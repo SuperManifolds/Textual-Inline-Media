@@ -6,9 +6,17 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FAC0403C1B544683002480BB /* Headers in Resources */ = {isa = PBXBuildFile; fileRef = FAC0403B1B544683002480BB /* Headers */; };
+		FAC0403F1B5446C6002480BB /* TPIInlineMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0403E1B5446C6002480BB /* TPIInlineMedia.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		FAC040321B544536002480BB /* Textual Inline Media.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Textual Inline Media.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC040351B544536002480BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAC0403B1B544683002480BB /* Headers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Headers; path = "../../../../Applications/Textual 5.app/Contents/Headers"; sourceTree = "<group>"; };
+		FAC0403D1B5446C5002480BB /* Textual Inline Media-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Textual Inline Media-Bridging-Header.h"; sourceTree = "<group>"; };
+		FAC0403E1B5446C6002480BB /* TPIInlineMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPIInlineMedia.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +49,10 @@
 		FAC040341B544536002480BB /* Textual Inline Media */ = {
 			isa = PBXGroup;
 			children = (
+				FAC0403B1B544683002480BB /* Headers */,
 				FAC040351B544536002480BB /* Info.plist */,
+				FAC0403E1B5446C6002480BB /* TPIInlineMedia.swift */,
+				FAC0403D1B5446C5002480BB /* Textual Inline Media-Bridging-Header.h */,
 			);
 			path = "Textual Inline Media";
 			sourceTree = "<group>";
@@ -72,6 +83,7 @@
 		FAC0402A1B544536002480BB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Alex S. Glomsaas";
 				TargetAttributes = {
@@ -102,6 +114,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAC0403C1B544683002480BB /* Headers in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAC0403F1B5446C6002480BB /* TPIInlineMedia.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,12 +212,19 @@
 		FAC040391B544536002480BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "/Applications/Textual 5.app/Contents/MacOS/Textual 5";
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"/Applications/Textual 5.app/Contents/Frameworks/**\"";
+				HEADER_SEARCH_PATHS = "\"/Applications/Textual 5.app/Contents/Headers/**\"";
 				INFOPLIST_FILE = "Textual Inline Media/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sorlie.Textual-Inline-Media";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Textual Inline Media/Textual Inline Media-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -211,12 +232,18 @@
 		FAC0403A1B544536002480BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "/Applications/Textual 5.app/Contents/MacOS/Textual 5";
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"/Applications/Textual 5.app/Contents/Frameworks/**\"";
+				HEADER_SEARCH_PATHS = "\"/Applications/Textual 5.app/Contents/Headers/**\"";
 				INFOPLIST_FILE = "Textual Inline Media/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sorlie.Textual-Inline-Media";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Textual Inline Media/Textual Inline Media-Bridging-Header.h";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
