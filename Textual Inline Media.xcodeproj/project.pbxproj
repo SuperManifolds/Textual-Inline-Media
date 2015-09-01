@@ -7,16 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FAC0403C1B544683002480BB /* Headers in Resources */ = {isa = PBXBuildFile; fileRef = FAC0403B1B544683002480BB /* Headers */; };
-		FAC0403F1B5446C6002480BB /* TPIInlineMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0403E1B5446C6002480BB /* TPIInlineMedia.swift */; };
+		FA6F487C1B95CA48000280E0 /* Dropbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487B1B95CA48000280E0 /* Dropbox.swift */; settings = {ASSET_TAGS = (); }; };
+		FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */; settings = {ASSET_TAGS = (); }; };
+		FA6F48801B95D0F4000280E0 /* CloudApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487F1B95D0F4000280E0 /* CloudApp.swift */; settings = {ASSET_TAGS = (); }; };
+		FA6F48871B95F998000280E0 /* GoogleDrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F48861B95F998000280E0 /* GoogleDrive.swift */; settings = {ASSET_TAGS = (); }; };
+		FAC0403F1B5446C6002480BB /* InlineMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0403E1B5446C6002480BB /* InlineMedia.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA6F487B1B95CA48000280E0 /* Dropbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dropbox.swift; path = "Inline Media Handlers/Dropbox.swift"; sourceTree = "<group>"; };
+		FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineMediaHandler.swift; path = "Inline Media Handlers/InlineMediaHandler.swift"; sourceTree = "<group>"; };
+		FA6F487F1B95D0F4000280E0 /* CloudApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudApp.swift; path = "Inline Media Handlers/CloudApp.swift"; sourceTree = "<group>"; };
+		FA6F48861B95F998000280E0 /* GoogleDrive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleDrive.swift; path = "Inline Media Handlers/GoogleDrive.swift"; sourceTree = "<group>"; };
 		FAC040321B544536002480BB /* Textual Inline Media.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Textual Inline Media.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC040351B544536002480BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FAC0403B1B544683002480BB /* Headers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Headers; path = "../../../../Applications/Textual 5.app/Contents/Headers"; sourceTree = "<group>"; };
 		FAC0403D1B5446C5002480BB /* Textual Inline Media-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Textual Inline Media-Bridging-Header.h"; sourceTree = "<group>"; };
-		FAC0403E1B5446C6002480BB /* TPIInlineMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPIInlineMedia.swift; sourceTree = "<group>"; };
+		FAC0403E1B5446C6002480BB /* InlineMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineMedia.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +36,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA6F487A1B95CA16000280E0 /* Inline Media Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				FA6F487B1B95CA48000280E0 /* Dropbox.swift */,
+				FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */,
+				FA6F487F1B95D0F4000280E0 /* CloudApp.swift */,
+				FA6F48861B95F998000280E0 /* GoogleDrive.swift */,
+			);
+			name = "Inline Media Handlers";
+			sourceTree = "<group>";
+		};
 		FAC040291B544536002480BB = {
 			isa = PBXGroup;
 			children = (
@@ -49,9 +66,9 @@
 		FAC040341B544536002480BB /* Textual Inline Media */ = {
 			isa = PBXGroup;
 			children = (
-				FAC0403B1B544683002480BB /* Headers */,
 				FAC040351B544536002480BB /* Info.plist */,
-				FAC0403E1B5446C6002480BB /* TPIInlineMedia.swift */,
+				FAC0403E1B5446C6002480BB /* InlineMedia.swift */,
+				FA6F487A1B95CA16000280E0 /* Inline Media Handlers */,
 				FAC0403D1B5446C5002480BB /* Textual Inline Media-Bridging-Header.h */,
 			);
 			path = "Textual Inline Media";
@@ -114,7 +131,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAC0403C1B544683002480BB /* Headers in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +141,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAC0403F1B5446C6002480BB /* TPIInlineMedia.swift in Sources */,
+				FA6F487C1B95CA48000280E0 /* Dropbox.swift in Sources */,
+				FA6F48801B95D0F4000280E0 /* CloudApp.swift in Sources */,
+				FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */,
+				FAC0403F1B5446C6002480BB /* InlineMedia.swift in Sources */,
+				FA6F48871B95F998000280E0 /* GoogleDrive.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,11 +232,12 @@
 		FAC040391B544536002480BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "/Applications/Textual 5.app/Contents/MacOS/Textual 5";
+				BUNDLE_LOADER = /Applications/Textual.app/Contents/MacOS/Textual;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"/Applications/Textual 5.app/Contents/Frameworks/**\"";
-				HEADER_SEARCH_PATHS = "\"/Applications/Textual 5.app/Contents/Headers/**\"";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"/Applications/Textual.app/Contents/Frameworks/**\"";
+				HEADER_SEARCH_PATHS = "\"/Applications/Textual.app/Contents/Headers/**\"";
 				INFOPLIST_FILE = "Textual Inline Media/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -232,11 +253,12 @@
 		FAC0403A1B544536002480BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "/Applications/Textual 5.app/Contents/MacOS/Textual 5";
+				BUNDLE_LOADER = /Applications/Textual.app/Contents/MacOS/Textual;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"/Applications/Textual 5.app/Contents/Frameworks/**\"";
-				HEADER_SEARCH_PATHS = "\"/Applications/Textual 5.app/Contents/Headers/**\"";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"/Applications/Textual.app/Contents/Frameworks/**\"";
+				HEADER_SEARCH_PATHS = "\"/Applications/Textual.app/Contents/Headers/**\"";
 				INFOPLIST_FILE = "Textual Inline Media/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -267,6 +289,7 @@
 				FAC0403A1B544536002480BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

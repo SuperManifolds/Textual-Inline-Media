@@ -20,9 +20,11 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>MinimumTextualVersion</key>
+	<string>5.2.0</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2015 Alex S. Glomsaas. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
-	<string></string>
+	<string>InlineMedia</string>
 </dict>
 </plist>
