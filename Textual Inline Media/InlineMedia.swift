@@ -18,7 +18,7 @@ import Foundation
 
 class InlineMedia: NSObject, THOPluginProtocol {
     let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
-    let inlineMediaMessageTypes = [TVCLogLineType.ActionType, TVCLogLineType.PrivateMessageType, TVCLogLineType.NoticeType]
+    let inlineMediaMessageTypes = [TVCLogLineType.ActionType.rawValue, TVCLogLineType.PrivateMessageType.rawValue, TVCLogLineType.NoticeType.rawValue]
     let mediaHandlers = [Dropbox.self, CloudApp.self, GoogleDrive.self]
     
     func pluginLoadedIntoMemory() {
@@ -35,12 +35,11 @@ class InlineMedia: NSObject, THOPluginProtocol {
     :param: isHistoryReload Whether or not the message was posted as log history.
     */
     func didPostNewMessageForViewController(logController: TVCLogController, messageInfo: [NSObject : AnyObject]!, isThemeReload: Bool, isHistoryReload: Bool) {
-        NSLog("%@", messageInfo)
         guard !isThemeReload && !isHistoryReload else {
             return
         }
         
-        if let lineType = messageInfo[THOPluginProtocolDidPostNewMessageLineTypeAttribute] as? TVCLogLineType {
+        if let lineType = messageInfo[THOPluginProtocolDidPostNewMessageLineTypeAttribute] as? UInt {
             guard (inlineMediaMessageTypes.contains(lineType)) else {
                 return
             }
@@ -64,8 +63,10 @@ class InlineMedia: NSObject, THOPluginProtocol {
                         isDirectImageLink = imageFileExtensions.contains(fileExtension.lowercaseString)
                         if (isDirectImageLink) {
                             NSLog("Inserting media")
-                            let image = InlineMedia.inlineImage(logController, source: link)
-                            InlineMedia.insert(logController, line: lineNumber, node: image)
+                            self.performBlockOnMainThread({
+                                let image = InlineMedia.inlineImage(logController, source: link)
+                                InlineMedia.insert(logController, line: lineNumber, node: image)
+                            })
                             
                             return
                         }
@@ -91,17 +92,15 @@ class InlineMedia: NSObject, THOPluginProtocol {
     :param: node       The HTML DOM Node to insert.
     */
     static func insert(controller: TVCLogController, line: String, node: DOMNode) {
-        dispatch_async(dispatch_get_main_queue(), {
-            let document = controller.webView.mainFrameDocument
-            let line = document.getElementById("line-" + line)
-            let message = line.querySelector(".innerMessage")
-            
-            let mediaContainer = document.createElement("span")
-            mediaContainer.className = "inlineMediaCell"
-            
-            mediaContainer.appendChild(node)
-            message.appendChild(mediaContainer)
-        })
+        let document = controller.webView.mainFrameDocument
+        let line = document.getElementById("line-" + line)
+        let message = line.querySelector(".innerMessage")
+        
+        let mediaContainer = document.createElement("span")
+        mediaContainer.className = "inlineMediaCell"
+        
+        mediaContainer.appendChild(node)
+        message.appendChild(mediaContainer)
     }
     
     
