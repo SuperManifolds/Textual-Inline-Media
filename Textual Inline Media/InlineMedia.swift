@@ -44,17 +44,11 @@ class InlineMedia: NSObject, THOPluginProtocol {
                 return
             }
             
-            NSLog("Valid line type ")
-            
             if let links = messageInfo[THOPluginProtocolDidPostNewMessageListOfHyperlinksAttribute] as? [[AnyObject]] {
                 let lineNumber = messageInfo[THOPluginProtocolDidPostNewMessageLineNumberAttribute] as! String
-                NSLog("Line number:" + lineNumber)
-                
                 for result in links {
                     //let rangeOfLink = result[0] as! NSRange
                     let link = result[1] as! String
-                    NSLog("link: " + link)
-                    
                     let url = convertToAsciiUrl(link)
                     
                     var isDirectImageLink = false
@@ -62,7 +56,6 @@ class InlineMedia: NSObject, THOPluginProtocol {
                     if let fileExtension = url.pathExtension {
                         isDirectImageLink = imageFileExtensions.contains(fileExtension.lowercaseString)
                         if (isDirectImageLink) {
-                            NSLog("Inserting media")
                             self.performBlockOnMainThread({
                                 let image = InlineMedia.inlineImage(logController, source: link)
                                 InlineMedia.insert(logController, line: lineNumber, node: image)
@@ -76,9 +69,12 @@ class InlineMedia: NSObject, THOPluginProtocol {
                         if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
                             if (mediaHandler.matchesServiceSchema(url, hasImageExtension: isDirectImageLink)) {
                                 mediaHandler.init(url: url, controller: logController, line: lineNumber)
+                                return
                             }
                         }
                     }
+                    
+                    WebpageHandler.displayInformation(url, controller: logController, line: lineNumber)
                 }
             }
         }

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "44CC276F5DB90F573507C0A9DED44D798CD27501",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2F312F938608360F2FD672790CC629062853806D" : 0,
+    "44CC276F5DB90F573507C0A9DED44D798CD27501" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "49FD5752-FDE8-478A-88E8-0DC567B4D1FC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2F312F938608360F2FD672790CC629062853806D" : "Textual-Inline-Media\/gumbo-parser\/",
+    "44CC276F5DB90F573507C0A9DED44D798CD27501" : "Textual-Inline-Media\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Textual Inline Media",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Textual Inline Media.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/google\/gumbo-parser.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2F312F938608360F2FD672790CC629062853806D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/xlexi\/Textual-Inline-Media.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "44CC276F5DB90F573507C0A9DED44D798CD27501"
+    }
+  ]
+}
