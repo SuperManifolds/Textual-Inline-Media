@@ -72,7 +72,9 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
                             if (fileExtension.lowercaseString == "gif") {
                                 self.performBlockOnMainThread({
                                     GifConversion.displayLoopingAnimation(url, controller: logController, line: lineNumber)
+                                    return
                                 })
+                            } else if (isDirectImageLink) {
                                 return
                             }
                         }
