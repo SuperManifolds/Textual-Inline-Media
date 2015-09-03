@@ -19,7 +19,7 @@ import Foundation
 class InlineMedia: NSObject, THOPluginProtocol {
     let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
     let inlineMediaMessageTypes = [TVCLogLineType.ActionType.rawValue, TVCLogLineType.PrivateMessageType.rawValue, TVCLogLineType.NoticeType.rawValue]
-    let mediaHandlers = [Dropbox.self, CloudApp.self, GoogleDrive.self]
+    let mediaHandlers = [Dropbox.self, CloudApp.self, GoogleDrive.self, Twitter.self, YouTube.self]
     
     func pluginLoadedIntoMemory() {
         NSLog("Plugin loaded")
@@ -39,42 +39,48 @@ class InlineMedia: NSObject, THOPluginProtocol {
             return
         }
         
+        /* Retrieve the line type of this message, we will only act on normal messages (privmsg) actions, and notices. */
         if let lineType = messageInfo[THOPluginProtocolDidPostNewMessageLineTypeAttribute] as? UInt {
             guard (inlineMediaMessageTypes.contains(lineType)) else {
                 return
             }
             
+            /* Iterate over the list of hyperlinks */
             if let links = messageInfo[THOPluginProtocolDidPostNewMessageListOfHyperlinksAttribute] as? [[AnyObject]] {
                 let lineNumber = messageInfo[THOPluginProtocolDidPostNewMessageLineNumberAttribute] as! String
                 for result in links {
-                    //let rangeOfLink = result[0] as! NSRange
                     let link = result[1] as! String
-                    let url = convertToAsciiUrl(link)
                     
-                    var isDirectImageLink = false
-                    
-                    if let fileExtension = url.pathExtension {
-                        isDirectImageLink = imageFileExtensions.contains(fileExtension.lowercaseString)
-                        if (isDirectImageLink) {
-                            self.performBlockOnMainThread({
-                                let image = InlineMedia.inlineImage(logController, source: link)
-                                InlineMedia.insert(logController, line: lineNumber, node: image)
-                            })
-                            
-                            return
-                        }
-                    }
-                    
-                    for mediaHandlerType in mediaHandlers {
-                        if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
-                            if (mediaHandler.matchesServiceSchema(url, hasImageExtension: isDirectImageLink)) {
-                                mediaHandler.init(url: url, controller: logController, line: lineNumber)
+                    /* NSURL is stupid and cannot comprehend unicode in domains, so we will use this method provided by Textual to convert it to "punycode" */
+                    if let url = TVCImageURLParser.URLFromWebViewPasteboard(link) {
+                        var isDirectImageLink = false
+                        
+                        /* Check if the url is a direct link to an image with a valid image file extension. */
+                        if let fileExtension = url.pathExtension {
+                            isDirectImageLink = imageFileExtensions.contains(fileExtension.lowercaseString)
+                            if (isDirectImageLink) {
+                                self.performBlockOnMainThread({
+                                    let image = InlineMedia.inlineImage(logController, source: link)
+                                    InlineMedia.insert(logController, line: lineNumber, node: image)
+                                })
                                 return
                             }
                         }
+                        
+                        /* Iterate over the available media handlers and see if we have one that supports this url. */
+                        for mediaHandlerType in mediaHandlers {
+                            if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
+                                if (mediaHandler.matchesServiceSchema(url, hasImageExtension: isDirectImageLink)) {
+                                    mediaHandler.init(url: url, controller: logController, line: lineNumber)
+                                    return
+                                }
+                            }
+                        }
+                        
+                        /* There were no media handlers for this url, we will attempt to retrieve the title, description, and preview thumbnail of the webpage instead. */
+                        WebpageHandler.displayInformation(url, controller: logController, line: lineNumber)
                     }
                     
-                    WebpageHandler.displayInformation(url, controller: logController, line: lineNumber)
                 }
             }
         }
