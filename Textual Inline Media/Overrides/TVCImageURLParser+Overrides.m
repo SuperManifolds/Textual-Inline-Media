@@ -49,9 +49,9 @@
 #pragma mark - Method Swizzling
 
 + (NSString *)imageURLFromBaseOverride:(NSString *)url {
-    /* Check if this url is a direct image link to a gif, if it is, intercept it. If not, relay it to Textual's default image parser. */
+    /* Check if this url is a direct image link to a gif or youtube url, if it is, intercept it. If not, relay it to Textual's default image parser. */
     NSURL *urlObject = [url URLUsingWebKitPasteboard];
-    if ([urlObject.pathExtension isEqualIgnoringCase:@"gif"]) {
+    if ([urlObject.pathExtension isEqualIgnoringCase:@"gif"] || [urlObject.host hasSuffix:@"youtube.com"]) {
         return nil;
     }
     return [TVCImageURLParser imageURLFromBaseOverride:url];
