@@ -27,10 +27,7 @@
 		FA39B2591B9717CC0034B0C7 /* OGText.m in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2451B9717CC0034B0C7 /* OGText.m */; settings = {ASSET_TAGS = (); }; };
 		FA39B25A1B9717CC0034B0C7 /* OGUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2471B9717CC0034B0C7 /* OGUtility.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-w"; }; };
 		FA39B25C1B97407F0034B0C7 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39B25B1B97407F0034B0C7 /* Twitter.swift */; settings = {ASSET_TAGS = (); }; };
-		FA6F487C1B95CA48000280E0 /* Dropbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487B1B95CA48000280E0 /* Dropbox.swift */; settings = {ASSET_TAGS = (); }; };
 		FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */; settings = {ASSET_TAGS = (); }; };
-		FA6F48801B95D0F4000280E0 /* CloudApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487F1B95D0F4000280E0 /* CloudApp.swift */; settings = {ASSET_TAGS = (); }; };
-		FA6F48871B95F998000280E0 /* GoogleDrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F48861B95F998000280E0 /* GoogleDrive.swift */; settings = {ASSET_TAGS = (); }; };
 		FA6F488E1B963E56000280E0 /* WebpageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F488D1B963E56000280E0 /* WebpageHandler.swift */; settings = {ASSET_TAGS = (); }; };
 		FAC0403F1B5446C6002480BB /* InlineMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0403E1B5446C6002480BB /* InlineMedia.swift */; };
 		FAD0EE201B975D7E0015A5B4 /* YouTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0EE1F1B975D7E0015A5B4 /* YouTube.swift */; settings = {ASSET_TAGS = (); }; };
@@ -79,10 +76,7 @@
 		FA39B2461B9717CC0034B0C7 /* OGUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGUtility.h; sourceTree = "<group>"; };
 		FA39B2471B9717CC0034B0C7 /* OGUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGUtility.m; sourceTree = "<group>"; };
 		FA39B25B1B97407F0034B0C7 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Twitter.swift; path = "Inline Media Handlers/Twitter.swift"; sourceTree = "<group>"; };
-		FA6F487B1B95CA48000280E0 /* Dropbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dropbox.swift; path = "Inline Media Handlers/Dropbox.swift"; sourceTree = "<group>"; };
 		FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineMediaHandler.swift; path = "Inline Media Handlers/InlineMediaHandler.swift"; sourceTree = "<group>"; };
-		FA6F487F1B95D0F4000280E0 /* CloudApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudApp.swift; path = "Inline Media Handlers/CloudApp.swift"; sourceTree = "<group>"; };
-		FA6F48861B95F998000280E0 /* GoogleDrive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleDrive.swift; path = "Inline Media Handlers/GoogleDrive.swift"; sourceTree = "<group>"; };
 		FA6F488D1B963E56000280E0 /* WebpageHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebpageHandler.swift; sourceTree = "<group>"; };
 		FAC040321B544536002480BB /* Textual Inline Media.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Textual Inline Media.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC040351B544536002480BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -161,10 +155,7 @@
 		FA6F487A1B95CA16000280E0 /* Inline Media Handlers */ = {
 			isa = PBXGroup;
 			children = (
-				FA6F487B1B95CA48000280E0 /* Dropbox.swift */,
 				FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */,
-				FA6F487F1B95D0F4000280E0 /* CloudApp.swift */,
-				FA6F48861B95F998000280E0 /* GoogleDrive.swift */,
 				FA39B25B1B97407F0034B0C7 /* Twitter.swift */,
 				FAD0EE1F1B975D7E0015A5B4 /* YouTube.swift */,
 			);
@@ -274,8 +265,6 @@
 				FA39B2501B9717CC0034B0C7 /* utf8.c in Sources */,
 				FAD0EE201B975D7E0015A5B4 /* YouTube.swift in Sources */,
 				FA39B2551B9717CC0034B0C7 /* ObjectiveGumbo.m in Sources */,
-				FA6F487C1B95CA48000280E0 /* Dropbox.swift in Sources */,
-				FA6F48801B95D0F4000280E0 /* CloudApp.swift in Sources */,
 				FA39B2521B9717CC0034B0C7 /* vector.c in Sources */,
 				FA39B2581B9717CC0034B0C7 /* OGNode.m in Sources */,
 				FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */,
@@ -294,7 +283,6 @@
 				FA39B24E1B9717CC0034B0C7 /* tag.c in Sources */,
 				FA39B25C1B97407F0034B0C7 /* Twitter.swift in Sources */,
 				FA39B24B1B9717CC0034B0C7 /* parser.c in Sources */,
-				FA6F48871B95F998000280E0 /* GoogleDrive.swift in Sources */,
 				FAD0EE221B9773A80015A5B4 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

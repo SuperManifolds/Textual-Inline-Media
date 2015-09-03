@@ -19,7 +19,7 @@ import Foundation
 class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
     let inlineMediaMessageTypes = [TVCLogLineType.ActionType.rawValue, TVCLogLineType.PrivateMessageType.rawValue, TVCLogLineType.NoticeType.rawValue]
-    let mediaHandlers = [Dropbox.self, CloudApp.self, GoogleDrive.self, Twitter.self, YouTube.self]
+    let mediaHandlers = [Twitter.self, YouTube.self]
     
     func pluginLoadedIntoMemory() {
         NSLog("Plugin loaded")
