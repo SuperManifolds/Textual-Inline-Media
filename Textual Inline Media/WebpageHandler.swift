@@ -77,7 +77,8 @@ class WebpageHandler: NSObject {
                         let document = controller.webView.mainFrameDocument
                         
                         /* Create the container for the entire inline media element. */
-                        let websiteContainer = document.createElement("div")
+                        let websiteContainer = document.createElement("a")
+                        websiteContainer.setAttribute("href", value: url.absoluteString)
                         websiteContainer.className = "inline_media_website"
                         
                         /* If we found a preview image element, we will add it. */

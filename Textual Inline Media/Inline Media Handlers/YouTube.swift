@@ -84,7 +84,8 @@ class YouTube: NSObject, InlineMediaHandler {
                                 let document = controller.webView.mainFrameDocument
                                 
                                 /* Create the container for the complete inline media item. */
-                                let ytContainer = document.createElement("div")
+                                let ytContainer = document.createElement("a")
+                                ytContainer.setAttribute("href", value: url.absoluteString)
                                 ytContainer.className = "inline_media_youtube"
                                 
                                 /* Create the thumbnail image. */
