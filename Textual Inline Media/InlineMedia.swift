@@ -49,50 +49,59 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
             if let links = messageInfo[THOPluginProtocolDidPostNewMessageListOfHyperlinksAttribute] as? [[AnyObject]] {
                 let lineNumber = messageInfo[THOPluginProtocolDidPostNewMessageLineNumberAttribute] as! String
                 
-                var handledLinks: [String] = []
+                var linkPriorityDict = Dictionary<String, [NSURL]>()
+                var sortedLinks: [NSURL] = []
                 for result in links {
-                    let link = result[1] as! String
-                    
-                    /* If this link is posted multiple times in the message, we will only handle it once. */
-                    guard handledLinks.contains(link) == false else {
-                        continue
-                    }
-                    
-                    handledLinks.append(link)
+                    let rawLink = result[1] as! String
                     
                     /* NSURL is stupid and cannot comprehend unicode in domains, so we will use this method provided by Textual to convert it to "punycode" */
-                    if let url = NSString(string: link).URLUsingWebKitPasteboard {
-                        var isDirectImageLink = false
+                    if let link = NSString(string: rawLink).URLUsingWebKitPasteboard {
+                        /* Organise links into a dictionary by what domain they are from. */
+                        if (!linkPriorityDict.keys.contains(link.host!)) {
+                            linkPriorityDict[link.host!] = []
+                        }
+                        linkPriorityDict[link.host!]?.append(link)
+                    }
+                }
+                
+                /* Prioritise links from the same domain by the number of path components. This will favour  a link to a subpage over a generic index page link and so on. */
+                for domain in linkPriorityDict {
+                    let sorted = domain.1.sort {
+                        return $0.pathComponents?.count > $1.pathComponents?.count
+                    }
+                    sortedLinks.append(sorted[0])
+                }
+                
+                for url in sortedLinks {
+                    var isDirectImageLink = false
+                    
+                    /* Check if the url is a direct link to an image with a valid image file extension. */
+                    if let fileExtension = url.pathExtension {
+                        isDirectImageLink = imageFileExtensions.contains(fileExtension.lowercaseString)
                         
-                        /* Check if the url is a direct link to an image with a valid image file extension. */
-                        if let fileExtension = url.pathExtension {
-                            isDirectImageLink = imageFileExtensions.contains(fileExtension.lowercaseString)
-                            
-                            /* Check if this is a link to a gif. */
-                            if (fileExtension.lowercaseString == "gif") {
-                                self.performBlockOnMainThread({
-                                    GifConversion.displayLoopingAnimation(url, controller: logController, line: lineNumber)
-                                    return
-                                })
-                            } else if (isDirectImageLink) {
+                        /* Check if this is a link to a gif. */
+                        if (fileExtension.lowercaseString == "gif") {
+                            self.performBlockOnMainThread({
+                                GifConversion.displayLoopingAnimation(url, controller: logController, line: lineNumber)
+                                return
+                            })
+                        } else if (isDirectImageLink) {
+                            return
+                        }
+                    }
+                    
+                    /* Iterate over the available media handlers and see if we have one that supports this url. */
+                    for mediaHandlerType in mediaHandlers {
+                        if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
+                            if (mediaHandler.matchesServiceSchema(url, hasImageExtension: isDirectImageLink)) {
+                                mediaHandler.init(url: url, controller: logController, line: lineNumber)
                                 return
                             }
                         }
-                        
-                        /* Iterate over the available media handlers and see if we have one that supports this url. */
-                        for mediaHandlerType in mediaHandlers {
-                            if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
-                                if (mediaHandler.matchesServiceSchema(url, hasImageExtension: isDirectImageLink)) {
-                                    mediaHandler.init(url: url, controller: logController, line: lineNumber)
-                                    return
-                                }
-                            }
-                        }
-                        
-                        /* There were no media handlers for this url, we will attempt to retrieve the title, description, and preview thumbnail of the webpage instead. */
-                        WebpageHandler.displayInformation(url, controller: logController, line: lineNumber)
                     }
                     
+                    /* There were no media handlers for this url, we will attempt to retrieve the title, description, and preview thumbnail of the webpage instead. */
+                    WebpageHandler.displayInformation(url, controller: logController, line: lineNumber)
                 }
             }
         }
