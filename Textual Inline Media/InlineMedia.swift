@@ -55,7 +55,12 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
                     let rawLink = result[1] as! String
                     
                     /* NSURL is stupid and cannot comprehend unicode in domains, so we will use this method provided by Textual to convert it to "punycode" */
-                    if let link = NSString(string: rawLink).URLUsingWebKitPasteboard {
+                    if var link = NSString(string: rawLink).URLUsingWebKitPasteboard {
+                        /* Replace Reddit shortlinks */
+                        if link.host!.hasSuffix("redd.it") {
+                            link = NSURL(string: String(format: "%@://www.reddit.com/tb%@", link.scheme, link.path!))!
+                        }
+                        
                         /* Organise links into a dictionary by what domain they are from. */
                         if (!linkPriorityDict.keys.contains(link.host!)) {
                             linkPriorityDict[link.host!] = []
@@ -67,6 +72,12 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
                 /* Prioritise links from the same domain by the number of path components. This will favour  a link to a subpage over a generic index page link and so on. */
                 for domain in linkPriorityDict {
                     let sorted = domain.1.sort {
+                        /* Terrible workaround to give subreddit links a low priority. */
+                        if ($1.pathComponents?.count > 2) {
+                            if ($1.pathComponents![1] == "r") {
+                                return true
+                            }
+                        }
                         return $0.pathComponents?.count > $1.pathComponents?.count
                     }
                     sortedLinks.append(sorted[0])
