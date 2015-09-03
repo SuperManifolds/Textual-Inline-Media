@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA02C4531B987F0300144323 /* GifConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02C4521B987F0300144323 /* GifConversion.swift */; settings = {ASSET_TAGS = (); }; };
 		FA39B2481B9717CC0034B0C7 /* attribute.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2201B9717CC0034B0C7 /* attribute.c */; settings = {ASSET_TAGS = (); }; };
 		FA39B2491B9717CC0034B0C7 /* char_ref.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2221B9717CC0034B0C7 /* char_ref.c */; settings = {ASSET_TAGS = (); }; };
 		FA39B24A1B9717CC0034B0C7 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2241B9717CC0034B0C7 /* error.c */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-w"; }; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA02C4521B987F0300144323 /* GifConversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifConversion.swift; sourceTree = "<group>"; };
 		FA39B2201B9717CC0034B0C7 /* attribute.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = attribute.c; sourceTree = "<group>"; };
 		FA39B2211B9717CC0034B0C7 /* attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attribute.h; sourceTree = "<group>"; };
 		FA39B2221B9717CC0034B0C7 /* char_ref.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = char_ref.c; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				FAC0403D1B5446C5002480BB /* Textual Inline Media-Bridging-Header.h */,
 				FA6F488D1B963E56000280E0 /* WebpageHandler.swift */,
 				FAD0EE211B9773A80015A5B4 /* Extensions.swift */,
+				FA02C4521B987F0300144323 /* GifConversion.swift */,
 			);
 			path = "Textual Inline Media";
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				FA39B24C1B9717CC0034B0C7 /* string_buffer.c in Sources */,
 				FA39B2491B9717CC0034B0C7 /* char_ref.c in Sources */,
 				FA6F488E1B963E56000280E0 /* WebpageHandler.swift in Sources */,
+				FA02C4531B987F0300144323 /* GifConversion.swift in Sources */,
 				FA39B2541B9717CC0034B0C7 /* NSString+OGString.m in Sources */,
 				FA39B24E1B9717CC0034B0C7 /* tag.c in Sources */,
 				FA39B25C1B97407F0034B0C7 /* Twitter.swift in Sources */,

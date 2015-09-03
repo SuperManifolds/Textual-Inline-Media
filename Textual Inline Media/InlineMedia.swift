@@ -62,8 +62,7 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
                             /* Check if this is a link to a gif. */
                             if (fileExtension.lowercaseString == "gif") {
                                 self.performBlockOnMainThread({
-                                    let image = InlineMedia.inlineImage(logController, source: link)
-                                    InlineMedia.insert(logController, line: lineNumber, node: image)
+                                    GifConversion.displayLoopingAnimation(url, controller: logController, line: lineNumber)
                                 })
                                 return
                             }
@@ -160,6 +159,32 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
         
         imageLink.appendChild(image)
         return imageLink
+    }
+    
+    /**
+    Creates an inline video from a link
+    
+    :param: controller The Textual "Log Controller" for the view we want to insert the media into.
+    :param: source     The source link for the video to display.
+    :param: loop       Whether this video should be continously looped.
+    :param: autoPlay   Whether this video should start playing automatically.
+    
+    :returns: An HTML DOM Node containing the video element.
+    */
+    static func inlineVideo(controller: TVCLogController, source: String, loop: Bool, autoPlay: Bool) -> DOMNode {
+        let document = controller.webView.mainFrameDocument
+        
+        /* Create the video tag  */
+        let video = document.createElement("video")
+        video.setAttribute("loop", value: loop.description)
+        video.setAttribute("autoplay", value: autoPlay.description)
+        
+        /* Set the source of the video */
+        let videoSource = document.createElement("source")
+        videoSource.setAttribute("type", value: "video/mp4")
+        videoSource.setAttribute("src", value: source)
+        video.appendChild(videoSource)
+        return video
     }
     
     func isNotSafeToPresentImageWithID(uniqueID: String!) {
