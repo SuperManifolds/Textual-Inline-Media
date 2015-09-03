@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA02C4531B987F0300144323 /* GifConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02C4521B987F0300144323 /* GifConversion.swift */; settings = {ASSET_TAGS = (); }; };
+		FA02C4561B98E3BD00144323 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = FA02C4551B98E3BD00144323 /* style.css */; settings = {ASSET_TAGS = (); }; };
 		FA39B2481B9717CC0034B0C7 /* attribute.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2201B9717CC0034B0C7 /* attribute.c */; settings = {ASSET_TAGS = (); }; };
 		FA39B2491B9717CC0034B0C7 /* char_ref.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2221B9717CC0034B0C7 /* char_ref.c */; settings = {ASSET_TAGS = (); }; };
 		FA39B24A1B9717CC0034B0C7 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2241B9717CC0034B0C7 /* error.c */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-w"; }; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		FA02C4521B987F0300144323 /* GifConversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifConversion.swift; sourceTree = "<group>"; };
+		FA02C4551B98E3BD00144323 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = Resources/style.css; sourceTree = "<group>"; };
 		FA39B2201B9717CC0034B0C7 /* attribute.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = attribute.c; sourceTree = "<group>"; };
 		FA39B2211B9717CC0034B0C7 /* attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attribute.h; sourceTree = "<group>"; };
 		FA39B2221B9717CC0034B0C7 /* char_ref.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = char_ref.c; sourceTree = "<group>"; };
@@ -101,6 +103,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA02C4541B98E36200144323 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FA02C4551B98E3BD00144323 /* style.css */,
+			);
+			name = Resources;
+			path = "Textual Inline Media";
+			sourceTree = "<group>";
+		};
 		FA39B21E1B9717CC0034B0C7 /* ObjectiveGumbo */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				FAC040341B544536002480BB /* Textual Inline Media */,
+				FA02C4541B98E36200144323 /* Resources */,
 				FAC040331B544536002480BB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -232,6 +244,9 @@
 		FAC0402A1B544536002480BB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					Resources,
+				);
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Alex S. Glomsaas";
@@ -264,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA39B2531B9717CC0034B0C7 /* LICENSE in Resources */,
+				FA02C4561B98E3BD00144323 /* style.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

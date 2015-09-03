@@ -1,0 +1,35 @@
+
+.inline_media_website,
+.inline_media_youtube {
+    margin-top: 5px;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.05);
+    padding: 10px;
+    overflow: auto;
+    display: flex;
+}
+
+.inline_media_website_title,
+.inline_media_youtube_title {
+    font-weight: bold;
+    color: white;
+}
+
+.inline_media_website_desc,
+.inline_media_youtube_desc {
+    color: white;
+}
+
+.inline_media_website_thumbnail,
+.inline_media_youtube_thumbnail {
+    width: auto;
+    height: auto;
+    max-width: 160px;
+    max-height: 75px;
+    margin-right: 15px;
+}
+
+.inline_media_website_info,
+.inline_media_youtube_info {
+    flex: 1;
+}

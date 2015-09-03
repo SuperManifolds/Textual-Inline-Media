@@ -22,7 +22,7 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     let mediaHandlers = [Twitter.self, YouTube.self]
     
     func pluginLoadedIntoMemory() {
-        NSLog("Plugin loaded")
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "logControllerViewFinishedLoading:", name: TVCLogControllerViewFinishedLoadingNotification, object: nil)
     }
     
     
@@ -116,6 +116,29 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
                 }
             }
         }
+    }
+    
+    /** 
+    Called when a web view has been loaded in Textual. Is used to load any static resources into the webview necessary for plugin features.
+    
+    :param notification an NSNotification object containing the Log Controller that for the webview that has loaded.
+    */
+    func logControllerViewFinishedLoading(notification: NSNotification) {
+        self.performBlockOnMainThread({
+            let controller = notification.object as! TVCLogController
+            let document = controller.webView.mainFrameDocument
+            let head = document.getElementsByTagName("head").item(0)
+            
+            let mainBundle = NSBundle(forClass: InlineMedia.self)
+            let stylesheetPath = mainBundle.pathForResource("style", ofType: "css")
+            
+            let stylesheet = document.createElement("link")
+            stylesheet.setAttribute("rel", value: "stylesheet")
+            stylesheet.setAttribute("type", value: "text/css")
+            stylesheet.setAttribute("href", value: stylesheetPath)
+            
+            head.appendChild(stylesheet)
+        })
     }
     
     /**
