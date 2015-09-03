@@ -16,7 +16,7 @@
 import Foundation
 
 
-class InlineMedia: NSObject, THOPluginProtocol {
+class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
     let inlineMediaMessageTypes = [TVCLogLineType.ActionType.rawValue, TVCLogLineType.PrivateMessageType.rawValue, TVCLogLineType.NoticeType.rawValue]
     let mediaHandlers = [Dropbox.self, CloudApp.self, GoogleDrive.self, Twitter.self, YouTube.self]
@@ -52,13 +52,15 @@ class InlineMedia: NSObject, THOPluginProtocol {
                     let link = result[1] as! String
                     
                     /* NSURL is stupid and cannot comprehend unicode in domains, so we will use this method provided by Textual to convert it to "punycode" */
-                    if let url = TVCImageURLParser.URLFromWebViewPasteboard(link) {
+                    if let url = NSString(string: link).URLUsingWebKitPasteboard {
                         var isDirectImageLink = false
                         
                         /* Check if the url is a direct link to an image with a valid image file extension. */
                         if let fileExtension = url.pathExtension {
                             isDirectImageLink = imageFileExtensions.contains(fileExtension.lowercaseString)
-                            if (isDirectImageLink) {
+                            
+                            /* Check if this is a link to a gif. */
+                            if (fileExtension.lowercaseString == "gif") {
                                 self.performBlockOnMainThread({
                                     let image = InlineMedia.inlineImage(logController, source: link)
                                     InlineMedia.insert(logController, line: lineNumber, node: image)
@@ -158,5 +160,13 @@ class InlineMedia: NSObject, THOPluginProtocol {
         
         imageLink.appendChild(image)
         return imageLink
+    }
+    
+    func isNotSafeToPresentImageWithID(uniqueID: String!) {
+        
+    }
+    
+    func isSafeToPresentImageWithID(uniqueID: String!) {
+        
     }
 }
