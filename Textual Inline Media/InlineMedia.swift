@@ -48,8 +48,17 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
             /* Iterate over the list of hyperlinks */
             if let links = messageInfo[THOPluginProtocolDidPostNewMessageListOfHyperlinksAttribute] as? [[AnyObject]] {
                 let lineNumber = messageInfo[THOPluginProtocolDidPostNewMessageLineNumberAttribute] as! String
+                
+                var handledLinks: [String] = []
                 for result in links {
                     let link = result[1] as! String
+                    
+                    /* If this link is posted multiple times in the message, we will only handle it once. */
+                    guard handledLinks.contains(link) == false else {
+                        continue
+                    }
+                    
+                    handledLinks.append(link)
                     
                     /* NSURL is stupid and cannot comprehend unicode in domains, so we will use this method provided by Textual to convert it to "punycode" */
                     if let url = NSString(string: link).URLUsingWebKitPasteboard {
