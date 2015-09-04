@@ -205,15 +205,15 @@
 		FAC040341B544536002480BB /* Textual Inline Media */ = {
 			isa = PBXGroup;
 			children = (
-				FA4FE0DC1B986A2C00F84701 /* Overrides */,
-				FA39B21E1B9717CC0034B0C7 /* ObjectiveGumbo */,
-				FAC040351B544536002480BB /* Info.plist */,
 				FAC0403E1B5446C6002480BB /* InlineMedia.swift */,
 				FA6F487A1B95CA16000280E0 /* Inline Media Handlers */,
+				FAC040351B544536002480BB /* Info.plist */,
 				FAC0403D1B5446C5002480BB /* Textual Inline Media-Bridging-Header.h */,
 				FA6F488D1B963E56000280E0 /* WebpageHandler.swift */,
 				FAD0EE211B9773A80015A5B4 /* Extensions.swift */,
 				FA02C4521B987F0300144323 /* GifConversion.swift */,
+				FA4FE0DC1B986A2C00F84701 /* Overrides */,
+				FA39B21E1B9717CC0034B0C7 /* ObjectiveGumbo */,
 			);
 			path = "Textual Inline Media";
 			sourceTree = "<group>";
