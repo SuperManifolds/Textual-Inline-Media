@@ -166,14 +166,15 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     */
     static func insert(controller: TVCLogController, line: String, node: DOMNode) {
         let document = controller.webView.mainFrameDocument
-        let line = document.getElementById("line-" + line)
-        let message = line.querySelector(".innerMessage")
-        
-        let mediaContainer = document.createElement("span")
-        mediaContainer.className = "inlineMediaCell"
-        
-        mediaContainer.appendChild(node)
-        message.appendChild(mediaContainer)
+        if let line = document.getElementById("line-" + line) {
+            let message = line.querySelector(".innerMessage")
+            
+            let mediaContainer = document.createElement("span")
+            mediaContainer.className = "inlineMediaCell"
+            
+            mediaContainer.appendChild(node)
+            message.appendChild(mediaContainer)
+        }
     }
     
     
