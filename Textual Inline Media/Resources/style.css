@@ -7,6 +7,7 @@
     padding: 10px;
     overflow: auto;
     display: flex;
+    border: none;
 }
 
 .inline_media_website_title,
