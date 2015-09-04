@@ -51,7 +51,7 @@
 + (NSString *)imageURLFromBaseOverride:(NSString *)url {
     /* Check if this url is a direct image link to a gif or youtube url, if it is, intercept it. If not, relay it to Textual's default image parser. */
     NSURL *urlObject = [url URLUsingWebKitPasteboard];
-    if ([urlObject.pathExtension isEqualIgnoringCase:@"gif"] || [urlObject.host hasSuffix:@"youtube.com"]) {
+    if ([urlObject.pathExtension isEqualIgnoringCase:@"gif"] || [urlObject.host hasSuffix:@"youtube.com"] || [urlObject.host hasSuffix:@"youtu.be"]) {
         return nil;
     }
     return [TVCImageURLParser imageURLFromBaseOverride:url];
