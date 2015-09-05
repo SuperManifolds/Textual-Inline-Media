@@ -41,7 +41,6 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "logControllerViewFinishedLoading:", name: TVCLogControllerViewFinishedLoadingNotification, object: nil)
     }
     
-    
     /**
     Called by the Textual plugin API when a new line has been added to the view.
     
@@ -147,13 +146,19 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
             
             let mainBundle = NSBundle(forClass: InlineMedia.self)
             let stylesheetPath = mainBundle.pathForResource("style", ofType: "css")
+            let scriptPath = mainBundle.pathForResource("media", ofType: "js")
             
             let stylesheet = document.createElement("link")
             stylesheet.setAttribute("rel", value: "stylesheet")
             stylesheet.setAttribute("type", value: "text/css")
             stylesheet.setAttribute("href", value: stylesheetPath)
             
+            let script = document.createElement("script")
+            script.setAttribute("type", value: "application/ecmascript")
+            script.setAttribute("src", value: scriptPath)
+            
             head.appendChild(stylesheet)
+            head.appendChild(script) 
         })
     }
     
@@ -249,6 +254,10 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
         let video = document.createElement("video")
         video.setAttribute("loop", value: loop.description)
         video.setAttribute("autoplay", value: autoPlay.description)
+        
+        /* Set the event listener to start/pause it when the user clicks it. */
+        let listener = EventListener()
+        video.addEventListener("click", listener: listener, useCapture: false)
         
         /* Set the source of the video */
         let videoSource = document.createElement("source")
