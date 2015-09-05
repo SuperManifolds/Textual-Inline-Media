@@ -1,3 +1,6 @@
+.inlineMediaCell {
+    display: block;
+}
 
 .inline_media_website,
 .inline_media_youtube {
