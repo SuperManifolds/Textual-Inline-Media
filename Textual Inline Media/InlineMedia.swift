@@ -36,6 +36,7 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
     let inlineMediaMessageTypes = [TVCLogLineType.ActionType, TVCLogLineType.PrivateMessageType, TVCLogLineType.NoticeType]
     let mediaHandlers = [Twitter.self, YouTube.self]
+    let disallowedTopLevelDomains = [".md", ".pl"]
     
     func pluginLoadedIntoMemory() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "logControllerViewFinishedLoading:", name: TVCLogControllerViewFinishedLoadingNotification, object: nil)
@@ -60,6 +61,12 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
                 
                 /* NSURL is stupid and cannot comprehend unicode in domains, so we will use this method provided by Textual to convert it to "punycode" */
                 if var link = NSString(string: rawLink).URLUsingWebKitPasteboard {
+                    for tld in disallowedTopLevelDomains {
+                        if link.host!.hasSuffix(tld) {
+                            continue
+                        }
+                    }
+                    
                     /* Replace Reddit shortlinks */
                     if link.host!.hasSuffix("redd.it") {
                         link = NSURL(string: String(format: "%@://www.reddit.com/tb%@", link.scheme, link.path!))!
