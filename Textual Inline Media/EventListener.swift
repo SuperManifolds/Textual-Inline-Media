@@ -33,12 +33,13 @@ import Foundation
 
 class EventListener: NSObject, DOMEventListener {
     func handleEvent(event: DOMEvent!) {
-        let video = event.target as! DOMElement
-        let paused = video.valueForKey("paused") as? Bool
-        if (paused == true) {
-            video.callWebScriptMethod("play", withArguments: nil)
-        } else {
-            video.callWebScriptMethod("pause", withArguments: nil)
+        if let video = event.target as? DOMElement {
+            let paused = video.valueForKey("paused") as? Bool
+            if (paused == true) {
+                video.callWebScriptMethod("play", withArguments: nil)
+            } else {
+                video.callWebScriptMethod("pause", withArguments: nil)
+            }
         }
         
     }

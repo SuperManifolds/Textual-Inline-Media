@@ -52,7 +52,6 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
         guard !messageObject.isProcessedInBulk && inlineMediaMessageTypes.contains(messageObject.lineType) else {
             return
         }
-        
         var linkPriorityDict = Dictionary<String, [NSURL]>()
         var sortedLinks: [NSURL] = []
         if let links = messageObject.listOfHyperlinks {
@@ -135,25 +134,31 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     */
     func logControllerViewFinishedLoading(notification: NSNotification) {
         self.performBlockOnMainThread({
-            let controller = notification.object as! TVCLogController
-            let document = controller.webView.mainFrameDocument
-            let head = document.getElementsByTagName("head").item(0)
-            
-            let mainBundle = NSBundle(forClass: InlineMedia.self)
-            let stylesheetPath = mainBundle.pathForResource("style", ofType: "css")
-            let scriptPath = mainBundle.pathForResource("media", ofType: "js")
-            
-            let stylesheet = document.createElement("link")
-            stylesheet.setAttribute("rel", value: "stylesheet")
-            stylesheet.setAttribute("type", value: "text/css")
-            stylesheet.setAttribute("href", value: stylesheetPath)
-            
-            let script = document.createElement("script")
-            script.setAttribute("type", value: "application/ecmascript")
-            script.setAttribute("src", value: scriptPath)
-            
-            head.appendChild(stylesheet)
-            head.appendChild(script) 
+            if let controller = notification.object as? TVCLogController {
+                let document = controller.webView.mainFrameDocument
+                let head = document.getElementsByTagName("head").item(0)
+                
+                let mainBundle = NSBundle(forClass: InlineMedia.self)
+                let stylesheetPath = mainBundle.pathForResource("style", ofType: "css")
+                let scriptPath = mainBundle.pathForResource("media", ofType: "js")
+                
+                let stylesheet = document.createElement("link")
+                stylesheet.setAttribute("rel", value: "stylesheet")
+                stylesheet.setAttribute("type", value: "text/css")
+                stylesheet.setAttribute("href", value: stylesheetPath)
+                
+                let script = document.createElement("script")
+                script.setAttribute("type", value: "application/ecmascript")
+                script.setAttribute("src", value: scriptPath)
+                
+                let twitterTheme = document.createElement("meta")
+                twitterTheme.setAttribute("name", value: "twitter:widgets:theme")
+                twitterTheme.setAttribute("content", value: "dark")
+                
+                head.appendChild(stylesheet)
+                head.appendChild(script)
+                head.appendChild(twitterTheme)
+            }
         })
     }
     

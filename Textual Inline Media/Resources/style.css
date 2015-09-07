@@ -3,7 +3,8 @@
 }
 
 .inline_media_website,
-.inline_media_youtube {
+.inline_media_youtube,
+.inline_media_twitter {
     margin-top: 5px;
     border-radius: 5px;
     background: rgba(255,255,255,0.05);
@@ -38,4 +39,24 @@
 .inline_media_youtube_info {
     -webkit-flex: 1;
     flex: 1;
+}
+
+blockquote.twitter-tweet {
+    display: inline-block;
+    padding: 16px;
+    margin: 10px 0;
+    max-width: 468px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    font: bold 14px/18px Helvetica, Arial, sans-serif;
+}
+
+blockquote.twitter-tweet p {
+    font: normal 18px/24px Georgia, "Times New Roman", Palatino, serif;
+    margin: 0 5px 10px 0;
+}
+
+blockquote.twitter-tweet a[href^="https://twitter.com"] {
+    font-weight: normal;
+    font-size: 12px;
 }

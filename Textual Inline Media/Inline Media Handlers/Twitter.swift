@@ -33,8 +33,41 @@ import Foundation
 
 class Twitter: NSObject, InlineMediaHandler {
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
-        /* Not yet implemented */
         self.init()
+        if (url.pathComponents!.count > 3) {
+            let tweetId = url.pathComponents![3]
+            let requestUrl = NSURL(string: String(format: "https://api.twitter.com/1/statuses/oembed.json?id=%@&omit_script=true&align=left&maxwidth=550", tweetId))
+            guard requestUrl != nil else {
+                return
+            }
+            
+            /* Rquest information about this tweet from the Twitter API. */
+            let session = NSURLSession.sharedSession()
+            session.dataTaskWithURL(requestUrl!, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+                guard data != nil else {
+                    return
+                }
+                
+                do {
+                   /* Attempt to serialise the JSON results into a dictionary. */
+                    let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+                    if let tweetHTML = root["html"] as? String {
+                        self.performBlockOnMainThread({
+                            let document = controller.webView.mainFrameDocument
+                            
+                            let tweet = document.createElement("div")
+                            tweet.className = "inline_media_twitter"
+                            tweet.innerHTML = tweetHTML
+                            
+                            InlineMedia.insert(controller, line: line, node: tweet)
+                            document.evaluateWebScript(String(format: "twttr.widgets.load(document.getElementById('line-%@'))", line))
+                        })
+                    }
+                } catch {
+                    return
+                }
+            }).resume()
+        }
     }
     
     static func matchesServiceSchema(url: NSURL, hasImageExtension: Bool) -> Bool {
