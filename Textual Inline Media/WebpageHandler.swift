@@ -83,7 +83,7 @@ class WebpageHandler: NSObject {
                     /* The og:image may be specified as a relative URL, if so, we will attemp to use NSURLs relativeToUrl feature to resolve the absolute path to this image file. */
                     if (previewImageUrl.characters.count > 0) {
                         if previewImageUrl.hasPrefix("data:image/") == false && previewImageUrl.hasPrefix("http://") == false && previewImageUrl.hasPrefix("https://") == false {
-                            if let resolvedRelativeUrl = NSURL(string: previewImageUrl, relativeToURL: url) {
+                            if let resolvedRelativeUrl = NSURL(string: previewImageUrl, relativeToURL: httpResponse.URL) {
                                 previewImageUrl = resolvedRelativeUrl.absoluteString
                             }
                         }
