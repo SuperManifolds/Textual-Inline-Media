@@ -60,6 +60,10 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
                 
                 /* NSURL is stupid and cannot comprehend unicode in domains, so we will use this method provided by Textual to convert it to "punycode" */
                 if var link = NSString(string: rawLink).URLUsingWebKitPasteboard {
+                    guard link.scheme.hasPrefix("http") else {
+                        continue
+                    }
+                    
                     for tld in disallowedTopLevelDomains {
                         if link.host!.hasSuffix(tld) {
                             continue
