@@ -32,6 +32,7 @@
 		FA39B25A1B9717CC0034B0C7 /* OGUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2471B9717CC0034B0C7 /* OGUtility.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-w"; }; };
 		FA39B25C1B97407F0034B0C7 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39B25B1B97407F0034B0C7 /* Twitter.swift */; settings = {ASSET_TAGS = (); }; };
 		FA4FE0DF1B986A9A00F84701 /* TVCImageURLParser+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4FE0DE1B986A9A00F84701 /* TVCImageURLParser+Overrides.m */; settings = {ASSET_TAGS = (); }; };
+		FA6E76811BA0FCB400948E03 /* AutoHyperlinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6E76801BA0FCB400948E03 /* AutoHyperlinks.framework */; };
 		FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */; settings = {ASSET_TAGS = (); }; };
 		FA6F488E1B963E56000280E0 /* WebpageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F488D1B963E56000280E0 /* WebpageHandler.swift */; settings = {ASSET_TAGS = (); }; };
 		FAC0403F1B5446C6002480BB /* InlineMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0403E1B5446C6002480BB /* InlineMedia.swift */; };
@@ -89,6 +90,7 @@
 		FA39B2471B9717CC0034B0C7 /* OGUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGUtility.m; sourceTree = "<group>"; };
 		FA39B25B1B97407F0034B0C7 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Twitter.swift; path = "Inline Media Handlers/Twitter.swift"; sourceTree = "<group>"; };
 		FA4FE0DE1B986A9A00F84701 /* TVCImageURLParser+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TVCImageURLParser+Overrides.m"; path = "Overrides/TVCImageURLParser+Overrides.m"; sourceTree = "<group>"; };
+		FA6E76801BA0FCB400948E03 /* AutoHyperlinks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AutoHyperlinks.framework; sourceTree = "<group>"; };
 		FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineMediaHandler.swift; path = "Inline Media Handlers/InlineMediaHandler.swift"; sourceTree = "<group>"; };
 		FA6F488D1B963E56000280E0 /* WebpageHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebpageHandler.swift; sourceTree = "<group>"; };
 		FAC040321B544536002480BB /* Textual Inline Media.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Textual Inline Media.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA6E76811BA0FCB400948E03 /* AutoHyperlinks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +210,7 @@
 				FAC040341B544536002480BB /* Textual Inline Media */,
 				FA02C4541B98E36200144323 /* Resources */,
 				FAC040331B544536002480BB /* Products */,
+				FA6E76801BA0FCB400948E03 /* AutoHyperlinks.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -428,7 +432,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"/Applications/Textual.app/Contents/Frameworks/**\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"/Applications/Textual.app/Contents/Frameworks/**",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = "\"/Applications/Textual.app/Contents/Headers/**\"";
 				INFOPLIST_FILE = "Textual Inline Media/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -449,7 +456,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"/Applications/Textual.app/Contents/Frameworks/**\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"/Applications/Textual.app/Contents/Frameworks/**",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = "\"/Applications/Textual.app/Contents/Headers/**\"";
 				INFOPLIST_FILE = "Textual Inline Media/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";

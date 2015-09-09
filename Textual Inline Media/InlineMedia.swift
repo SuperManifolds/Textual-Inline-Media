@@ -31,12 +31,10 @@
 
 import Foundation
 
-
 class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
     let inlineMediaMessageTypes = [TVCLogLineType.ActionType, TVCLogLineType.PrivateMessageType, TVCLogLineType.NoticeType]
     let mediaHandlers = [Twitter.self, YouTube.self]
-    let disallowedTopLevelDomains = [".md", ".pl"]
     
     func pluginLoadedIntoMemory() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "logControllerViewFinishedLoading:", name: TVCLogControllerViewFinishedLoadingNotification, object: nil)
@@ -52,86 +50,82 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
         guard !messageObject.isProcessedInBulk && inlineMediaMessageTypes.contains(messageObject.lineType) else {
             return
         }
+        
+        let linkScanner = AHHyperlinkScanner.init()
+        let links = linkScanner.strictMatchesForString(messageObject.messageContents)
+        
         var linkPriorityDict = Dictionary<String, [NSURL]>()
         var sortedLinks: [NSURL] = []
-        if let links = messageObject.listOfHyperlinks {
-            for result in links {
-                let rawLink = result[1] as! String
+        for result in links {
+            let rawLink = result[1] as! String
+            
+            /* NSURL is stupid and cannot comprehend unicode in domains, so we will use this method provided by Textual to convert it to "punycode" */
+            if var link = NSString(string: rawLink).URLUsingWebKitPasteboard {
+                guard link.scheme.hasPrefix("http") else {
+                    continue
+                }
                 
-                /* NSURL is stupid and cannot comprehend unicode in domains, so we will use this method provided by Textual to convert it to "punycode" */
-                if var link = NSString(string: rawLink).URLUsingWebKitPasteboard {
-                    guard link.scheme.hasPrefix("http") else {
-                        continue
+                /* Replace Reddit shortlinks */
+                if link.host!.hasSuffix("redd.it") {
+                    link = NSURL(string: String(format: "%@://www.reddit.com/tb%@", link.scheme, link.path!))!
+                }
+                
+                /* Organise links into a dictionary by what domain they are from. */
+                if (!linkPriorityDict.keys.contains(link.host!)) {
+                    linkPriorityDict[link.host!] = []
+                }
+                linkPriorityDict[link.host!]?.append(link)
+            }
+        }
+        
+        /* Prioritise links from the same domain by the number of path components. This will favour  a link to a subpage over a generic index page link and so on. */
+        for domain in linkPriorityDict {
+            let sorted = domain.1.sort {
+                /* Terrible workaround to give subreddit links a low priority. */
+                if ($1.pathComponents?.count > 2) {
+                    if ($1.pathComponents![1] == "r") {
+                        return true
                     }
-                    
-                    for tld in disallowedTopLevelDomains {
-                        if link.host!.hasSuffix(tld) {
-                            continue
-                        }
-                    }
-                    
-                    /* Replace Reddit shortlinks */
-                    if link.host!.hasSuffix("redd.it") {
-                        link = NSURL(string: String(format: "%@://www.reddit.com/tb%@", link.scheme, link.path!))!
-                    }
-                    
-                    /* Organise links into a dictionary by what domain they are from. */
-                    if (!linkPriorityDict.keys.contains(link.host!)) {
-                        linkPriorityDict[link.host!] = []
-                    }
-                    linkPriorityDict[link.host!]?.append(link)
+                }
+                return $0.pathComponents?.count > $1.pathComponents?.count
+            }
+            sortedLinks.append(sorted[0])
+        }
+        
+        for url in sortedLinks {
+            var isDirectImageLink = false
+            
+            /* Check if the url is a direct link to an image with a valid image file extension. */
+            if let fileExtension = url.pathExtension {
+                isDirectImageLink = imageFileExtensions.contains(fileExtension.lowercaseString)
+                
+                /* Check if this is a link to a gif. */
+                if (fileExtension.lowercaseString == "gif") {
+                    self.performBlockOnMainThread({
+                        GifConversion.displayLoopingAnimation(url, controller: logController, line: messageObject.lineNumber)
+                        return
+                    })
+                } else if (isDirectImageLink) {
+                    return
                 }
             }
             
-            /* Prioritise links from the same domain by the number of path components. This will favour  a link to a subpage over a generic index page link and so on. */
-            for domain in linkPriorityDict {
-                let sorted = domain.1.sort {
-                    /* Terrible workaround to give subreddit links a low priority. */
-                    if ($1.pathComponents?.count > 2) {
-                        if ($1.pathComponents![1] == "r") {
-                            return true
-                        }
-                    }
-                    return $0.pathComponents?.count > $1.pathComponents?.count
-                }
-                sortedLinks.append(sorted[0])
-            }
-            
-            for url in sortedLinks {
-                var isDirectImageLink = false
-                
-                /* Check if the url is a direct link to an image with a valid image file extension. */
-                if let fileExtension = url.pathExtension {
-                    isDirectImageLink = imageFileExtensions.contains(fileExtension.lowercaseString)
-                    
-                    /* Check if this is a link to a gif. */
-                    if (fileExtension.lowercaseString == "gif") {
-                        self.performBlockOnMainThread({
-                            GifConversion.displayLoopingAnimation(url, controller: logController, line: messageObject.lineNumber)
-                            return
-                        })
-                    } else if (isDirectImageLink) {
+            /* Iterate over the available media handlers and see if we have one that supports this url. */
+            for mediaHandlerType in mediaHandlers {
+                if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
+                    if (mediaHandler.matchesServiceSchema(url, hasImageExtension: isDirectImageLink)) {
+                        mediaHandler.init(url: url, controller: logController, line: messageObject.lineNumber)
                         return
                     }
                 }
-                
-                /* Iterate over the available media handlers and see if we have one that supports this url. */
-                for mediaHandlerType in mediaHandlers {
-                    if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
-                        if (mediaHandler.matchesServiceSchema(url, hasImageExtension: isDirectImageLink)) {
-                            mediaHandler.init(url: url, controller: logController, line: messageObject.lineNumber)
-                            return
-                        }
-                    }
-                }
-                
-                /* There were no media handlers for this url, we will attempt to retrieve the title, description, and preview thumbnail of the webpage instead. */
-                WebpageHandler.displayInformation(url, controller: logController, line: messageObject.lineNumber)
             }
+            
+            /* There were no media handlers for this url, we will attempt to retrieve the title, description, and preview thumbnail of the webpage instead. */
+            WebpageHandler.displayInformation(url, controller: logController, line: messageObject.lineNumber)
         }
     }
     
-    /** 
+    /**
     Called when a web view has been loaded in Textual. Is used to load any static resources into the webview necessary for plugin features.
     
     :param notification an NSNotification object containing the Log Controller that for the webview that has loaded.
