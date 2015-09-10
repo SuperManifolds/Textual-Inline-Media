@@ -19,30 +19,31 @@ class Wikipedia: NSObject, InlineMediaHandler {
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         if let query = url.pathComponents?[2] {
-            NSLog("Making query")
             let requestString = String(format: "format=json&action=query&exsentences=4&prop=extracts|pageimages&titles=%@&pithumbsize=200",
                 query).stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
-            NSLog("%@", requestString)
+            
+            let subdomain = url.host?.componentsSeparatedByString(".")[0]
+            guard subdomain != nil else {
+                return
+            }
+            
             let config = NSURLSessionConfiguration.defaultSessionConfiguration()
             config.HTTPAdditionalHeaders = ["User-Agent": "TextualInlineMedia/1.0 (https://github.com/xlexi/Textual-Inline-Media/; alex@sorlie.co.uk)"]
+            
             let session = NSURLSession(configuration: config)
-            if let requestUrl = NSURL(string: "https://en.wikipedia.org/w/api.php?" + requestString) {
-                NSLog("making request")
+            if let requestUrl = NSURL(string: String(format: "https://%@.wikipedia.org/w/api.php?%@", subdomain!, requestString)) {
                 session.dataTaskWithURL(requestUrl, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-                    NSLog("data task finished")
                     guard data != nil else {
                         return
                     }
                     
                     do {
-                        NSLog("parsing json")
                         /* Attempt to serialise the JSON results into a dictionary. */
                         let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
                         let query = root["query"] as! Dictionary<String, AnyObject>
                         let pages = query["pages"] as! Dictionary<String, AnyObject>
                         let page = pages.first!
                         if (page.0 != "-1") {
-                            NSLog("Making media")
                             let article = page.1 as! Dictionary<String, AnyObject>
                             let title = article["title"] as! String
                             let description = article["extract"] as! String
