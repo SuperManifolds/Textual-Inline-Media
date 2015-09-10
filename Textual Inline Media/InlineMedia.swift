@@ -34,7 +34,7 @@ import Foundation
 class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
     let inlineMediaMessageTypes = [TVCLogLineType.ActionType, TVCLogLineType.PrivateMessageType, TVCLogLineType.NoticeType]
-    let mediaHandlers = [Twitter.self, YouTube.self]
+    let mediaHandlers = [Twitter.self, YouTube.self, Wikipedia.self]
     
     func pluginLoadedIntoMemory() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "logControllerViewFinishedLoading:", name: TVCLogControllerViewFinishedLoadingNotification, object: nil)

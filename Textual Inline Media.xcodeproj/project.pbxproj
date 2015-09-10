@@ -33,6 +33,7 @@
 		FA39B25C1B97407F0034B0C7 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39B25B1B97407F0034B0C7 /* Twitter.swift */; settings = {ASSET_TAGS = (); }; };
 		FA4FE0DF1B986A9A00F84701 /* TVCImageURLParser+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4FE0DE1B986A9A00F84701 /* TVCImageURLParser+Overrides.m */; settings = {ASSET_TAGS = (); }; };
 		FA6E76811BA0FCB400948E03 /* AutoHyperlinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6E76801BA0FCB400948E03 /* AutoHyperlinks.framework */; };
+		FA6E76851BA1071500948E03 /* Wikipedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6E76841BA1071500948E03 /* Wikipedia.swift */; settings = {ASSET_TAGS = (); }; };
 		FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */; settings = {ASSET_TAGS = (); }; };
 		FA6F488E1B963E56000280E0 /* WebpageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F488D1B963E56000280E0 /* WebpageHandler.swift */; settings = {ASSET_TAGS = (); }; };
 		FAC0403F1B5446C6002480BB /* InlineMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0403E1B5446C6002480BB /* InlineMedia.swift */; };
@@ -91,6 +92,7 @@
 		FA39B25B1B97407F0034B0C7 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Twitter.swift; path = "Inline Media Handlers/Twitter.swift"; sourceTree = "<group>"; };
 		FA4FE0DE1B986A9A00F84701 /* TVCImageURLParser+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TVCImageURLParser+Overrides.m"; path = "Overrides/TVCImageURLParser+Overrides.m"; sourceTree = "<group>"; };
 		FA6E76801BA0FCB400948E03 /* AutoHyperlinks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AutoHyperlinks.framework; sourceTree = "<group>"; };
+		FA6E76841BA1071500948E03 /* Wikipedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Wikipedia.swift; path = "Inline Media Handlers/Wikipedia.swift"; sourceTree = "<group>"; };
 		FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineMediaHandler.swift; path = "Inline Media Handlers/InlineMediaHandler.swift"; sourceTree = "<group>"; };
 		FA6F488D1B963E56000280E0 /* WebpageHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebpageHandler.swift; sourceTree = "<group>"; };
 		FAC040321B544536002480BB /* Textual Inline Media.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Textual Inline Media.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +202,7 @@
 				FA39B25B1B97407F0034B0C7 /* Twitter.swift */,
 				FAD0EE1F1B975D7E0015A5B4 /* YouTube.swift */,
 				FA13CEDC1B9E62ED00FA1475 /* FileServiceHandler.swift */,
+				FA6E76841BA1071500948E03 /* Wikipedia.swift */,
 			);
 			name = "Inline Media Handlers";
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				FAE219A21B9B969700CDF0E4 /* EventListener.swift in Sources */,
 				FA39B24E1B9717CC0034B0C7 /* tag.c in Sources */,
 				FA39B25C1B97407F0034B0C7 /* Twitter.swift in Sources */,
+				FA6E76851BA1071500948E03 /* Wikipedia.swift in Sources */,
 				FA39B24B1B9717CC0034B0C7 /* parser.c in Sources */,
 				FAD0EE221B9773A80015A5B4 /* Extensions.swift in Sources */,
 			);

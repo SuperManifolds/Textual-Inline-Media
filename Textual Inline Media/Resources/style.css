@@ -4,7 +4,8 @@
 
 .inline_media_website,
 .inline_media_youtube,
-.inline_media_twitter {
+.inline_media_twitter,
+.inline_media_wiki {
     margin-top: 5px;
     border-radius: 5px;
     background: rgba(255,255,255,0.05);
@@ -21,13 +22,22 @@
     color: white;
 }
 
+.inline_media_wiki_title {
+    font-size: 150%;
+    color: white;
+    font-family: Georgia, Times, serif;
+    text-decoration: underline;
+}
+
 .inline_media_website_desc,
-.inline_media_youtube_desc {
+.inline_media_youtube_desc,
+.inline_media_wiki_desc {
     color: white;
 }
 
 .inline_media_website_thumbnail,
-.inline_media_youtube_thumbnail {
+.inline_media_youtube_thumbnail,
+.inline_media_wiki_thumbnail {
     width: auto;
     height: auto;
     max-width: 160px;
@@ -35,8 +45,13 @@
     margin-right: 15px;
 }
 
+.inline_media_wiki_thumbnail {
+    max-height: 160px;
+}
+
 .inline_media_website_info,
-.inline_media_youtube_info {
+.inline_media_youtube_info,
+.inline_media_wiki_info {
     -webkit-flex: 1;
     flex: 1;
 }
