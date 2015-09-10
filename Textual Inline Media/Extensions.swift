@@ -40,3 +40,77 @@ extension String {
         return self[startIndex.advancedBy(range.startIndex)..<startIndex.advancedBy(range.endIndex)]
     }
 }
+
+
+extension NSTimeInterval {
+    init?(iso8601String: String) {
+        if iso8601String.hasPrefix("P") && iso8601String.containsString("T") {
+            
+            var seconds: NSTimeInterval = 0
+            var isTimeSegment = false
+            
+            let iso8601duration = NSScanner(string: iso8601String)
+            if iso8601String.hasPrefix("PT") {
+                iso8601duration.charactersToBeSkipped = NSCharacterSet(charactersInString: "PT")
+                isTimeSegment = true
+            } else {
+                iso8601duration.charactersToBeSkipped = NSCharacterSet(charactersInString: "P")
+            }
+            
+            while iso8601duration.atEnd == false {
+                var value = 0.0
+                var units: NSString?
+                
+                if iso8601duration.scanDouble(&value) {
+                    if iso8601duration.scanCharactersFromSet(NSCharacterSet.uppercaseLetterCharacterSet(), intoString: &units) {
+                        if let unitString = units as? String {
+                            for unit in unitString.characters {
+                                switch unit {
+                                case  "Y":
+                                    seconds += 31557600*value
+                                    break
+                                    
+                                case "M":
+                                    if isTimeSegment {
+                                        seconds += 60*value
+                                    } else {
+                                        seconds += 2629800*value
+                                    }
+                                    break
+                                    
+                                case "W":
+                                    seconds += 604800*value
+                                    break
+                                    
+                                case "D":
+                                    seconds += 86400*value
+                                    break
+                                    
+                                case "H":
+                                    seconds += 3600*value
+                                    break
+                                    
+                                case "S":
+                                    seconds += value
+                                    break
+                                    
+                                case "T":
+                                    isTimeSegment = true
+                                    break
+                                    
+                                default:
+                                    break
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    break
+                }
+            }
+            self.init(seconds)
+            return
+        }
+        return nil
+    }
+}

@@ -43,6 +43,28 @@
     max-width: 160px;
     max-height: 75px;
     margin-right: 15px;
+    position: relative;
+}
+
+.inline_media_youtube_thumbnail > img {
+    width: auto;
+    height: auto;
+    max-width: 160px;
+    max-height: 75px;
+}
+
+.inline_media_youtube_thumbnail > span {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    height: 14px;
+    line-height: 14px;
+    background: #000;
+    font-size: 11px;
+    color: #fff;
+    font-weight: bold;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 .inline_media_wiki_thumbnail {

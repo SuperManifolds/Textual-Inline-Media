@@ -60,7 +60,7 @@ class YouTube: NSObject, InlineMediaHandler {
         }
         
         if videoID.characters.count > 0 {
-            let requestUrl = NSURL(string: String(format: "https://www.googleapis.com/youtube/v3/videos?id=%@&part=snippet&key=AIzaSyDzFtmfVnm9-iGnmrpJeR-26rau1SGjq04", videoID))
+            let requestUrl = NSURL(string: String(format: "https://www.googleapis.com/youtube/v3/videos?id=%@&part=snippet,contentDetails&key=AIzaSyDzFtmfVnm9-iGnmrpJeR-26rau1SGjq04", videoID))
             guard requestUrl != nil else {
                 return
             }
@@ -96,6 +96,15 @@ class YouTube: NSObject, InlineMediaHandler {
                             let standardThumbnail = thumbnails["medium"] as! Dictionary<String, AnyObject>
                             let thumbnailUrl = standardThumbnail["url"] as! String
                             
+                            /* Retrieve the length of the video */
+                            let contentDetails = item["contentDetails"] as! Dictionary<String, AnyObject>
+                            let timeInterval = NSTimeInterval(iso8601String: contentDetails["duration"] as! String)
+                            let formatter = NSDateComponentsFormatter()
+                            
+                            formatter.allowedUnits = timeInterval >= 3600 ? [.Hour, .Minute, .Second] : [.Minute, .Second]
+                            formatter.zeroFormattingBehavior = .Pad
+                            let duration = formatter.stringFromTimeInterval(timeInterval!)
+                            
                             self.performBlockOnMainThread({
                                 let document = controller.webView.mainFrameDocument
                                 
@@ -104,11 +113,19 @@ class YouTube: NSObject, InlineMediaHandler {
                                 ytContainer.setAttribute("href", value: url.absoluteString)
                                 ytContainer.className = "inline_media_youtube"
                                 
+                                let thumbnailContainer = document.createElement("div")
+                                thumbnailContainer.className = "inline_media_youtube_thumbnail"
+                                ytContainer.appendChild(thumbnailContainer)
+                                
                                 /* Create the thumbnail image. */
                                 let thumbnailImage = document.createElement("img")
                                 thumbnailImage.setAttribute("src", value: thumbnailUrl)
-                                thumbnailImage.className = "inline_media_youtube_thumbnail"
-                                ytContainer.appendChild(thumbnailImage)
+                                thumbnailContainer.appendChild(thumbnailImage)
+                                
+                                /* Include the video length inside the thumbnail */
+                                let videoLength = document.createElement("span")
+                                videoLength.appendChild(document.createTextNode(duration))
+                                thumbnailContainer.appendChild(videoLength)
                                 
                                 /* Create the container that holds the title and description. */
                                 let infoContainer = document.createElement("div")
