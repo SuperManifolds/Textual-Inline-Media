@@ -57,7 +57,8 @@ class GifConversion: NSObject {
                 do {
                     /* Attempt to serialise the JSON results into a dictionary. */
                     let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
-                    if let videoUrl = root["mp4Url"] as! String? {
+                    NSLog("%@", root as! Dictionary<String, AnyObject>)
+                    if let videoUrl = root["mp4Url"] as? String {
                         self.performBlockOnMainThread({
                             /* Create the video tag and set it to automatically play, and loop continously. */
                             let video = InlineMedia.inlineVideo(controller, source: videoUrl, loop: true, autoPlay: true)
