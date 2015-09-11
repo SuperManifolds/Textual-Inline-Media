@@ -60,7 +60,7 @@ class YouTube: NSObject, InlineMediaHandler {
         }
         
         if videoID.characters.count > 0 {
-            let requestUrl = NSURL(string: String(format: "https://www.googleapis.com/youtube/v3/videos?id=%@&part=snippet,contentDetails&key=AIzaSyDzFtmfVnm9-iGnmrpJeR-26rau1SGjq04", videoID))
+            let requestUrl = NSURL(string: "https://www.googleapis.com/youtube/v3/videos?id=\(videoID)&part=snippet,contentDetails,statistics&key=AIzaSyDzFtmfVnm9-iGnmrpJeR-26rau1SGjq04")
             guard requestUrl != nil else {
                 return
             }
@@ -86,10 +86,15 @@ class YouTube: NSObject, InlineMediaHandler {
                             /* Retrieve the video title. */
                             let title = video["title"] as! String
                             
-                            /* Retrieve only the first paragraph of the description. */
-                            let fullDescription = video["description"] as? String
-                            let descriptionLines = fullDescription!.componentsSeparatedByString("\n")
-                            let description = descriptionLines[0]
+                            /* Retrieve the author  */
+                            let author = video["channelTitle"] as! String
+                            
+                            /* Retrieve the view count */
+                            let statistics = item["statistics"] as! Dictionary<String, AnyObject>
+                            let numberFormatter = NSNumberFormatter()
+                            numberFormatter.numberStyle = .DecimalStyle
+                            let unformattedViewCount = statistics["viewCount"] as! String
+                            let viewCount = numberFormatter.stringFromNumber(Int(unformattedViewCount)!)
                             
                             /* Retrieve the thumbnail of the video. */
                             let thumbnails = video["thumbnails"] as! Dictionary<String, AnyObject>
@@ -138,11 +143,17 @@ class YouTube: NSObject, InlineMediaHandler {
                                 videoTitle.appendChild(document.createTextNode(title))
                                 infoContainer.appendChild(videoTitle)
                                 
-                                /* Create the description */
-                                let videoDescription = document.createElement("p")
-                                videoDescription.className = "inline_media_youtube_desc"
-                                videoDescription.appendChild(document.createTextNode(description))
-                                infoContainer.appendChild(videoDescription)
+                                /* Create the author  */
+                                let videoAuthor = document.createElement("p")
+                                videoAuthor.className = "inline_media_youtube_author"
+                                videoAuthor.appendChild(document.createTextNode("by " + author))
+                                infoContainer.appendChild(videoAuthor)
+                                
+                                /* Create the view count  */
+                                let videoViews = document.createElement("p")
+                                videoViews.className = "inline_media_youtube_views"
+                                videoViews.appendChild(document.createTextNode(viewCount! + " views"))
+                                infoContainer.appendChild(videoViews)
                                 
                                 /* Insert the element into Textual's view. */
                                 InlineMedia.insert(controller, line: line, node: ytContainer)

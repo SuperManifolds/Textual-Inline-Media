@@ -36,7 +36,7 @@ class Twitter: NSObject, InlineMediaHandler {
         self.init()
         if (url.pathComponents!.count > 3) {
             let tweetId = url.pathComponents![3]
-            let requestUrl = NSURL(string: String(format: "https://api.twitter.com/1/statuses/oembed.json?id=%@&omit_script=true&align=left&maxwidth=550", tweetId))
+            let requestUrl = NSURL(string: "https://api.twitter.com/1/statuses/oembed.json?id=\(tweetId)&omit_script=true&align=left&maxwidth=550")
             guard requestUrl != nil else {
                 return
             }
@@ -60,7 +60,7 @@ class Twitter: NSObject, InlineMediaHandler {
                             tweet.innerHTML = tweetHTML
                             
                             InlineMedia.insert(controller, line: line, node: tweet)
-                            document.evaluateWebScript(String(format: "twttr.widgets.load(document.getElementById('line-%@'))", line))
+                            document.evaluateWebScript("twttr.widgets.load(document.getElementById('line-\(line)'))")
                         })
                     }
                 } catch {

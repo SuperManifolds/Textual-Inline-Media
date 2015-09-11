@@ -35,7 +35,7 @@ class GifConversion: NSObject {
     static func displayLoopingAnimation(url: NSURL, controller: TVCLogController, line: String) {
         if url.host!.hasSuffix("imgur.com") {
             /* Imgur already has video versions of gifs so we will not need to convert these, we will just change the extension to .mp4 and make it a video element. */
-            let imgurVideoUrl = String(format: "%@.mp4", url.URLByDeletingPathExtension!)
+            let imgurVideoUrl = "\(url.URLByDeletingPathExtension!).mp4"
             let video = InlineMedia.inlineVideo(controller, source: imgurVideoUrl, loop: true, autoPlay: true)
             
             /* Insert the element into Textual's view. */
@@ -43,7 +43,7 @@ class GifConversion: NSObject {
         } else {
             /* Create a request to the gfycat API to convert this gif into a video file. */
             let requestString = url.absoluteString.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
-            let requestUrl = NSURL(string: String(format: "http://upload.gfycat.com/transcode?fetchUrl=%@", requestString))
+            let requestUrl = NSURL(string: "http://upload.gfycat.com/transcode?fetchUrl=\(requestString)")
             guard requestUrl != nil else {
                 return
             }
@@ -57,7 +57,6 @@ class GifConversion: NSObject {
                 do {
                     /* Attempt to serialise the JSON results into a dictionary. */
                     let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
-                    NSLog("%@", root as! Dictionary<String, AnyObject>)
                     if let videoUrl = root["mp4Url"] as? String {
                         self.performBlockOnMainThread({
                             /* Create the video tag and set it to automatically play, and loop continously. */

@@ -35,8 +35,8 @@ class Wikipedia: NSObject, InlineMediaHandler {
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         if let query = url.pathComponents?[2] {
-            let requestString = String(format: "format=json&action=query&exsentences=4&prop=extracts|pageimages&titles=%@&pithumbsize=200",
-                query).stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
+            let requestString = "format=json&action=query&exsentences=4&prop=extracts|pageimages&titles=\(query)&pithumbsize=200"
+                .stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
             
             let subdomain = url.host?.componentsSeparatedByString(".")[0]
             guard subdomain != nil else {
@@ -47,7 +47,7 @@ class Wikipedia: NSObject, InlineMediaHandler {
             config.HTTPAdditionalHeaders = ["User-Agent": "TextualInlineMedia/1.0 (https://github.com/xlexi/Textual-Inline-Media/; alex@sorlie.co.uk)"]
             
             let session = NSURLSession(configuration: config)
-            if let requestUrl = NSURL(string: String(format: "https://%@.wikipedia.org/w/api.php?%@", subdomain!, requestString)) {
+            if let requestUrl = NSURL(string: "https://\(subdomain).wikipedia.org/w/api.php?\(requestString)") {
                 session.dataTaskWithURL(requestUrl, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
                     guard data != nil else {
                         return

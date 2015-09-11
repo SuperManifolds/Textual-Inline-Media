@@ -66,40 +66,33 @@ extension NSTimeInterval {
                         if let unitString = units as? String {
                             for unit in unitString.characters {
                                 switch unit {
-                                case  "Y":
-                                    seconds += 31557600*value
-                                    break
-                                    
-                                case "M":
-                                    if isTimeSegment {
-                                        seconds += 60*value
-                                    } else {
-                                        seconds += 2629800*value
-                                    }
-                                    break
-                                    
-                                case "W":
-                                    seconds += 604800*value
-                                    break
-                                    
-                                case "D":
-                                    seconds += 86400*value
-                                    break
-                                    
-                                case "H":
-                                    seconds += 3600*value
-                                    break
-                                    
-                                case "S":
-                                    seconds += value
-                                    break
-                                    
-                                case "T":
-                                    isTimeSegment = true
-                                    break
-                                    
-                                default:
-                                    break
+                                    case  "Y":
+                                        seconds += 31557600*value
+                                        
+                                    case "M":
+                                        if isTimeSegment {
+                                            seconds += 60*value
+                                        } else {
+                                            seconds += 2629800*value
+                                        }
+                                        
+                                    case "W":
+                                        seconds += 604800*value
+                                        
+                                    case "D":
+                                        seconds += 86400*value
+                                        
+                                    case "H":
+                                        seconds += 3600*value
+                                        
+                                    case "S":
+                                        seconds += value
+                                        
+                                    case "T":
+                                        isTimeSegment = true
+                                        
+                                    default:
+                                        return nil
                                 }
                             }
                         }
