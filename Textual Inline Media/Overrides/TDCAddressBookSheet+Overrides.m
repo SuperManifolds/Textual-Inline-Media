@@ -45,6 +45,11 @@
 	[self __tpi_start];
 
     if ([[self ignore] entryType] == IRCAddressBookIgnoreEntryType) {
+		/* Maybe set default value for property */
+		if ([self newItem]) {
+			[[self ignore] setIgnoreInlineMedia:YES];
+		}
+
 		/* Create the button to add. */
 		/* The frame the button is created with is the default. Constraints
 		 are added later on in this method which will position it correctly. */
