@@ -36,7 +36,6 @@
 + (void)load
 {
     XRExchangeImplementation(@"TDCAddressBookSheet", @"start", @"__tpi_start");
-    XRExchangeImplementation(@"TDCAddressBookSheet", @"ok:", @"__tpi_ok:");
 }
 
 #pragma mark - Method Swizzling
@@ -98,11 +97,6 @@
 									   constant:40.0]
 		 ];
     }
-}
-
-- (void)__tpi_ok:(id)sender
-{
-	[self __tpi_ok:sender];
 }
 
 - (void)inlineMediaCheckboxToggled:(NSButton *)sender
