@@ -30,9 +30,16 @@
 }
 
 .inline_media_website_desc,
-.inline_media_youtube_desc,
 .inline_media_wiki_desc {
     color: white;
+}
+
+
+.inline_media_youtube_author,
+.inline_media_youtube_views {
+    color: #ccc;
+    font-size: 90%;
+    line-height: 18px;
 }
 
 .inline_media_website_thumbnail,
