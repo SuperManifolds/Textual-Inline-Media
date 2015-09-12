@@ -4,3 +4,4 @@
 
 #import "TextualApplication.h"
 #import "ObjectiveGumbo.h"
+#import "IRCAddressBookEntry+Overrides.h"
