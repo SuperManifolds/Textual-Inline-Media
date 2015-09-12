@@ -29,48 +29,29 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <objc/runtime.h>
 #import "TextualApplication.h"
 
 @implementation TVCImageURLParser (Overrides)
 
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        Class class = object_getClass((id)self);
-        
-        SEL originalSelector = @selector(imageURLFromBase:);
-        SEL swizzledSelector = @selector(imageURLFromBaseOverride:);
-        
-        Method originalMethod = class_getClassMethod(class, originalSelector);
-        Method swizzledMethod = class_getClassMethod(class, swizzledSelector);
-        
-        BOOL didAddMethod =
-        class_addMethod(class,
-                        originalSelector,
-                        method_getImplementation(swizzledMethod),
-                        method_getTypeEncoding(swizzledMethod));
-        
-        if (didAddMethod) {
-            class_replaceMethod(class,
-                                swizzledSelector,
-                                method_getImplementation(originalMethod),
-                                method_getTypeEncoding(originalMethod));
-        } else {
-            method_exchangeImplementations(originalMethod, swizzledMethod);
-        }
-    });
++ (void)load
+{
+	XRExchangeImplementation(@"TVCImageURLParser", @"imageURLFromBase:", @"__tpi_imageURLFromBase:");
 }
 
 #pragma mark - Method Swizzling
 
-+ (NSString *)imageURLFromBaseOverride:(NSString *)url {
-    /* Check if this url is a direct image link to a gif or youtube url, if it is, intercept it. If not, relay it to Textual's default image parser. */
-    NSURL *urlObject = [url URLUsingWebKitPasteboard];
-    if ([urlObject.pathExtension isEqualIgnoringCase:@"gif"] || [urlObject.host hasSuffix:@"youtube.com"] || [urlObject.host hasSuffix:@"youtu.be"]) {
-        return nil;
-    }
-    return [TVCImageURLParser imageURLFromBaseOverride:url];
++ (NSString *)__tpi_imageURLFromBase:(NSString *)url
+{
+	NSURL *urlObject = [url URLUsingWebKitPasteboard];
+
+	if ([[urlObject pathExtension] isEqualIgnoringCase:@"gif"] ||
+		[[urlObject host] hasSuffix:@"youtube.com"] ||
+		[[urlObject host] hasSuffix:@"youtu.be"])
+	{
+		return nil;
+	}
+
+	return [TVCImageURLParser imageURLFromBase:url];
 }
 
 @end

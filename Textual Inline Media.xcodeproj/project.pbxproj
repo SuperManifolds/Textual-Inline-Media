@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C8799E11BA47A7600099E13 /* CocoaExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8799E01BA47A5B00099E13 /* CocoaExtensions.framework */; };
 		4C8CF6F11BA12A6E0030BC21 /* AutoHyperlinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8CF6F01BA12A670030BC21 /* AutoHyperlinks.framework */; };
 		FA02C4531B987F0300144323 /* GifConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02C4521B987F0300144323 /* GifConversion.swift */; settings = {ASSET_TAGS = (); }; };
 		FA02C4561B98E3BD00144323 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = FA02C4551B98E3BD00144323 /* style.css */; settings = {ASSET_TAGS = (); }; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C8799E01BA47A5B00099E13 /* CocoaExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaExtensions.framework; path = ../../../../Applications/Textual.app/Contents/Frameworks/CocoaExtensions.framework; sourceTree = "<group>"; };
 		4C8CF6F01BA12A670030BC21 /* AutoHyperlinks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AutoHyperlinks.framework; path = /Applications/Textual.app/Contents/Frameworks/AutoHyperlinks.framework; sourceTree = "<absolute>"; };
 		FA02C4521B987F0300144323 /* GifConversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifConversion.swift; sourceTree = "<group>"; };
 		FA02C4551B98E3BD00144323 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = Resources/style.css; sourceTree = "<group>"; };
@@ -113,12 +115,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C8CF6F11BA12A6E0030BC21 /* AutoHyperlinks.framework in Frameworks */,
+				4C8799E11BA47A7600099E13 /* CocoaExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C8799DD1BA47A1300099E13 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C8CF6F01BA12A670030BC21 /* AutoHyperlinks.framework */,
+				4C8799E01BA47A5B00099E13 /* CocoaExtensions.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FA02C4541B98E36200144323 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,8 +224,8 @@
 			children = (
 				FAC040341B544536002480BB /* Textual Inline Media */,
 				FA02C4541B98E36200144323 /* Resources */,
+				4C8799DD1BA47A1300099E13 /* Frameworks */,
 				FAC040331B544536002480BB /* Products */,
-				4C8CF6F01BA12A670030BC21 /* AutoHyperlinks.framework */,
 			);
 			sourceTree = "<group>";
 		};
