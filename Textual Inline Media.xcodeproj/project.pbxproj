@@ -34,6 +34,7 @@
 		FA39B25A1B9717CC0034B0C7 /* OGUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2471B9717CC0034B0C7 /* OGUtility.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-w"; }; };
 		FA39B25C1B97407F0034B0C7 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39B25B1B97407F0034B0C7 /* Twitter.swift */; settings = {ASSET_TAGS = (); }; };
 		FA4FE0DF1B986A9A00F84701 /* TVCImageURLParser+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4FE0DE1B986A9A00F84701 /* TVCImageURLParser+Overrides.m */; settings = {ASSET_TAGS = (); }; };
+		FA56C1D31BA4B45F0084BED6 /* TVCLogController+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FA56C1D21BA4B45F0084BED6 /* TVCLogController+Overrides.m */; settings = {ASSET_TAGS = (); }; };
 		FA6E76851BA1071500948E03 /* Wikipedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6E76841BA1071500948E03 /* Wikipedia.swift */; settings = {ASSET_TAGS = (); }; };
 		FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */; settings = {ASSET_TAGS = (); }; };
 		FA6F488E1B963E56000280E0 /* WebpageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F488D1B963E56000280E0 /* WebpageHandler.swift */; settings = {ASSET_TAGS = (); }; };
@@ -94,6 +95,7 @@
 		FA39B2471B9717CC0034B0C7 /* OGUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGUtility.m; sourceTree = "<group>"; };
 		FA39B25B1B97407F0034B0C7 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Twitter.swift; path = "Inline Media Handlers/Twitter.swift"; sourceTree = "<group>"; };
 		FA4FE0DE1B986A9A00F84701 /* TVCImageURLParser+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TVCImageURLParser+Overrides.m"; path = "Overrides/TVCImageURLParser+Overrides.m"; sourceTree = "<group>"; };
+		FA56C1D21BA4B45F0084BED6 /* TVCLogController+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TVCLogController+Overrides.m"; path = "Overrides/TVCLogController+Overrides.m"; sourceTree = "<group>"; };
 		FA6E76841BA1071500948E03 /* Wikipedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Wikipedia.swift; path = "Inline Media Handlers/Wikipedia.swift"; sourceTree = "<group>"; };
 		FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineMediaHandler.swift; path = "Inline Media Handlers/InlineMediaHandler.swift"; sourceTree = "<group>"; };
 		FA6F488D1B963E56000280E0 /* WebpageHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebpageHandler.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				FADAFB2F1B9BABB200273C13 /* IRCAddressBookEntry+Overrides.h */,
 				FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */,
 				FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */,
+				FA56C1D21BA4B45F0084BED6 /* TVCLogController+Overrides.m */,
 			);
 			name = Overrides;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA56C1D31BA4B45F0084BED6 /* TVCLogController+Overrides.m in Sources */,
 				FA13CEDD1B9E62ED00FA1475 /* FileServiceHandler.swift in Sources */,
 				FA39B25A1B9717CC0034B0C7 /* OGUtility.m in Sources */,
 				FA39B2591B9717CC0034B0C7 /* OGText.m in Sources */,
