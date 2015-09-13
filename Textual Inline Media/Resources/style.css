@@ -1,5 +1,6 @@
 .inlineMediaCell {
     display: block;
+    text-indent: 0 !important;
 }
 
 .inline_media_website,
