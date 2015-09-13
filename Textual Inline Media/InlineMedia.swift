@@ -38,6 +38,13 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     let mediaHandlers = [Twitter.self, YouTube.self, Wikipedia.self]
     
     func pluginLoadedIntoMemory() {
+        #if TEXTUAL_BUILT_INSIDE_SANDBOX
+            let alert = NSAlert()
+            alert.messageText = "Textual Inline Media Plugin"
+            alert.addButtonWithTitle("OK")
+            alert.informativeText = "This plugin will not work correctly because it is not compatible with your version of Textual"
+            alert.runModal()
+        #endif
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "logControllerViewFinishedLoading:", name: TVCLogControllerViewFinishedLoadingNotification, object: nil)
         let updater = SUUpdater(forBundle: NSBundle(forClass: object_getClass(self)))
         updater.resetUpdateCycle()
