@@ -113,11 +113,16 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
                     if (fileExtension.lowercaseString == "gif") {
                         self.performBlockOnMainThread({
                             GifConversion.displayLoopingAnimation(url, controller: logController, line: messageObject.lineNumber)
-                            return
                         })
+                        continue
                     } else if (isDirectImageLink) {
-                        return
+                        continue
                     }
+                }
+                
+                /* If Textual already handles this link, we will not attempt to. */
+                guard TVCImageURLParser.imageURLFromBase(url.absoluteString) == nil else {
+                    continue
                 }
                 
                 /* Iterate over the available media handlers and see if we have one that supports this url. */
@@ -125,7 +130,7 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
                     if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
                         if (mediaHandler.matchesServiceSchema(url, hasImageExtension: isDirectImageLink)) {
                             mediaHandler.init(url: url, controller: logController, line: messageObject.lineNumber)
-                            return
+                            break
                         }
                     }
                 }
