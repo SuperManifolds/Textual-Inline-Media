@@ -30,6 +30,7 @@
 */
 
 import Foundation
+import Sparkle
 
 class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
@@ -38,6 +39,9 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     
     func pluginLoadedIntoMemory() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "logControllerViewFinishedLoading:", name: TVCLogControllerViewFinishedLoadingNotification, object: nil)
+        let updater = SUUpdater(forBundle: NSBundle(forClass: object_getClass(self)))
+        updater.resetUpdateCycle()
+        updater.checkForUpdatesInBackground()
     }
     
     /**

@@ -13,6 +13,7 @@
 		FA02C4561B98E3BD00144323 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = FA02C4551B98E3BD00144323 /* style.css */; settings = {ASSET_TAGS = (); }; };
 		FA13CED61B9E02CD00FA1475 /* media.js in Resources */ = {isa = PBXBuildFile; fileRef = FA13CED51B9E02CD00FA1475 /* media.js */; settings = {ASSET_TAGS = (); }; };
 		FA13CEDD1B9E62ED00FA1475 /* FileServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA13CEDC1B9E62ED00FA1475 /* FileServiceHandler.swift */; settings = {ASSET_TAGS = (); }; };
+		FA2A0B041BA4D09F00B4CEDF /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA2A0B031BA4D09F00B4CEDF /* Sparkle.framework */; settings = {ASSET_TAGS = (); }; };
 		FA39B2481B9717CC0034B0C7 /* attribute.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2201B9717CC0034B0C7 /* attribute.c */; settings = {ASSET_TAGS = (); }; };
 		FA39B2491B9717CC0034B0C7 /* char_ref.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2221B9717CC0034B0C7 /* char_ref.c */; settings = {ASSET_TAGS = (); }; };
 		FA39B24A1B9717CC0034B0C7 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2241B9717CC0034B0C7 /* error.c */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-w"; }; };
@@ -39,6 +40,8 @@
 		FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */; settings = {ASSET_TAGS = (); }; };
 		FA6F488E1B963E56000280E0 /* WebpageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F488D1B963E56000280E0 /* WebpageHandler.swift */; settings = {ASSET_TAGS = (); }; };
 		FAC0403F1B5446C6002480BB /* InlineMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0403E1B5446C6002480BB /* InlineMedia.swift */; };
+		FAC93D9D1BA4D8DF00B9896C /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = FAC93D9C1BA4D8DF00B9896C /* dsa_pub.pem */; settings = {ASSET_TAGS = (); }; };
+		FAC93D9F1BA4FD2200B9896C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAC93D9E1BA4FD2200B9896C /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		FAD0EE201B975D7E0015A5B4 /* YouTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0EE1F1B975D7E0015A5B4 /* YouTube.swift */; settings = {ASSET_TAGS = (); }; };
 		FAD0EE221B9773A80015A5B4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0EE211B9773A80015A5B4 /* Extensions.swift */; settings = {ASSET_TAGS = (); }; };
 		FADAFB311B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */; settings = {ASSET_TAGS = (); }; };
@@ -53,6 +56,7 @@
 		FA02C4551B98E3BD00144323 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = Resources/style.css; sourceTree = "<group>"; };
 		FA13CED51B9E02CD00FA1475 /* media.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = media.js; path = Resources/media.js; sourceTree = "<group>"; };
 		FA13CEDC1B9E62ED00FA1475 /* FileServiceHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileServiceHandler.swift; path = "Inline Media Handlers/FileServiceHandler.swift"; sourceTree = "<group>"; };
+		FA2A0B031BA4D09F00B4CEDF /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Textual Inline Media/Frameworks/Sparkle.framework"; sourceTree = "<group>"; };
 		FA39B2201B9717CC0034B0C7 /* attribute.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = attribute.c; sourceTree = "<group>"; };
 		FA39B2211B9717CC0034B0C7 /* attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attribute.h; sourceTree = "<group>"; };
 		FA39B2221B9717CC0034B0C7 /* char_ref.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = char_ref.c; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 		FAC040351B544536002480BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAC0403D1B5446C5002480BB /* Textual Inline Media-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Textual Inline Media-Bridging-Header.h"; sourceTree = "<group>"; };
 		FAC0403E1B5446C6002480BB /* InlineMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineMedia.swift; sourceTree = "<group>"; };
+		FAC93D9C1BA4D8DF00B9896C /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = Resources/dsa_pub.pem; sourceTree = "<group>"; };
+		FAC93D9E1BA4FD2200B9896C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
 		FAD0EE1F1B975D7E0015A5B4 /* YouTube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YouTube.swift; path = "Inline Media Handlers/YouTube.swift"; sourceTree = "<group>"; };
 		FAD0EE211B9773A80015A5B4 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FADAFB2F1B9BABB200273C13 /* IRCAddressBookEntry+Overrides.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "IRCAddressBookEntry+Overrides.h"; path = "Overrides/IRCAddressBookEntry+Overrides.h"; sourceTree = "<group>"; };
@@ -117,6 +123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C8CF6F11BA12A6E0030BC21 /* AutoHyperlinks.framework in Frameworks */,
+				FA2A0B041BA4D09F00B4CEDF /* Sparkle.framework in Frameworks */,
 				4C8799E11BA47A7600099E13 /* CocoaExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,6 +134,7 @@
 		4C8799DD1BA47A1300099E13 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA2A0B031BA4D09F00B4CEDF /* Sparkle.framework */,
 				4C8CF6F01BA12A670030BC21 /* AutoHyperlinks.framework */,
 				4C8799E01BA47A5B00099E13 /* CocoaExtensions.framework */,
 			);
@@ -136,8 +144,10 @@
 		FA02C4541B98E36200144323 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FAC93D9C1BA4D8DF00B9896C /* dsa_pub.pem */,
 				FA02C4551B98E3BD00144323 /* style.css */,
 				FA13CED51B9E02CD00FA1475 /* media.js */,
+				FAC93D9E1BA4FD2200B9896C /* Assets.xcassets */,
 			);
 			name = Resources;
 			path = "Textual Inline Media";
@@ -317,7 +327,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAC93D9F1BA4FD2200B9896C /* Assets.xcassets in Resources */,
 				FA39B2531B9717CC0034B0C7 /* LICENSE in Resources */,
+				FAC93D9D1BA4D8DF00B9896C /* dsa_pub.pem in Resources */,
 				FA13CED61B9E02CD00FA1475 /* media.js in Resources */,
 				FA02C4561B98E3BD00144323 /* style.css in Resources */,
 			);
@@ -372,6 +384,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -414,6 +427,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -450,11 +464,15 @@
 			buildSettings = {
 				BUNDLE_LOADER = /Applications/Textual.app/Contents/MacOS/Textual;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer: Alex Sorlie Glomsaas (C6R37Z9WN2)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Applications/Textual.app/Contents/Frameworks/**",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Textual",
+					Inline,
+					Media/Frameworks,
 				);
 				HEADER_SEARCH_PATHS = "\"/Applications/Textual.app/Contents/Headers/**\"";
 				INFOPLIST_FILE = "Textual Inline Media/Info.plist";
@@ -474,11 +492,15 @@
 			buildSettings = {
 				BUNDLE_LOADER = /Applications/Textual.app/Contents/MacOS/Textual;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer: Alex Sorlie Glomsaas (C6R37Z9WN2)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Applications/Textual.app/Contents/Frameworks/**",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Textual",
+					Inline,
+					Media/Frameworks,
 				);
 				HEADER_SEARCH_PATHS = "\"/Applications/Textual.app/Contents/Headers/**\"";
 				INFOPLIST_FILE = "Textual Inline Media/Info.plist";
