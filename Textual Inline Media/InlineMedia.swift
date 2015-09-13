@@ -102,7 +102,7 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
                 sortedLinks.append(sorted[0])
             }
             
-            for url in sortedLinks {
+            linkLoop: for url in sortedLinks {
                 var isDirectImageLink = false
                 
                 /* Check if the url is a direct link to an image with a valid image file extension. */
@@ -130,7 +130,7 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
                     if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
                         if (mediaHandler.matchesServiceSchema(url, hasImageExtension: isDirectImageLink)) {
                             mediaHandler.init(url: url, controller: logController, line: messageObject.lineNumber)
-                            break
+                            continue linkLoop
                         }
                     }
                 }
