@@ -47,7 +47,7 @@ class Wikipedia: NSObject, InlineMediaHandler {
             config.HTTPAdditionalHeaders = ["User-Agent": "TextualInlineMedia/1.0 (https://github.com/xlexi/Textual-Inline-Media/; alex@sorlie.co.uk)"]
             
             let session = NSURLSession(configuration: config)
-            if let requestUrl = NSURL(string: "https://\(subdomain).wikipedia.org/w/api.php?\(requestString)") {
+            if let requestUrl = NSURL(string: "https://\(subdomain!).wikipedia.org/w/api.php?\(requestString)") {
                 session.dataTaskWithURL(requestUrl, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
                     guard data != nil else {
                         return
