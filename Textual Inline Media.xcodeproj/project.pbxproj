@@ -36,6 +36,7 @@
 		FA39B25C1B97407F0034B0C7 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39B25B1B97407F0034B0C7 /* Twitter.swift */; settings = {ASSET_TAGS = (); }; };
 		FA4FE0DF1B986A9A00F84701 /* TVCImageURLParser+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4FE0DE1B986A9A00F84701 /* TVCImageURLParser+Overrides.m */; settings = {ASSET_TAGS = (); }; };
 		FA56C1D31BA4B45F0084BED6 /* TVCLogController+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FA56C1D21BA4B45F0084BED6 /* TVCLogController+Overrides.m */; settings = {ASSET_TAGS = (); }; };
+		FA644C6B1BABB0C8009BDA8A /* Imgur.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA644C6A1BABB0C8009BDA8A /* Imgur.swift */; settings = {ASSET_TAGS = (); }; };
 		FA6E76851BA1071500948E03 /* Wikipedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6E76841BA1071500948E03 /* Wikipedia.swift */; settings = {ASSET_TAGS = (); }; };
 		FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */; settings = {ASSET_TAGS = (); }; };
 		FA6F488E1B963E56000280E0 /* WebpageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F488D1B963E56000280E0 /* WebpageHandler.swift */; settings = {ASSET_TAGS = (); }; };
@@ -102,6 +103,7 @@
 		FA39B25B1B97407F0034B0C7 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Twitter.swift; path = "Inline Media Handlers/Twitter.swift"; sourceTree = "<group>"; };
 		FA4FE0DE1B986A9A00F84701 /* TVCImageURLParser+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TVCImageURLParser+Overrides.m"; path = "Overrides/TVCImageURLParser+Overrides.m"; sourceTree = "<group>"; };
 		FA56C1D21BA4B45F0084BED6 /* TVCLogController+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TVCLogController+Overrides.m"; path = "Overrides/TVCLogController+Overrides.m"; sourceTree = "<group>"; };
+		FA644C6A1BABB0C8009BDA8A /* Imgur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Imgur.swift; path = "Inline Media Handlers/Imgur.swift"; sourceTree = "<group>"; };
 		FA6E76841BA1071500948E03 /* Wikipedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Wikipedia.swift; path = "Inline Media Handlers/Wikipedia.swift"; sourceTree = "<group>"; };
 		FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineMediaHandler.swift; path = "Inline Media Handlers/InlineMediaHandler.swift"; sourceTree = "<group>"; };
 		FA6F488D1B963E56000280E0 /* WebpageHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebpageHandler.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				FAD0EE1F1B975D7E0015A5B4 /* YouTube.swift */,
 				FA13CEDC1B9E62ED00FA1475 /* FileServiceHandler.swift */,
 				FA6E76841BA1071500948E03 /* Wikipedia.swift */,
+				FA644C6A1BABB0C8009BDA8A /* Imgur.swift */,
 			);
 			name = "Inline Media Handlers";
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				FA13CEDD1B9E62ED00FA1475 /* FileServiceHandler.swift in Sources */,
 				FA39B25A1B9717CC0034B0C7 /* OGUtility.m in Sources */,
 				FA39B2591B9717CC0034B0C7 /* OGText.m in Sources */,
+				FA644C6B1BABB0C8009BDA8A /* Imgur.swift in Sources */,
 				FA39B2501B9717CC0034B0C7 /* utf8.c in Sources */,
 				FAD0EE201B975D7E0015A5B4 /* YouTube.swift in Sources */,
 				FA39B2551B9717CC0034B0C7 /* ObjectiveGumbo.m in Sources */,
