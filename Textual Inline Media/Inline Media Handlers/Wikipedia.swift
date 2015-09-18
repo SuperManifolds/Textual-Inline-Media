@@ -103,7 +103,7 @@ class Wikipedia: NSObject, InlineMediaHandler {
                                     descriptionElement.innerHTML = description
                                     infoContainer.appendChild(descriptionElement)
                                 }
-                                InlineMedia.insert(controller, line: line, node: wikiContainer)
+                                InlineMedia.insert(controller, line: line, node: wikiContainer, url: url.absoluteString)
                             })
                         }
                     } catch {

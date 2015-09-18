@@ -41,6 +41,16 @@ extension String {
     }
 }
 
+extension DOMElement {
+    var classList: [String] {
+        get {
+            return self.className.componentsSeparatedByString(" ")
+        } set(classes) {
+            self.className = classes.joinWithSeparator(" ")
+        }
+    }
+}
+
 
 extension NSTimeInterval {
     init?(iso8601String: String) {

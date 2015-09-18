@@ -206,14 +206,30 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     :param: controller The Textual "Log Controller" responsible for the view we want to insert the media into.
     :param: line       The unique ID for the line we wish to modify.
     :param: node       The HTML DOM Node to insert.
+    :param: url        The original URL of the media source.
     */
-    static func insert(controller: TVCLogController, line: String, node: DOMNode) {
+    static func insert(controller: TVCLogController, line: String, node: DOMNode, url: String) {
         let document = controller.webView.mainFrameDocument
         if let line = document.getElementById("line-" + line) {
             let message = line.querySelector(".innerMessage")
             
             let mediaContainer = document.createElement("span")
             mediaContainer.className = "inlineMediaCell"
+            mediaContainer.setAttribute("href", value: url)
+            
+            let hideListener = HideElementEventListener()
+            mediaContainer.addEventListener("click", listener: hideListener, useCapture: false)
+            
+            let showListener = ShowElementEventListener()
+            let messageLinks = message.querySelectorAll("a");
+            for index in 0...messageLinks.length {
+                let node = messageLinks.item(index)
+                if let element = node as? DOMElement {
+                    if element.getAttribute("href") == url {
+                        element.addEventListener("click", listener: showListener, useCapture: false)
+                    }
+                }
+            }
             
             mediaContainer.appendChild(node)
             message.appendChild(mediaContainer)

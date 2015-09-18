@@ -123,7 +123,7 @@ class WebpageHandler: NSObject {
                             descriptionElement.appendChild(document.createTextNode(description))
                             infoContainer.appendChild(descriptionElement)
                         }
-                        InlineMedia.insert(controller, line: line, node: websiteContainer)
+                        InlineMedia.insert(controller, line: line, node: websiteContainer, url: url.absoluteString)
                     })
                 }
             }

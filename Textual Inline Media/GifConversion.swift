@@ -39,7 +39,7 @@ class GifConversion: NSObject {
             let video = InlineMedia.inlineVideo(controller, source: imgurVideoUrl, loop: true, autoPlay: true)
             
             /* Insert the element into Textual's view. */
-            InlineMedia.insert(controller, line: line, node: video)
+            InlineMedia.insert(controller, line: line, node: video, url: url.absoluteString)
         } else {
             /* Create a request to the gfycat API to convert this gif into a video file. */
             let requestString = url.absoluteString.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
@@ -63,7 +63,7 @@ class GifConversion: NSObject {
                             let video = InlineMedia.inlineVideo(controller, source: videoUrl, loop: true, autoPlay: true)
                             
                             /* Insert the element into Textual's view. */
-                            InlineMedia.insert(controller, line: line, node: video)
+                            InlineMedia.insert(controller, line: line, node: video, url: url.absoluteString)
                         })
                     }
                 } catch {

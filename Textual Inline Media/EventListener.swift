@@ -31,7 +31,12 @@
 
 import Foundation
 
-class EventListener: NSObject, DOMEventListener {
+class VideoEventListener: NSObject, DOMEventListener {
+    /**
+    Triggered when the user has clicked a video element. Toggles the play/pause state.
+    
+    - parameter event: <#event description#>
+    */
     func handleEvent(event: DOMEvent!) {
         if let video = event.target as? DOMElement {
             let paused = video.valueForKey("paused") as? Bool
@@ -44,3 +49,41 @@ class EventListener: NSObject, DOMEventListener {
         
     }
 }
+
+
+class HideElementEventListener: NSObject, DOMEventListener {
+    /**
+    Triggered when the user has clicked an inline media element. Checks if the user is holding the shift key and hides the element.
+    
+    - parameter event: The event object for this click event.
+    */
+    func handleEvent(event: DOMEvent!) {
+        let mouseEvent = event as! DOMMouseEvent
+        if mouseEvent.shiftKey == true {
+            let mediaElement = event.currentTarget as! DOMElement
+            mediaElement.classList += ["hidden"]
+            event.preventDefault()
+        }
+    }
+}
+
+class ShowElementEventListener: NSObject, DOMEventListener {
+    /**
+    Triggered when the user has clicked a url for an inline media element. Checks if the user is holding the shift key and displays the element.
+    
+    - parameter event: The event object for this click event.
+    */
+    func handleEvent(event: DOMEvent!) {
+        let mouseEvent = event as! DOMMouseEvent
+        if mouseEvent.shiftKey == true {
+            let linkElement = event.target as! DOMElement
+            let url = linkElement.getAttribute("href")
+            let mediaElement = linkElement.parentElement.querySelector(".inlineMediaCell[href='\(url)']")
+            if let index = mediaElement.classList.indexOf("hidden") {
+                mediaElement.classList.removeAtIndex(index)
+            }
+            event.preventDefault()
+        }
+    }
+}
+

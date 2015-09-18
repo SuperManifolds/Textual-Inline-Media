@@ -3,6 +3,10 @@
     text-indent: 0 !important;
 }
 
+.inlineMediaCell.hidden {
+    display: none;
+}
+
 .inline_media_website,
 .inline_media_youtube,
 .inline_media_twitter,

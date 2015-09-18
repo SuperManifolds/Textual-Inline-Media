@@ -59,7 +59,7 @@ class Twitter: NSObject, InlineMediaHandler {
                             tweet.className = "inline_media_twitter"
                             tweet.innerHTML = tweetHTML
                             
-                            InlineMedia.insert(controller, line: line, node: tweet)
+                            InlineMedia.insert(controller, line: line, node: tweet, url: url.absoluteString)
                             document.evaluateWebScript("twttr.widgets.load(document.getElementById('line-\(line)'))")
                         })
                     }
