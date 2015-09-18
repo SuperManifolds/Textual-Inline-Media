@@ -220,26 +220,6 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
         }
     }
     
-    
-    /**
-    Converts a Unicode link to it's ASCII representation.
-    
-    :param: unicodeLink The original link to process.
-    
-    :returns: A string containing a link with any unicode characters converted to ASCII representations or "punycode"
-    */
-    func convertToAsciiUrl(unicodeLink: String) -> NSURL {
-        let pasteboard = NSPasteboard.pasteboardWithUniqueName()
-        pasteboard.stringContent = unicodeLink
-        
-        var asciiLink = WebView.URLFromPasteboard(pasteboard)
-        if (asciiLink == nil) {
-            asciiLink = NSURL(string: unicodeLink)
-        }
-        return asciiLink
-    }
-    
-    
     /**
     Create an inline image from a link.
     
@@ -294,7 +274,7 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
         video.setAttribute("autoplay", value: autoPlay.description)
         
         /* Set the event listener to start/pause it when the user clicks it. */
-        let listener = EventListener()
+        let listener = VideoEventListener()
         video.addEventListener("click", listener: listener, useCapture: false)
         
         /* Set the source of the video */
