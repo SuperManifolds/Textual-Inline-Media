@@ -36,21 +36,21 @@ protocol InlineMediaHandler {
     /**
     Inline Media Handler Protocol, can be extended to provide media handlers for urls that match certain conditions
     
-    :param: url        The URL of the inline media source
-    :param: controller A Textual "Log Controller" for the view we want to insert the inline media
-    :param: line       The unique identifier of the line we want to insert the inline media into
+    - parameter url:        The URL of the inline media source
+    - parameter controller: A Textual "Log Controller" for the view we want to insert the inline media
+    - parameter line:       The unique identifier of the line we want to insert the inline media into
     
-    :returns: An instance of an inline media handler
+    - returns: An instance of an inline media handler
     */
     init(url: NSURL, controller: TVCLogController, line: String)
     
     /**
     Called to check whether the current URL matches the requirements for the inline media handler
     
-    :param: url               The URL to test against
-    :param: hasImageExtension Whether or not the URL has a valid image file extension
+    - parameter url:               The URL to test against
+    - parameter hasImageExtension: Whether or not the URL has a valid image file extension
     
-    :returns: A boolean representing whether or not this URL can be handled by this media handler
+    - returns: A boolean representing whether or not this URL can be handled by this media handler
     */
     static func matchesServiceSchema(url: NSURL, hasImageExtension: Bool) -> Bool
 }

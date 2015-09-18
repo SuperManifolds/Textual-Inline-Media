@@ -35,7 +35,7 @@ class VideoEventListener: NSObject, DOMEventListener {
     /**
     Triggered when the user has clicked a video element. Toggles the play/pause state.
     
-    - parameter event: <#event description#>
+    - parameter event: The event object for this click event.
     */
     func handleEvent(event: DOMEvent!) {
         if let video = event.target as? DOMElement {

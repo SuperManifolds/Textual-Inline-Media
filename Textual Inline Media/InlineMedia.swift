@@ -47,6 +47,9 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
         return preferencesView
     }
     
+    /**
+    Called when the plugin has been loaded into memory.
+    */
     func pluginLoadedIntoMemory() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "logControllerViewFinishedLoading:", name: TVCLogControllerViewFinishedLoadingNotification, object: nil)
         
@@ -70,8 +73,8 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     /**
     Called by the Textual plugin API when a new line has been added to the view.
     
-    :param: messageObject An object containing all message information related to this line.
-    :param: logController The Textual "Log Controller" responsible for the event.
+    - parameter messageObject: An object containing all message information related to this line.
+    - parameter logController: The Textual "Log Controller" responsible for the event.
     */
     func didPostNewMessage(messageObject: THOPluginDidPostNewMessageConcreteObject!, forViewController logController: TVCLogController!) {
         guard !messageObject.isProcessedInBulk && inlineMediaMessageTypes.contains(messageObject.lineType) && logController.inlineImagesEnabledForView == true else {
@@ -168,7 +171,7 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     /**
     Called when a web view has been loaded in Textual. Is used to load any static resources into the webview necessary for plugin features.
     
-    :param notification an NSNotification object containing the Log Controller that for the webview that has loaded.
+    - parameter notification: an NSNotification object containing the Log Controller that for the webview that has loaded.
     */
     func logControllerViewFinishedLoading(notification: NSNotification) {
         self.performBlockOnMainThread({
@@ -203,10 +206,10 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     /**
     Inserts any HTML DOM Node as an inline media item in a message.
     
-    :param: controller The Textual "Log Controller" responsible for the view we want to insert the media into.
-    :param: line       The unique ID for the line we wish to modify.
-    :param: node       The HTML DOM Node to insert.
-    :param: url        The original URL of the media source.
+    - parameter controller: The Textual "Log Controller" responsible for the view we want to insert the media into.
+    - parameter line:       The unique ID for the line we wish to modify.
+    - parameter node:       The HTML DOM Node to insert.
+    - parameter url:        The original URL of the media source.
     */
     static func insert(controller: TVCLogController, line: String, node: DOMNode, url: String) {
         let document = controller.webView.mainFrameDocument
@@ -239,10 +242,10 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     /**
     Create an inline image from a link.
     
-    :param: controller The Textual "Log Controller" for the view we want to insert the media into.
-    :param: source     The source link for the image to display.
+    - parameter controller: The Textual "Log Controller" for the view we want to insert the media into.
+    - parameter source:     The source link for the image to display.
     
-    :returns: An HTML DOM Node containing the inline image element.
+    - returns: An HTML DOM Node containing the inline image element.
     */
     static func inlineImage(controller: TVCLogController, source: String) -> DOMNode {
         return InlineMedia.inlineImage(controller, source: source, link: source)
@@ -252,11 +255,11 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     /**
     Creates an inline image from a link.
     
-    :param: controller The Textual "Log Controller" for the view we want to insert the media into.
-    :param: source     The source link for the image to display.
-    :param: link       The link to open when the user interacts with the image.
+    - parameter controller: The Textual "Log Controller" for the view we want to insert the media into.
+    - parameter source:     The source link for the image to display.
+    - parameter link:       The link to open when the user interacts with the image.
     
-    :returns: An HTML DOM Node containing the inline image element.
+    - returns: An HTML DOM Node containing the inline image element.
     */
     static func inlineImage(controller: TVCLogController, source: String, link: String) -> DOMNode {
         let document = controller.webView.mainFrameDocument
@@ -274,12 +277,12 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     /**
     Creates an inline video from a link
     
-    :param: controller The Textual "Log Controller" for the view we want to insert the media into.
-    :param: source     The source link for the video to display.
-    :param: loop       Whether this video should be continously looped.
-    :param: autoPlay   Whether this video should start playing automatically.
+    - parameter controller: The Textual "Log Controller" for the view we want to insert the media into.
+    - parameter source:     The source link for the video to display.
+    - parameter loop:       Whether this video should be continously looped.
+    - parameter autoPlay:   Whether this video should start playing automatically.
     
-    :returns: An HTML DOM Node containing the video element.
+    - returns: An HTML DOM Node containing the video element.
     */
     static func inlineVideo(controller: TVCLogController, source: String, loop: Bool, autoPlay: Bool) -> DOMNode {
         let document = controller.webView.mainFrameDocument
