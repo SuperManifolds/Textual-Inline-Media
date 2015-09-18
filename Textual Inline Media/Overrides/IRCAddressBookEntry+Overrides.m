@@ -49,7 +49,7 @@ static void *_internalIgnoreInlineMediaPropertyValue = nil;
 	if (ignoreInlineMedia) {
 		return [ignoreInlineMedia boolValue];
 	} else {
-		return NO;
+        return YES;
 	}
 }
 
