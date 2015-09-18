@@ -39,13 +39,13 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     
     var preferencesView: NSView!
     
-    var pluginPreferencesPaneMenuItemName: String {
+    /*var pluginPreferencesPaneMenuItemName: String {
         return "Inline Media"
     }
     
     var pluginPreferencesPaneView: NSView {
         return preferencesView
-    }
+    }*/
     
     /**
     Called when the plugin has been loaded into memory.
