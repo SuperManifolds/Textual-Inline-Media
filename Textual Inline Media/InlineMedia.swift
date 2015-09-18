@@ -74,7 +74,7 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
     :param: logController The Textual "Log Controller" responsible for the event.
     */
     func didPostNewMessage(messageObject: THOPluginDidPostNewMessageConcreteObject!, forViewController logController: TVCLogController!) {
-        guard !messageObject.isProcessedInBulk && inlineMediaMessageTypes.contains(messageObject.lineType) else {
+        guard !messageObject.isProcessedInBulk && inlineMediaMessageTypes.contains(messageObject.lineType) && logController.inlineImagesEnabledForView == true else {
             return
         }
         
