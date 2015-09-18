@@ -54,7 +54,9 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "logControllerViewFinishedLoading:", name: TVCLogControllerViewFinishedLoadingNotification, object: nil)
         
         let updater = SUUpdater(forBundle: NSBundle(forClass: object_getClass(self)))
+        updater.delegate = PluginUpdater()
         updater.resetUpdateCycle()
+        updater
         updater.checkForUpdatesInBackground()
         
         let preferences = Preferences()

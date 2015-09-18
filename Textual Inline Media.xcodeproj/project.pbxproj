@@ -14,6 +14,7 @@
 		FA13CED61B9E02CD00FA1475 /* media.js in Resources */ = {isa = PBXBuildFile; fileRef = FA13CED51B9E02CD00FA1475 /* media.js */; settings = {ASSET_TAGS = (); }; };
 		FA13CEDD1B9E62ED00FA1475 /* FileServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA13CEDC1B9E62ED00FA1475 /* FileServiceHandler.swift */; settings = {ASSET_TAGS = (); }; };
 		FA2A0B041BA4D09F00B4CEDF /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA2A0B031BA4D09F00B4CEDF /* Sparkle.framework */; settings = {ASSET_TAGS = (); }; };
+		FA3778931BAC9805002D4083 /* PluginUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3778921BAC9805002D4083 /* PluginUpdater.swift */; settings = {ASSET_TAGS = (); }; };
 		FA39B2481B9717CC0034B0C7 /* attribute.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2201B9717CC0034B0C7 /* attribute.c */; settings = {ASSET_TAGS = (); }; };
 		FA39B2491B9717CC0034B0C7 /* char_ref.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2221B9717CC0034B0C7 /* char_ref.c */; settings = {ASSET_TAGS = (); }; };
 		FA39B24A1B9717CC0034B0C7 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2241B9717CC0034B0C7 /* error.c */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-w"; }; };
@@ -60,6 +61,7 @@
 		FA13CED51B9E02CD00FA1475 /* media.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = media.js; path = Resources/media.js; sourceTree = "<group>"; };
 		FA13CEDC1B9E62ED00FA1475 /* FileServiceHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileServiceHandler.swift; path = "Inline Media Handlers/FileServiceHandler.swift"; sourceTree = "<group>"; };
 		FA2A0B031BA4D09F00B4CEDF /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Textual Inline Media/Frameworks/Sparkle.framework"; sourceTree = "<group>"; };
+		FA3778921BAC9805002D4083 /* PluginUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginUpdater.swift; sourceTree = "<group>"; };
 		FA39B2201B9717CC0034B0C7 /* attribute.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = attribute.c; sourceTree = "<group>"; };
 		FA39B2211B9717CC0034B0C7 /* attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attribute.h; sourceTree = "<group>"; };
 		FA39B2221B9717CC0034B0C7 /* char_ref.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = char_ref.c; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				FAC93DAA1BA626A800B9896C /* User Interface */,
 				FA4FE0DC1B986A2C00F84701 /* Overrides */,
 				FA39B21E1B9717CC0034B0C7 /* ObjectiveGumbo */,
+				FA3778921BAC9805002D4083 /* PluginUpdater.swift */,
 			);
 			path = "Textual Inline Media";
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				FA02C4531B987F0300144323 /* GifConversion.swift in Sources */,
 				FA39B2541B9717CC0034B0C7 /* NSString+OGString.m in Sources */,
 				FADAFB341B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m in Sources */,
+				FA3778931BAC9805002D4083 /* PluginUpdater.swift in Sources */,
 				FAE219A21B9B969700CDF0E4 /* EventListener.swift in Sources */,
 				FA39B24E1B9717CC0034B0C7 /* tag.c in Sources */,
 				FA39B25C1B97407F0034B0C7 /* Twitter.swift in Sources */,
