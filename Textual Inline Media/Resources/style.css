@@ -10,7 +10,8 @@
 .inline_media_website,
 .inline_media_youtube,
 .inline_media_twitter,
-.inline_media_wiki {
+.inline_media_wiki,
+.inline_media_xkcd {
     margin-top: 5px;
     border-radius: 5px;
     background: rgba(255,255,255,0.05);
@@ -109,3 +110,13 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
     font-weight: normal;
     font-size: 12px;
 }
+
+.inline_media_xkcd {
+    display: block;
+}
+
+.inline_media_xkcd_title {
+    font-size: 125%;
+    margin-bottom: 10px;
+}
+

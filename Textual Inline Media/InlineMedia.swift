@@ -32,20 +32,20 @@
 import Foundation
 import Sparkle
 
-class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
+class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoaderDelegate {
     let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
     let inlineMediaMessageTypes = [TVCLogLineType.ActionType, TVCLogLineType.PrivateMessageType, TVCLogLineType.NoticeType]
-    let mediaHandlers = [Twitter.self, YouTube.self, Wikipedia.self]
+    let mediaHandlers = [Twitter.self, YouTube.self, Wikipedia.self, xkcd.self]
     
     var preferencesView: NSView!
     
-    /*var pluginPreferencesPaneMenuItemName: String {
+    var pluginPreferencesPaneMenuItemName: String {
         return "Inline Media"
     }
     
-    var pluginPreferencesPaneView: NSView {
+    var pluginPreferencesPaneView: NSView? {
         return preferencesView
-    }*/
+    }
     
     /**
     Called when the plugin has been loaded into memory.
@@ -54,7 +54,7 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "logControllerViewFinishedLoading:", name: TVCLogControllerViewFinishedLoadingNotification, object: nil)
         
         let updater = SUUpdater(forBundle: NSBundle(forClass: object_getClass(self)))
-        updater.delegate = PluginUpdater()
+        updater.delegate = self
         updater.resetUpdateCycle()
         updater.checkForUpdatesInBackground()
         
@@ -69,6 +69,10 @@ class InlineMedia: NSObject, THOPluginProtocol, TVCImageURLoaderDelegate {
             alert.informativeText = "This plugin will not work correctly because it is not compatible with your version of Textual"
             alert.runModal()
         #endif
+    }
+    
+    func pathToRelaunchForUpdater(updater: SUUpdater!) -> String! {
+        return NSBundle.mainBundle().bundlePath
     }
     
     /**
