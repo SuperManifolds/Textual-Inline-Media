@@ -16,17 +16,17 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 import Foundation
 
 class Preferences: NSViewController, NSTabViewDelegate {
-    @IBOutlet var preferences: NSView!
-    @IBOutlet var tabView: NSTabView!
+    @IBOutlet weak var preferences: NSView!
+    @IBOutlet weak var tabView: NSTabView!
     
     override func viewDidAppear() {
         self.tabView.delegate = self
     }
     
     func tabView(tabView: NSTabView, shouldSelectTabViewItem tabViewItem: NSTabViewItem?) -> Bool {
-        if tabViewItem!.identifier as! Int == 3 {
+        /*if tabViewItem!.identifier as! Int == 3 {
             return false
-        }
+        }*/
         return true
     }
     
