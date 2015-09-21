@@ -34,7 +34,6 @@ import Foundation
 class xkcd: NSObject, InlineMediaHandler {
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
-        NSLog("Making request")
         let request = NSMutableURLRequest(URL: url)
         
         /* Inform the server that we only accept HTML documents, it should reject our connection otherwise. */
@@ -42,7 +41,6 @@ class xkcd: NSObject, InlineMediaHandler {
         
         let session = NSURLSession.sharedSession()
         session.dataTaskWithRequest(request, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-            NSLog("Receiving request")
             if let httpResponse = response as? NSHTTPURLResponse {
                 /* Validate that the server obeyed our request to only receive HTML, abort if otherwise. */
                 guard httpResponse.allHeaderFields["Content-Type"]?.contains("text/html") == true && data != nil else {
@@ -54,7 +52,6 @@ class xkcd: NSObject, InlineMediaHandler {
                     return
                 }
                 
-                NSLog("Parsing")
                 /* Create an HTML parser object of the website using ObjectiveGumbo. */
                 if let node = ObjectiveGumbo.parseDocumentWithData(data, encoding: NSUTF8StringEncoding) {
                     if let comicContainer = node.elementsWithID("comic").first as? OGElement {
