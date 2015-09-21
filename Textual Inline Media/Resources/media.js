@@ -19,8 +19,13 @@ twttr.ready(
   function (twttr) {
       twttr.events.bind('rendered', function (event) {
           var style = document.createElement("style");
-          style.textContent = ".embeddedtweet,.embeddedtweet-mediaforward,.EmbeddedTweet-tweet {background-color: transparent; border: 0; border-color: transparent; border-radius: 0; border-bottom-right-radius: 0 !important; border-bottom-left-radius: 0 !important; border-top-color: transparent !important; border-right-color: transparent !important; border-bottom-color: transparent !important; border-left-color: transparent !important; }";
+          style.textContent = ".embeddedtweet,.embeddedtweet-mediaforward,.EmbeddedTweet-tweet {background-color: transparent; border: 0; border-color: transparent; border-radius: 0; border-bottom-right-radius: 0 !important; border-bottom-left-radius: 0 !important; border-top-color: transparent !important; border-right-color: transparent !important; border-bottom-color: transparent !important; border-left-color: transparent !important; } .tweet-actions {display: none !important;}";
           event.target.contentDocument.getElementsByTagName("head")[0].appendChild(style);
+          var links = event.target.contentDocument.querySelectorAll("a");
+          for (var i = 0, len = links.length; i < len; i++) {
+            var link = links[i];
+            link.setAttribute("target", "_parent");
+          }
      });
   }
 );
