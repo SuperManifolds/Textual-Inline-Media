@@ -27,52 +27,82 @@
                 <font key="font" metaFont="system"/>
             </buttonCell>
         </button>
-        <customView id="Dn3-xq-8rf">
-            <rect key="frame" x="0.0" y="0.0" width="589" height="562"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Dn3-xq-8rf">
+            <rect key="frame" x="0.0" y="0.0" width="589" height="407"/>
             <userGuides>
-                <userLayoutGuide location="342" affinity="minY"/>
+                <userLayoutGuide location="492" affinity="minY"/>
                 <userLayoutGuide location="33" affinity="minY"/>
             </userGuides>
             <subviews>
-                <tabView translatesAutoresizingMaskIntoConstraints="NO" id="SFS-Ap-QZe">
-                    <rect key="frame" x="13" y="10" width="563" height="538"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="522" id="kCh-Zx-37p"/>
-                        <constraint firstAttribute="width" constant="549" id="kRl-G5-wPV"/>
-                    </constraints>
+                <tabView fixedFrame="YES" controlSize="small" translatesAutoresizingMaskIntoConstraints="NO" id="SFS-Ap-QZe">
+                    <rect key="frame" x="13" y="10" width="563" height="383"/>
                     <animations/>
-                    <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="General" identifier="1" id="ZPk-hh-DwJ">
-                            <view key="view" id="ArE-bA-jF3">
-                                <rect key="frame" x="10" y="33" width="203" height="0.0"/>
+                            <view key="view" ambiguous="YES" id="ArE-bA-jF3">
+                                <rect key="frame" x="10" y="25" width="543" height="345"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wVD-DL-wd2">
+                                        <rect key="frame" x="88" y="297" width="367" height="18"/>
+                                        <animations/>
+                                        <buttonCell key="cell" type="check" title="Do not display information for links posted multiple times" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Yad-2Q-wVW">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wf2-rg-z3h">
+                                        <rect key="frame" x="195" y="10" width="152" height="32"/>
+                                        <animations/>
+                                        <buttonCell key="cell" type="push" title="Check for updates" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yBg-ph-yql">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="checkForUpdatesClicked:" target="-2" id="1eY-FT-YG1"/>
+                                        </connections>
+                                    </button>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sry-gC-KY8">
+                                        <rect key="frame" x="386" y="269" width="37" height="22"/>
+                                        <animations/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="VeN-rH-BCc">
+                                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="sqp-a5-wqP"/>
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzi-WV-qnd">
+                                        <rect key="frame" x="117" y="274" width="263" height="17"/>
+                                        <animations/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Maximum displayed previews per message" id="beM-DK-2Ok">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Wf2-rg-z3h" secondAttribute="bottom" constant="4" id="c7D-lb-zi8"/>
+                                </constraints>
                                 <animations/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="Images" identifier="2" id="gAT-p6-Sbl">
                             <view key="view" id="P5V-qT-5jZ">
-                                <rect key="frame" x="10" y="33" width="543" height="492"/>
+                                <rect key="frame" x="10" y="25" width="543" height="345"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="BdJ-uc-fzC">
-                                        <rect key="frame" x="160" y="423" width="173" height="18"/>
+                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BdJ-uc-fzC">
+                                        <rect key="frame" x="185" y="298" width="173" height="18"/>
                                         <animations/>
                                         <buttonCell key="cell" type="check" title="Display animated images" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="awH-iU-JWJ">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
-                                    <box verticalHuggingPriority="750" misplaced="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="2ww-ZN-7Ja">
-                                        <rect key="frame" x="59" y="445" width="405" height="5"/>
-                                        <animations/>
-                                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <font key="titleFont" metaFont="system"/>
-                                    </box>
-                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="brD-AM-wyG">
-                                        <rect key="frame" x="98" y="403" width="307" height="18"/>
+                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="brD-AM-wyG">
+                                        <rect key="frame" x="118" y="278" width="307" height="18"/>
                                         <animations/>
                                         <buttonCell key="cell" type="check" title="Automatically convert GIF files to looping video" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="tNs-vY-kss">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -82,34 +112,17 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="brD-AM-wyG" firstAttribute="top" secondItem="BdJ-uc-fzC" secondAttribute="bottom" constant="6" symbolic="YES" id="04I-jS-TzL"/>
-                                    <constraint firstItem="2ww-ZN-7Ja" firstAttribute="top" secondItem="P5V-qT-5jZ" secondAttribute="top" constant="44" id="2IO-5K-y4k"/>
                                     <constraint firstItem="BdJ-uc-fzC" firstAttribute="leading" secondItem="P5V-qT-5jZ" secondAttribute="leading" constant="162" id="DuU-29-IoI"/>
-                                    <constraint firstItem="BdJ-uc-fzC" firstAttribute="top" secondItem="2ww-ZN-7Ja" secondAttribute="bottom" constant="8" symbolic="YES" id="EUS-vc-2Ut"/>
-                                    <constraint firstAttribute="trailing" secondItem="2ww-ZN-7Ja" secondAttribute="trailing" constant="-261" id="YPe-V9-qDR"/>
                                     <constraint firstItem="brD-AM-wyG" firstAttribute="leading" secondItem="P5V-qT-5jZ" secondAttribute="leading" constant="100" id="ZA6-tb-feK"/>
-                                    <constraint firstItem="2ww-ZN-7Ja" firstAttribute="leading" secondItem="P5V-qT-5jZ" secondAttribute="leading" constant="59" id="znm-Ae-5cq"/>
                                 </constraints>
-                                <animations/>
-                            </view>
-                        </tabViewItem>
-                        <tabViewItem label="Services" identifier="3" id="FCi-ta-VYj">
-                            <view key="view" id="WvU-kK-43o">
-                                <rect key="frame" x="10" y="33" width="543" height="492"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <animations/>
                             </view>
                         </tabViewItem>
                     </tabViewItems>
                 </tabView>
             </subviews>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="SFS-Ap-QZe" secondAttribute="trailing" constant="20" id="C90-Fe-Qf8"/>
-                <constraint firstItem="SFS-Ap-QZe" firstAttribute="leading" secondItem="Dn3-xq-8rf" secondAttribute="leading" constant="20" id="Gnk-nl-z06"/>
-                <constraint firstItem="SFS-Ap-QZe" firstAttribute="top" secondItem="Dn3-xq-8rf" secondAttribute="top" constant="20" id="JtN-vC-wr0"/>
-                <constraint firstAttribute="bottom" secondItem="SFS-Ap-QZe" secondAttribute="bottom" constant="20" id="iMm-zV-VKh"/>
-            </constraints>
             <animations/>
-            <point key="canvasLocation" x="373.5" y="648"/>
+            <point key="canvasLocation" x="373.5" y="570.5"/>
         </customView>
     </objects>
 </document>

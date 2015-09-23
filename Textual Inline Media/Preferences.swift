@@ -14,20 +14,27 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 
 import Foundation
+import Sparkle
 
-class Preferences: NSViewController, NSTabViewDelegate {
+class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
     @IBOutlet weak var preferences: NSView!
     @IBOutlet weak var tabView: NSTabView!
+    var updater: SUUpdater?
+    
+    @IBAction func checkForUpdatesClicked(sender: AnyObject) {
+        updater = SUUpdater(forBundle: NSBundle(forClass: object_getClass(self)))
+        updater!.delegate = self
+        updater!.resetUpdateCycle()
+        NSLog("Checking for updates")
+        updater!.checkForUpdates(sender)
+    }
     
     override func viewDidAppear() {
         self.tabView.delegate = self
     }
     
-    func tabView(tabView: NSTabView, shouldSelectTabViewItem tabViewItem: NSTabViewItem?) -> Bool {
-        /*if tabViewItem!.identifier as! Int == 3 {
-            return false
-        }*/
-        return true
+    func pathToRelaunchForUpdater(updater: SUUpdater!) -> String! {
+        return NSBundle.mainBundle().bundlePath
     }
     
     required override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
