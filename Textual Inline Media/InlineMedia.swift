@@ -36,6 +36,7 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
     let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
     let inlineMediaMessageTypes = [TVCLogLineType.ActionType, TVCLogLineType.PrivateMessageType]
     let mediaHandlers = [Twitter.self, YouTube.self, Wikipedia.self, xkcd.self, Imgur.self]
+    var previouslyDisplayedLinks: [String] = []
     
     var preferencesView: NSView!
     var preferences: Preferences!
@@ -95,6 +96,7 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
             return
         }
         
+        let defaults = NSUserDefaults.standardUserDefaults()
         if let user = logController.associatedChannel?.findMember(messageObject.senderNickname) {
             let ignoreMatches = logController.associatedClient?.checkIgnoreAgainstHostmask(user.hostmask, withMatches: [IRCAddressBookDictionaryValueIgnoreInlineMediaKey])
             guard ignoreMatches?.ignoreInlineMedia != true else {
@@ -113,6 +115,11 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                 if var link = NSString(string: rawLink).URLUsingWebKitPasteboard {
                     guard link.scheme.hasPrefix("http") else {
                         continue
+                    }
+                    if Bool(defaults.integerForKey("displayInformationForDuplicates")) {
+                        guard previouslyDisplayedLinks.contains(link.absoluteString) == false else {
+                            continue
+                        }
                     }
                     
                     /* Replace Reddit shortlinks */
@@ -141,7 +148,6 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                 }
                 sortedLinks.append(sorted[0])
             }
-            let defaults = NSUserDefaults.standardUserDefaults()
             let maximumLinkCount = defaults.integerForKey("maximumPreviewsPerMessage")
             
             var linkCount = 0
@@ -150,6 +156,11 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                 if linkCount > maximumLinkCount {
                     break
                 }
+                
+                if previouslyDisplayedLinks.count == 50 {
+                    previouslyDisplayedLinks.removeAtIndex(0)
+                }
+                previouslyDisplayedLinks.append(url.absoluteString)
                 
                 var isDirectImageLink = false
                 
