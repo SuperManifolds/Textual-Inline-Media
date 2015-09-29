@@ -43,9 +43,9 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wVD-DL-wd2">
-                                        <rect key="frame" x="88" y="297" width="367" height="18"/>
+                                        <rect key="frame" x="88" y="297" width="324" height="18"/>
                                         <animations/>
-                                        <buttonCell key="cell" type="check" title="Do not display information for links posted multiple times" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Yad-2Q-wVW">
+                                        <buttonCell key="cell" type="check" title="Display information for links posted multiple times" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Yad-2Q-wVW">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>

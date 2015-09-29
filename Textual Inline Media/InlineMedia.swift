@@ -116,7 +116,7 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                     guard link.scheme.hasPrefix("http") else {
                         continue
                     }
-                    if Bool(defaults.integerForKey("displayInformationForDuplicates")) {
+                    if Bool(defaults.integerForKey("displayInformationForDuplicates")) == false {
                         guard previouslyDisplayedLinks.contains(link.absoluteString) == false else {
                             continue
                         }
