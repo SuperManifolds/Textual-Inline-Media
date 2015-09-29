@@ -141,8 +141,8 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                 }
                 sortedLinks.append(sorted[0])
             }
-            
-            let maximumLinkCount = NSUserDefaults.standardUserDefaults().integerForKey("maximumPreviewsPerMessage")
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let maximumLinkCount = defaults.integerForKey("maximumPreviewsPerMessage")
             
             var linkCount = 0
             linkLoop: for url in sortedLinks {
@@ -158,7 +158,7 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                     isDirectImageLink = imageFileExtensions.contains(fileExtension.lowercaseString)
                     
                     /* Check if this is a link to a gif. */
-                    if (fileExtension.lowercaseString == "gif") {
+                    if fileExtension.lowercaseString == "gif" && Bool(defaults.integerForKey("displayAnimatedImages")) {
                         self.performBlockOnMainThread({
                             GifConversion.displayLoopingAnimation(url, controller: logController, line: messageObject.lineNumber)
                         })
