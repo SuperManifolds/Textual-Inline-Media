@@ -22,7 +22,6 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
     @IBOutlet weak var maximumPreviewsPerMessage: NSTextField!
     @IBOutlet weak var displayAnimatedImages: NSButton!
     @IBOutlet weak var tabView: NSTabView!
-    @IBOutlet weak var automaticallyConvertGifs: NSButton!
     
     var updater: SUUpdater?
     
@@ -40,7 +39,6 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
         self.displayInformationForDuplicates.state = defaults.integerForKey("displayInformationForDuplicates")
         self.maximumPreviewsPerMessage.stringValue = String(defaults.integerForKey("maximumPreviewsPerMessage"))
         self.displayAnimatedImages.state           = defaults.integerForKey("displayAnimatedImages")
-        self.automaticallyConvertGifs.state        = defaults.integerForKey("automaticallyConvertGifs")
     }
     
     func pathToRelaunchForUpdater(updater: SUUpdater!) -> String! {
@@ -72,12 +70,6 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
     @IBAction func displayAnimatedImagesChange(sender: NSButton) {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setInteger(sender.state, forKey: "displayAnimatedImages")
-        defaults.synchronize()
-    }
-    
-    @IBAction func automaticallyConvertGifsChange(sender: NSButton) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(sender.state, forKey: "automaticallyConvertGifs")
         defaults.synchronize()
     }
 }

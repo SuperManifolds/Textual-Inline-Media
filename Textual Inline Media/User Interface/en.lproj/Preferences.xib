@@ -7,8 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Preferences" customModule="Textual_Inline_Media" customModuleProvider="target">
             <connections>
-                <outlet property="automaticallyConvertGifs" destination="brD-AM-wyG" id="2si-SV-loT"/>
-                <outlet property="displayAnimatedImages" destination="BdJ-uc-fzC" id="Ijg-zr-zCk"/>
+                <outlet property="displayAnimatedImages" destination="IQ1-hr-vXF" id="s7S-zD-QLR"/>
                 <outlet property="displayInformationForDuplicates" destination="wVD-DL-wd2" id="4Zb-3t-GSP"/>
                 <outlet property="maximumPreviewsPerMessage" destination="Sry-gC-KY8" id="fhA-fb-9Xx"/>
                 <outlet property="preferences" destination="Dn3-xq-8rf" id="5Hp-n8-B1W"/>
@@ -87,45 +86,20 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IQ1-hr-vXF">
+                                        <rect key="frame" x="185" y="250" width="173" height="18"/>
+                                        <animations/>
+                                        <buttonCell key="cell" type="check" title="Display animated images" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="IZT-DT-ZJ0">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="displayAnimatedImagesChange:" target="-2" id="MQT-ZW-BQ7"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Wf2-rg-z3h" secondAttribute="bottom" constant="4" id="c7D-lb-zi8"/>
-                                </constraints>
-                                <animations/>
-                            </view>
-                        </tabViewItem>
-                        <tabViewItem label="Images" identifier="2" id="gAT-p6-Sbl">
-                            <view key="view" id="P5V-qT-5jZ">
-                                <rect key="frame" x="10" y="25" width="543" height="345"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BdJ-uc-fzC">
-                                        <rect key="frame" x="185" y="298" width="173" height="18"/>
-                                        <animations/>
-                                        <buttonCell key="cell" type="check" title="Display animated images" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="awH-iU-JWJ">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="displayAnimatedImagesChange:" target="-2" id="YiB-Pm-BT0"/>
-                                        </connections>
-                                    </button>
-                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="brD-AM-wyG">
-                                        <rect key="frame" x="118" y="278" width="307" height="18"/>
-                                        <animations/>
-                                        <buttonCell key="cell" type="check" title="Automatically convert GIF files to looping video" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="tNs-vY-kss">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="automaticallyConvertGifsChange:" target="-2" id="4Gr-c1-IIw"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="brD-AM-wyG" firstAttribute="top" secondItem="BdJ-uc-fzC" secondAttribute="bottom" constant="6" symbolic="YES" id="04I-jS-TzL"/>
-                                    <constraint firstItem="BdJ-uc-fzC" firstAttribute="leading" secondItem="P5V-qT-5jZ" secondAttribute="leading" constant="162" id="DuU-29-IoI"/>
-                                    <constraint firstItem="brD-AM-wyG" firstAttribute="leading" secondItem="P5V-qT-5jZ" secondAttribute="leading" constant="100" id="ZA6-tb-feK"/>
                                 </constraints>
                                 <animations/>
                             </view>
