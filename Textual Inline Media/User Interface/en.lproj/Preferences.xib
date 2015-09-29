@@ -7,17 +7,17 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Preferences" customModule="Textual_Inline_Media" customModuleProvider="target">
             <connections>
+                <outlet property="automaticallyConvertGifs" destination="brD-AM-wyG" id="2si-SV-loT"/>
+                <outlet property="displayAnimatedImages" destination="BdJ-uc-fzC" id="Ijg-zr-zCk"/>
+                <outlet property="displayInformationForDuplicates" destination="wVD-DL-wd2" id="4Zb-3t-GSP"/>
+                <outlet property="maximumPreviewsPerMessage" destination="Sry-gC-KY8" id="fhA-fb-9Xx"/>
                 <outlet property="preferences" destination="Dn3-xq-8rf" id="5Hp-n8-B1W"/>
                 <outlet property="tabView" destination="SFS-Ap-QZe" id="12B-z3-yE8"/>
+                <outlet property="view" destination="Dn3-xq-8rf" id="EtX-ne-7ha"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application" customClass="Preferences">
-            <connections>
-                <outlet property="preferences" destination="Dn3-xq-8rf" id="d6b-qc-ZGA"/>
-                <outlet property="tabView" destination="SFS-Ap-QZe" id="cez-Na-moB"/>
-            </connections>
-        </customObject>
+        <customObject id="-3" userLabel="Application" customClass="Preferences"/>
         <button id="7p9-Lf-kxY">
             <rect key="frame" x="0.0" y="0.0" width="61" height="18"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -50,6 +50,9 @@
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="displayInformationForDuplicatesChange:" target="-2" id="Ski-rF-ymO"/>
+                                        </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wf2-rg-z3h">
                                         <rect key="frame" x="195" y="10" width="152" height="32"/>
@@ -71,6 +74,9 @@
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <action selector="maximumPreviewsPerMessageChange:" target="-2" id="q8L-Nj-CHF"/>
+                                        </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzi-WV-qnd">
                                         <rect key="frame" x="117" y="274" width="263" height="17"/>
@@ -100,6 +106,9 @@
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="displayAnimatedImagesChange:" target="-2" id="YiB-Pm-BT0"/>
+                                        </connections>
                                     </button>
                                     <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="brD-AM-wyG">
                                         <rect key="frame" x="118" y="278" width="307" height="18"/>
@@ -108,6 +117,9 @@
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="automaticallyConvertGifsChange:" target="-2" id="4Gr-c1-IIw"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

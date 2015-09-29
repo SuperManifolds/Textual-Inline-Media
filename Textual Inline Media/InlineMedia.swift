@@ -38,6 +38,7 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
     let mediaHandlers = [Twitter.self, YouTube.self, Wikipedia.self, xkcd.self, Imgur.self]
     
     var preferencesView: NSView!
+    var preferences: Preferences!
     
     var pluginPreferencesPaneMenuItemName: String {
         return "Inline Media"
@@ -58,7 +59,15 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
         updater.resetUpdateCycle()
         updater.checkForUpdatesInBackground()
         
-        let preferences = Preferences()
+        let defaults: [String : AnyObject] = [
+            "displayInformationForDuplicates": 1,
+            "maximumPreviewsPerMessage": 10,
+            "displayAnimatedImages": 1,
+            "AutomaticallyConvertGifs": 1
+        ]
+        NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
+        
+        preferences = Preferences()
         NSBundle(forClass: object_getClass(self)).loadNibNamed("Preferences", owner: preferences, topLevelObjects: nil)
         self.preferencesView = preferences.preferences
         

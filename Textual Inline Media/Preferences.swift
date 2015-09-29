@@ -18,7 +18,12 @@ import Sparkle
 
 class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
     @IBOutlet weak var preferences: NSView!
+    @IBOutlet weak var displayInformationForDuplicates: NSButton!
+    @IBOutlet weak var maximumPreviewsPerMessage: NSTextField!
+    @IBOutlet weak var displayAnimatedImages: NSButton!
     @IBOutlet weak var tabView: NSTabView!
+    @IBOutlet weak var automaticallyConvertGifs: NSButton!
+    
     var updater: SUUpdater?
     
     @IBAction func checkForUpdatesClicked(sender: AnyObject) {
@@ -31,6 +36,12 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
     
     override func viewDidAppear() {
         self.tabView.delegate = self
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        self.displayInformationForDuplicates.state = defaults.integerForKey("displayInformationForDuplicates")
+        self.maximumPreviewsPerMessage.stringValue = String(defaults.integerForKey("maximumPreviewsPerMessage"))
+        self.displayAnimatedImages.state           = defaults.integerForKey("displayAnimatedImages")
+        self.automaticallyConvertGifs.state        = defaults.integerForKey("automaticallyConvertGifs")
     }
     
     func pathToRelaunchForUpdater(updater: SUUpdater!) -> String! {
@@ -45,4 +56,29 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
         super.init(coder: coder)
     }
     
+    @IBAction func displayInformationForDuplicatesChange(sender: NSButton) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(sender.state, forKey: "displayInformationForDuplicates")
+        defaults.synchronize()
+    }
+    
+    @IBAction func maximumPreviewsPerMessageChange(sender: NSTextField) {
+        if let maxMessagePreviews = Int(sender.stringValue) {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setInteger(maxMessagePreviews, forKey: "maximumPreviewsPerMessage")
+            defaults.synchronize()
+        }
+    }
+    
+    @IBAction func displayAnimatedImagesChange(sender: NSButton) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(sender.state, forKey: "displayAnimatedImages")
+        defaults.synchronize()
+    }
+    
+    @IBAction func automaticallyConvertGifsChange(sender: NSButton) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(sender.state, forKey: "automaticallyConvertGifs")
+        defaults.synchronize()
+    }
 }
