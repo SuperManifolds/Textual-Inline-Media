@@ -30,7 +30,6 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
         updater = SUUpdater(forBundle: NSBundle(forClass: object_getClass(self)))
         updater!.delegate = self
         updater!.resetUpdateCycle()
-        NSLog("Checking for updates")
         updater!.checkForUpdates(sender)
     }
     

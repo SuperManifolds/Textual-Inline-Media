@@ -142,7 +142,15 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                 sortedLinks.append(sorted[0])
             }
             
+            let maximumLinkCount = NSUserDefaults.standardUserDefaults().integerForKey("maximumPreviewsPerMessage")
+            
+            var linkCount = 0
             linkLoop: for url in sortedLinks {
+                linkCount++
+                if linkCount > maximumLinkCount {
+                    break
+                }
+                
                 var isDirectImageLink = false
                 
                 /* Check if the url is a direct link to an image with a valid image file extension. */
