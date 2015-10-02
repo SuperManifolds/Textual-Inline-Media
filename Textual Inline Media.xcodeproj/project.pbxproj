@@ -51,6 +51,7 @@
 		FADAFB311B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */; };
 		FADAFB341B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */; };
 		FAE219A21B9B969700CDF0E4 /* EventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE219A11B9B969700CDF0E4 /* EventListener.swift */; };
+		FAF3C6C21BBABF3A003BB3A9 /* Instagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF3C6C11BBABF3A003BB3A9 /* Instagram.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +124,7 @@
 		FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "IRCAddressBookEntry+Overrides.m"; path = "Overrides/IRCAddressBookEntry+Overrides.m"; sourceTree = "<group>"; };
 		FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TDCAddressBookSheet+Overrides.m"; path = "Overrides/TDCAddressBookSheet+Overrides.m"; sourceTree = "<group>"; };
 		FAE219A11B9B969700CDF0E4 /* EventListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListener.swift; sourceTree = "<group>"; };
+		FAF3C6C11BBABF3A003BB3A9 /* Instagram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Instagram.swift; path = "Inline Media Handlers/Instagram.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +240,7 @@
 				FA6E76841BA1071500948E03 /* Wikipedia.swift */,
 				FA644C6A1BABB0C8009BDA8A /* Imgur.swift */,
 				FA0DF97D1BAFD6CA004142FD /* xkcd.swift */,
+				FAF3C6C11BBABF3A003BB3A9 /* Instagram.swift */,
 			);
 			name = "Inline Media Handlers";
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				FA39B24F1B9717CC0034B0C7 /* tokenizer.c in Sources */,
 				FA39B2511B9717CC0034B0C7 /* util.c in Sources */,
 				FA39B24D1B9717CC0034B0C7 /* string_piece.c in Sources */,
+				FAF3C6C21BBABF3A003BB3A9 /* Instagram.swift in Sources */,
 				FA39B24A1B9717CC0034B0C7 /* error.c in Sources */,
 				FAC0403F1B5446C6002480BB /* InlineMedia.swift in Sources */,
 				FA4FE0DF1B986A9A00F84701 /* TVCImageURLParser+Overrides.m in Sources */,

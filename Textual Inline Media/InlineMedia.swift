@@ -35,7 +35,7 @@ import Sparkle
 class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoaderDelegate {
     let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
     let inlineMediaMessageTypes = [TVCLogLineType.ActionType, TVCLogLineType.PrivateMessageType]
-    let mediaHandlers = [Twitter.self, YouTube.self, Wikipedia.self, xkcd.self, Imgur.self]
+    let mediaHandlers = [Twitter.self, YouTube.self, Wikipedia.self, xkcd.self, Imgur.self, Instagram.self]
     var previouslyDisplayedLinks: [String] = []
     
     var preferencesView: NSView!
@@ -187,7 +187,7 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                 /* Iterate over the available media handlers and see if we have one that supports this url. */
                 for mediaHandlerType in mediaHandlers {
                     if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
-                        if (mediaHandler.matchesServiceSchema(url, hasImageExtension: isDirectImageLink)) {
+                        if mediaHandler.matchesServiceSchema?(url, hasImageExtension: isDirectImageLink) == true {
                             mediaHandler.init(url: url, controller: logController, line: messageObject.lineNumber)
                             continue linkLoop
                         }
@@ -199,6 +199,27 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
             }
         }
         
+    }
+    
+    /**
+    Given an URL, returns the same URL or another that can be shown as an image inline in chat.
+    
+    - parameter resource: A URL that was detected in a message being rendered.
+    
+    - returns: A URL that can be shown as an inline image in relation to resource or nil to ignore.
+    */
+    func processInlineMediaContentURL(resource: String!) -> String! {
+        if let url = NSString(string: resource).URLUsingWebKitPasteboard {
+            /* Iterate over the available media handlers and see if we have one that supports this url. */
+            for mediaHandlerType in mediaHandlers {
+                if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
+                    if let link = mediaHandler.processInlineMediaContentURL?(url) {
+                        return link
+                    }
+                }
+            }
+        }
+        return nil
     }
     
     /**

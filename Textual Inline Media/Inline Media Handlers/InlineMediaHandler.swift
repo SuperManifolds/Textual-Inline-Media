@@ -32,7 +32,7 @@
 import Foundation
 
 
-protocol InlineMediaHandler {
+@objc protocol InlineMediaHandler {
     /**
     Inline Media Handler Protocol, can be extended to provide media handlers for urls that match certain conditions
     
@@ -52,5 +52,14 @@ protocol InlineMediaHandler {
     
     - returns: A boolean representing whether or not this URL can be handled by this media handler
     */
-    static func matchesServiceSchema(url: NSURL, hasImageExtension: Bool) -> Bool
+    optional static func matchesServiceSchema(url: NSURL, hasImageExtension: Bool) -> Bool
+    
+    /**
+    Given an URL, returns a corrected URL with a direct link to an image, to be displayed in Textual.
+    
+    - parameter url: URL that was detected in a message being rendered
+    
+    - returns: A string containing the corrected url, or nil if not applicable.
+    */
+    optional static func processInlineMediaContentURL(url: NSURL) -> String?
 }
