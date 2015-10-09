@@ -85,6 +85,14 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
         return NSBundle.mainBundle().bundlePath
     }
     
+    func updater(updater: SUUpdater!, didFindValidUpdate item: SUAppcastItem!) {
+        let updateNotification = NSUserNotification()
+        updateNotification.title = "Textual Plugin Update Found"
+        updateNotification.informativeText = "An update to Textual Inline Media Plugin was found."
+        updateNotification.soundName = NSUserNotificationDefaultSoundName
+        NSUserNotificationCenter.defaultUserNotificationCenter().deliverNotification(updateNotification)
+    }
+    
     /**
     Called by the Textual plugin API when a new line has been added to the view.
     
