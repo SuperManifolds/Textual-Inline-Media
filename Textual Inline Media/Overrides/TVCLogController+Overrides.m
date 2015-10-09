@@ -32,6 +32,7 @@
 #import "TextualApplication.h"
 #import "IRCAddressBookEntry+Overrides.h"
 
+
 @implementation TVCLogController (Overrides)
 
 + (void)load {
@@ -43,6 +44,15 @@
 - (void)__tpi_isSafeToPresentImageWithID:(NSString *)uniqueID {
     DOMDocument *document = [[self webView] mainFrameDocument];
     DOMElement *image = [document getElementById:[@"inlineImage-" stringByAppendingString:uniqueID]];
+    NSString *imageUrl = [[image querySelector:@"a"] getAttribute:@"href"];
+    
+    NSURL *urlObject = [imageUrl URLUsingWebKitPasteboard];
+    if ([[urlObject pathExtension] isEqualIgnoringCase:@"gif"] ||
+        [[urlObject host] hasSuffix:@"youtube.com"] ||
+        [[urlObject host] hasSuffix:@"youtu.be"]) {
+            return;
+    }
+    
     DOMElement *sender = [[[image parentElement] parentElement] querySelector:@".sender"];
     NSString *nickname = [sender getAttribute:@"nickname"];
     if (nickname != nil) {

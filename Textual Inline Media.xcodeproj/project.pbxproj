@@ -36,7 +36,6 @@
 		FA39B2591B9717CC0034B0C7 /* OGText.m in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2451B9717CC0034B0C7 /* OGText.m */; };
 		FA39B25A1B9717CC0034B0C7 /* OGUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2471B9717CC0034B0C7 /* OGUtility.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FA39B25C1B97407F0034B0C7 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39B25B1B97407F0034B0C7 /* Twitter.swift */; };
-		FA4FE0DF1B986A9A00F84701 /* TVCImageURLParser+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4FE0DE1B986A9A00F84701 /* TVCImageURLParser+Overrides.m */; };
 		FA56C1D31BA4B45F0084BED6 /* TVCLogController+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FA56C1D21BA4B45F0084BED6 /* TVCLogController+Overrides.m */; };
 		FA644C6B1BABB0C8009BDA8A /* Imgur.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA644C6A1BABB0C8009BDA8A /* Imgur.swift */; };
 		FA6E76851BA1071500948E03 /* Wikipedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6E76841BA1071500948E03 /* Wikipedia.swift */; };
@@ -105,7 +104,6 @@
 		FA39B2461B9717CC0034B0C7 /* OGUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGUtility.h; sourceTree = "<group>"; };
 		FA39B2471B9717CC0034B0C7 /* OGUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGUtility.m; sourceTree = "<group>"; };
 		FA39B25B1B97407F0034B0C7 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Twitter.swift; path = "Inline Media Handlers/Twitter.swift"; sourceTree = "<group>"; };
-		FA4FE0DE1B986A9A00F84701 /* TVCImageURLParser+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TVCImageURLParser+Overrides.m"; path = "Overrides/TVCImageURLParser+Overrides.m"; sourceTree = "<group>"; };
 		FA56C1D21BA4B45F0084BED6 /* TVCLogController+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TVCLogController+Overrides.m"; path = "Overrides/TVCLogController+Overrides.m"; sourceTree = "<group>"; };
 		FA644C6A1BABB0C8009BDA8A /* Imgur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Imgur.swift; path = "Inline Media Handlers/Imgur.swift"; sourceTree = "<group>"; };
 		FA6E76841BA1071500948E03 /* Wikipedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Wikipedia.swift; path = "Inline Media Handlers/Wikipedia.swift"; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 		FA4FE0DC1B986A2C00F84701 /* Overrides */ = {
 			isa = PBXGroup;
 			children = (
-				FA4FE0DE1B986A9A00F84701 /* TVCImageURLParser+Overrides.m */,
 				FADAFB2F1B9BABB200273C13 /* IRCAddressBookEntry+Overrides.h */,
 				FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */,
 				FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */,
@@ -385,7 +382,6 @@
 				FAF3C6C21BBABF3A003BB3A9 /* Instagram.swift in Sources */,
 				FA39B24A1B9717CC0034B0C7 /* error.c in Sources */,
 				FAC0403F1B5446C6002480BB /* InlineMedia.swift in Sources */,
-				FA4FE0DF1B986A9A00F84701 /* TVCImageURLParser+Overrides.m in Sources */,
 				FA39B2481B9717CC0034B0C7 /* attribute.c in Sources */,
 				FA39B2561B9717CC0034B0C7 /* OGDocument.m in Sources */,
 				FA39B24C1B9717CC0034B0C7 /* string_buffer.c in Sources */,

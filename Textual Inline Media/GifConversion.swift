@@ -65,13 +65,24 @@ class GifConversion: NSObject {
                             /* Insert the element into Textual's view. */
                             InlineMedia.insert(controller, line: line, node: video, url: url.absoluteString)
                         })
+                    } else {
+                        /* The image conversation was unsuccessful, this is most likely not an animated gif, we will fall back to displaying the normal image. */
+                        self.performBlockOnMainThread({
+                            let document = controller.webView.mainFrameDocument
+                            if let line = document.getElementById("line-" + line) {
+                                let image = line.querySelector(".inlineImageCell a[href='\(url.absoluteString)']").parentElement
+                                if let imageId = image.getAttribute("id") {
+                                    if let eventSink = controller.valueForKey("webViewScriptSink") as? TVCLogScriptEventSink {
+                                        eventSink.toggleInlineImage(imageId)
+                                    }
+                                }
+                            }
+                        })
                     }
                 } catch {
                     return
                 }
             }).resume()
         }
-        
-        
     }
 }
