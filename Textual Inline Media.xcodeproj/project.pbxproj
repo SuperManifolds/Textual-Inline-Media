@@ -49,6 +49,7 @@
 		FADAFB311B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */; };
 		FADAFB341B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */; };
 		FAE219A21B9B969700CDF0E4 /* EventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE219A11B9B969700CDF0E4 /* EventListener.swift */; };
+		FAEB67181BC87AE40060A162 /* gfycat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB67171BC87AE40060A162 /* gfycat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,6 +120,7 @@
 		FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "IRCAddressBookEntry+Overrides.m"; path = "Overrides/IRCAddressBookEntry+Overrides.m"; sourceTree = "<group>"; };
 		FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TDCAddressBookSheet+Overrides.m"; path = "Overrides/TDCAddressBookSheet+Overrides.m"; sourceTree = "<group>"; };
 		FAE219A11B9B969700CDF0E4 /* EventListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListener.swift; sourceTree = "<group>"; };
+		FAEB67171BC87AE40060A162 /* gfycat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = gfycat.swift; path = "Inline Media Handlers/gfycat.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 				FA13CEDC1B9E62ED00FA1475 /* FileServiceHandler.swift */,
 				FA6E76841BA1071500948E03 /* Wikipedia.swift */,
 				FA0DF97D1BAFD6CA004142FD /* xkcd.swift */,
+				FAEB67171BC87AE40060A162 /* gfycat.swift */,
 			);
 			name = "Inline Media Handlers";
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				FA39B2521B9717CC0034B0C7 /* vector.c in Sources */,
 				FA39B2581B9717CC0034B0C7 /* OGNode.m in Sources */,
 				FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */,
+				FAEB67181BC87AE40060A162 /* gfycat.swift in Sources */,
 				FA39B2571B9717CC0034B0C7 /* OGElement.m in Sources */,
 				FA39B24F1B9717CC0034B0C7 /* tokenizer.c in Sources */,
 				FA39B2511B9717CC0034B0C7 /* util.c in Sources */,
