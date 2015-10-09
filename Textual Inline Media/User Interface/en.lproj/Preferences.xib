@@ -64,21 +64,8 @@
                                             <action selector="checkForUpdatesClicked:" target="-2" id="1eY-FT-YG1"/>
                                         </connections>
                                     </button>
-                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sry-gC-KY8">
-                                        <rect key="frame" x="386" y="269" width="37" height="22"/>
-                                        <animations/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="VeN-rH-BCc">
-                                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="sqp-a5-wqP"/>
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <action selector="maximumPreviewsPerMessageChange:" target="-2" id="q8L-Nj-CHF"/>
-                                        </connections>
-                                    </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzi-WV-qnd">
-                                        <rect key="frame" x="117" y="274" width="263" height="17"/>
+                                        <rect key="frame" x="117" y="274" width="280" height="17"/>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Maximum displayed previews per message" id="beM-DK-2Ok">
                                             <font key="font" metaFont="system"/>
@@ -97,6 +84,19 @@
                                             <action selector="displayAnimatedImagesChange:" target="-2" id="MQT-ZW-BQ7"/>
                                         </connections>
                                     </button>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sry-gC-KY8">
+                                        <rect key="frame" x="391" y="271" width="37" height="22"/>
+                                        <animations/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="" drawsBackground="YES" id="VeN-rH-BCc">
+                                            <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="sqp-a5-wqP"/>
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <action selector="maximumPreviewsPerMessageChange:" target="-2" id="q8L-Nj-CHF"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Wf2-rg-z3h" secondAttribute="bottom" constant="4" id="c7D-lb-zi8"/>
