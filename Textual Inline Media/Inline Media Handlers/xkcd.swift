@@ -32,6 +32,10 @@
 import Foundation
 
 class xkcd: NSObject, InlineMediaHandler {
+    static func name() -> String {
+        return "xkcd"
+    }
+    
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         let request = NSMutableURLRequest(URL: url)

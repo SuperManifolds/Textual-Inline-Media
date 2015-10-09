@@ -193,7 +193,7 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                 }
                 
                 /* Iterate over the available media handlers and see if we have one that supports this url. */
-                for mediaHandlerType in mediaHandlers {
+                for mediaHandlerType in InlineMedia.mediaHandlers {
                     if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
                         if mediaHandler.matchesServiceSchema?(url, hasImageExtension: isDirectImageLink) == true {
                             mediaHandler.init(url: url, controller: logController, line: messageObject.lineNumber)
@@ -219,7 +219,7 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
     func processInlineMediaContentURL(resource: String!) -> String! {
         if let url = NSString(string: resource).URLUsingWebKitPasteboard {
             /* Iterate over the available media handlers and see if we have one that supports this url. */
-            for mediaHandlerType in mediaHandlers {
+            for mediaHandlerType in InlineMedia.mediaHandlers {
                 if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
                     if let link = mediaHandler.processInlineMediaContentURL?(url) {
                         return link

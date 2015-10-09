@@ -32,6 +32,10 @@
 import Foundation
 
 class Wikipedia: NSObject, InlineMediaHandler {
+    static func name() -> String {
+        return "Wikipedia"
+    }
+    
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         if let query = url.pathComponents?[2] {

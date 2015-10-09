@@ -32,6 +32,10 @@
 import Foundation
 
 class Twitter: NSObject, InlineMediaHandler {
+    static func name() -> String {
+        return "Twitter"
+    }
+    
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         if (url.pathComponents!.count > 3) {

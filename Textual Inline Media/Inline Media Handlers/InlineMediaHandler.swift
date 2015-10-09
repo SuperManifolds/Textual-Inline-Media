@@ -45,6 +45,20 @@ import Foundation
     init(url: NSURL, controller: TVCLogController, line: String)
     
     /**
+    Name of the service this media handler is responsible for
+    
+    - returns: The name of the service
+    */
+    static func name() -> String
+    
+    /**
+    Icon for the service this media handler is responsible for
+    
+    - returns: Resource path for the icon this media handler is responsible for
+    */
+    optional static func icon() -> String
+    
+    /**
     Called to check whether the current URL matches the requirements for the inline media handler
     
     - parameter url:               The URL to test against

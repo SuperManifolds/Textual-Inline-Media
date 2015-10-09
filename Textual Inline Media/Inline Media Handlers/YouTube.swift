@@ -32,6 +32,10 @@
 import Foundation
 
 class YouTube: NSObject, InlineMediaHandler {
+    static func name() -> String {
+        return "YouTube"
+    }
+    
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         var videoID = ""

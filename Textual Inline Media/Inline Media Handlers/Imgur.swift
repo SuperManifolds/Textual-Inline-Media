@@ -32,6 +32,10 @@
 import Foundation
 
 class Imgur: NSObject, InlineMediaHandler {
+    static func name() -> String {
+        return "Imgur"
+    }
+    
     let disallowedPathCharacters = NSCharacterSet.alphanumericCharacterSet().invertedSet
     
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
