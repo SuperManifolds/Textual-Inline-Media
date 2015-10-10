@@ -11,6 +11,7 @@
 .inline_media_youtube,
 .inline_media_twitter,
 .inline_media_wiki,
+.inline_media_imdb,
 .inline_media_xkcd {
     margin-top: 5px;
     border-radius: 5px;
@@ -20,6 +21,12 @@
     display: -webkit-flex;
     display: flex;
     border: none;
+}
+
+.inline_media_imdb {
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
 }
 
 .inline_media_website_title,
@@ -120,3 +127,90 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
     margin-bottom: 10px;
 }
 
+.inline_media_imdb_thumbnail {
+    max-height: 260px;
+    max-width: 200px;
+}
+
+.inline_media_imdb_info {
+    padding-left: 20px;
+    flex: 1;
+}
+
+.inline_media_imdb_title {
+    display: inline;
+    margin: 0;
+    font-size: 175%;
+    font-weight: 300;
+    padding-right: 10px;
+}
+
+.inline_media_imdb_infobar {
+    font-size: 80%;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    color: #eee;
+}
+
+.inline_media_imdb_infobar a {
+    text-decoration: none !important;
+    border-bottom: none !important;
+}
+
+.inline_media_imdb_infobar > ::before {
+    content: "|";
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #eee;
+}
+
+.inline_media_imdb_infobar > :first-child::before {
+    display: none;
+}
+
+.inline_media_imdb_starbox {
+    height: 66px;
+    width: 200px;
+    display: table;
+    text-align: left;
+}
+
+.inline_media_imdb_rating {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    background-image: url('http://sorlie.co.uk/d/titlePageSprite-1214724556._V_.png');
+    background-position: -180px -71px;
+    width: 66px;
+    height: 66px;
+    line-height: 66px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 15px;
+    font-weight: bold;
+    float: left;
+    color: #fff;
+    padding-right: 5px;
+}
+
+.inline_media_imdb_rating_details {
+    display: table-cell;
+    font-size: 80%;
+    color: #eee;
+    vertical-align: middle;
+    margin-left: -50px;
+    line-height: 1.5;
+}
+
+.inline_media_imdb_description {
+    line-height: 1.5;
+}
+
+.inline_media_imdb_credit {
+    padding-top: 10px;
+    line-height: 1.25;
+}
+
+.inline_media_imdb_credit > span::after {
+    display: block;
+    content: ' '
+}

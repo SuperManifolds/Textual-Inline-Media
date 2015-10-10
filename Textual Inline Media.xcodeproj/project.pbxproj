@@ -50,6 +50,7 @@
 		FADAFB341B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */; };
 		FAE219A21B9B969700CDF0E4 /* EventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE219A11B9B969700CDF0E4 /* EventListener.swift */; };
 		FAEB67181BC87AE40060A162 /* gfycat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB67171BC87AE40060A162 /* gfycat.swift */; };
+		FAEB671A1BC881620060A162 /* imdb.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB67191BC881620060A162 /* imdb.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -121,6 +122,7 @@
 		FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TDCAddressBookSheet+Overrides.m"; path = "Overrides/TDCAddressBookSheet+Overrides.m"; sourceTree = "<group>"; };
 		FAE219A11B9B969700CDF0E4 /* EventListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListener.swift; sourceTree = "<group>"; };
 		FAEB67171BC87AE40060A162 /* gfycat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = gfycat.swift; path = "Inline Media Handlers/gfycat.swift"; sourceTree = "<group>"; };
+		FAEB67191BC881620060A162 /* imdb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = imdb.swift; path = "Inline Media Handlers/imdb.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 				FA6E76841BA1071500948E03 /* Wikipedia.swift */,
 				FA0DF97D1BAFD6CA004142FD /* xkcd.swift */,
 				FAEB67171BC87AE40060A162 /* gfycat.swift */,
+				FAEB67191BC881620060A162 /* imdb.swift */,
 			);
 			name = "Inline Media Handlers";
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				FA6F488E1B963E56000280E0 /* WebpageHandler.swift in Sources */,
 				FA02C4531B987F0300144323 /* GifConversion.swift in Sources */,
 				FA39B2541B9717CC0034B0C7 /* NSString+OGString.m in Sources */,
+				FAEB671A1BC881620060A162 /* imdb.swift in Sources */,
 				FADAFB341B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m in Sources */,
 				FAE219A21B9B969700CDF0E4 /* EventListener.swift in Sources */,
 				FA39B24E1B9717CC0034B0C7 /* tag.c in Sources */,
