@@ -177,8 +177,9 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 
 .inline_media_imdb_rating {
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-    background-image: url('http://sorlie.co.uk/d/titlePageSprite-1214724556._V_.png');
-    background-position: -180px -71px;
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTU3LjYgMTM2LjUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDE1Ny42IDEzNi41OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6I0VGRDE1OTt9PC9zdHlsZT48cGF0aCBjbGFzcz0ic3QwIiBkPSJNODAsMGMwLDAsMjIsMzMuNSwyNiw0NGMwLDAsNDkuNSw4LDUxLjUsMTBTMTIxLDg4LjUsMTIxLDg4LjVzMTAsNDMsNi41LDQ3LjVTODAsMTE0LDgwLDExNHMtMzAsMTguNS00OSwyMi41YzAsMCw1LTM0LDkuNS00OEM0MC41LDg4LjUsMjYsNzgsMCw1NGMwLDAsMTAuNS01LDU0LTlMODAsMHoiLz48L3N2Zz4=');
+    background-size: 90%;
+    background-repeat: no-repeat;
     width: 66px;
     height: 66px;
     line-height: 66px;
