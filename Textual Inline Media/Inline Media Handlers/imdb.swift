@@ -30,6 +30,11 @@ class imdb: NSObject, InlineMediaHandler {
             do {
                 /* Attempt to serialise the JSON results into a dictionary. */
                 let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+                let response = root["Response"] as! String
+                guard response == "True" else {
+                    return
+                }
+                
                 let title       = root["Title"]      as! String
                 let pgRating    = root["Rated"]      as! String
                 let year        = root["Year"]       as! String
