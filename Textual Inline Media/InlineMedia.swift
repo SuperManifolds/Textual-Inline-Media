@@ -100,6 +100,7 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
     - parameter logController: The Textual "Log Controller" responsible for the event.
     */
     func didPostNewMessage(messageObject: THOPluginDidPostNewMessageConcreteObject!, forViewController logController: TVCLogController!) {
+        
         guard !messageObject.isProcessedInBulk && inlineMediaMessageTypes.contains(messageObject.lineType) && logController.inlineImagesEnabledForView == true else {
             return
         }
@@ -188,8 +189,10 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                 }
                 
                 /* If Textual already handles this link, we will not attempt to. */
-                guard TVCImageURLParser.imageURLFromBase(url.absoluteString) == nil else {
-                    continue
+                if url.host?.hasSuffix("youtube.com") == false && url.host?.hasSuffix("youtu.be") == false {
+                    guard TVCImageURLParser.imageURLFromBase(url.absoluteString) == nil else {
+                        continue
+                    }
                 }
                 
                 /* Iterate over the available media handlers and see if we have one that supports this url. */
