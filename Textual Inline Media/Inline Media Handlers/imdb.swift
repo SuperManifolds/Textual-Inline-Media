@@ -66,7 +66,7 @@ class imdb: NSObject, InlineMediaHandler {
                 let genres      = root["Genre"]      as! String
                 let director    = root["Director"]   as! String
                 let writers     = root["Writer"]     as! String
-                let stars       = root["Actors"]     as! String
+                let starring    = root["Actors"]     as! String
                 let description = root["Plot"]       as! String
                 let country     = root["Country"]    as! String
                 let metascore   = root["Metascore"]  as! String
@@ -81,10 +81,12 @@ class imdb: NSObject, InlineMediaHandler {
                     imdbContainer.className = "inline_media_imdb"
                     
                     /* Create the element for the movie/series cover thumbnail */
-                    let imdbThumbnail = document.createElement("img")
-                    imdbThumbnail.className = "inline_media_imdb_thumbnail"
-                    imdbThumbnail.setAttribute("src", value: thumbnail)
-                    imdbContainer.appendChild(imdbThumbnail)
+                    if thumbnail != "N/A" {
+                        let imdbThumbnail = document.createElement("img")
+                        imdbThumbnail.className = "inline_media_imdb_thumbnail"
+                        imdbThumbnail.setAttribute("src", value: thumbnail)
+                        imdbContainer.appendChild(imdbThumbnail)
+                    }
                     
                     
                     /* Create the container holding all the information on the right side of the thumbnail */
@@ -103,65 +105,73 @@ class imdb: NSObject, InlineMediaHandler {
                     imdbTitle.textContent = title
                     imdbHeader.appendChild(imdbTitle)
                     
-                    /* Set the relase year of this title */
-                    let imdbYear = document.createElement("span")
-                    imdbYear.className = "inline_media_imdb_year"
-                    imdbYear.appendChild(document.createTextNode("("))
-                    imdbHeader.appendChild(imdbYear)
-                    
-                    let imdbYearLink = document.createElement("a")
-                    imdbYearLink.setAttribute("href", value: "http://www.imdb.com/year/\(year)")
-                    imdbYearLink.textContent = year
-                    imdbYear.appendChild(imdbYearLink)
-                    
-                    imdbYear.appendChild(document.createTextNode(")"))
-                    
-                    
+                    if year != "N/A" {
+                        /* Set the relase year of this title */
+                        let imdbYear = document.createElement("span")
+                        imdbYear.className = "inline_media_imdb_year"
+                        imdbYear.appendChild(document.createTextNode("("))
+                        imdbHeader.appendChild(imdbYear)
+                        
+                        let imdbYearLink = document.createElement("a")
+                        imdbYearLink.setAttribute("href", value: "http://www.imdb.com/year/\(year)")
+                        imdbYearLink.textContent = year
+                        imdbYear.appendChild(imdbYearLink)
+                        
+                        imdbYear.appendChild(document.createTextNode(")"))
+                    }
                     
                     /* Create the container for the 'bar' holding the pg rating, duration, genre, and release info */
                     let imdbInfobar = document.createElement("div")
                     imdbInfobar.className = "inline_media_imdb_infobar"
                     infoContainer.appendChild(imdbInfobar)
                     
-                    /* Create the PG-reating for this title */
-                    let imdbPgRating = document.createElement("span")
-                    imdbPgRating.className = "inline_media_imdb_pgRating"
-                    imdbPgRating.textContent = pgRating
-                    imdbInfobar.appendChild(imdbPgRating)
-                    
-                    /* Create the duration/runtime for this title */
-                    let imdbDuration = document.createElement("span")
-                    imdbDuration.className = "inline_media_imdb_duration"
-                    imdbDuration.textContent = runtime
-                    imdbInfobar.appendChild(imdbDuration)
-                    
-                    /* Create the list of genres for this title */
-                    let imdbGenre = document.createElement("span")
-                    imdbGenre.className = "inline_media_imdb_genre"
-                    let seperatedGenres = genres.componentsSeparatedByString(",")
-                    
-                    /* The API gives us the genres in a comma seperated plain text list.
-                    We will seperate them into an array, trim the whitespace, and turn it into a list of links.*/
-                    for genre in seperatedGenres {
-                        let trimmedGenre = genre.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-                        let genreLink = document.createElement("a")
-                        genreLink.setAttribute("href", value: "http://www.imdb.com/genre/\(trimmedGenre)")
-                        genreLink.textContent = trimmedGenre
-                        imdbGenre.appendChild(genreLink)
-                        
-                        /* Seperate the items in the list with commas, making sure not to append a comma to the last item. */
-                        if genre != seperatedGenres.last {
-                            imdbGenre.appendChild(document.createTextNode(", "))
-                        }
+                    if pgRating != "N/A" {
+                        /* Create the PG-reating for this title */
+                        let imdbPgRating = document.createElement("span")
+                        imdbPgRating.className = "inline_media_imdb_pgRating"
+                        imdbPgRating.textContent = pgRating
+                        imdbInfobar.appendChild(imdbPgRating)
                     }
-                    imdbInfobar.appendChild(imdbGenre)
                     
-                    /* Create the release information link for this title */
-                    let imdbReleaseInfo = document.createElement("a")
-                    imdbReleaseInfo.className = "inline_media_imdb_releaseinfo"
-                    imdbReleaseInfo.setAttribute("href", value: "http://www.imdb.com/title/\(requestString)/releaseinfo")
-                    imdbReleaseInfo.textContent = "\(releaseDate) (\(country))"
-                    imdbInfobar.appendChild(imdbReleaseInfo)
+                    if runtime != "N/A" {
+                        /* Create the duration/runtime for this title */
+                        let imdbDuration = document.createElement("span")
+                        imdbDuration.className = "inline_media_imdb_duration"
+                        imdbDuration.textContent = runtime
+                        imdbInfobar.appendChild(imdbDuration)
+                    }
+                    
+                    if genres != "N/A" {
+                        /* Create the list of genres for this title */
+                        let imdbGenre = document.createElement("span")
+                        imdbGenre.className = "inline_media_imdb_genre"
+                        let seperatedGenres = genres.componentsSeparatedByString(",")
+                        
+                        /* The API gives us the genres in a comma seperated plain text list.
+                        We will seperate them into an array, trim the whitespace, and turn it into a list of links.*/
+                        for genre in seperatedGenres {
+                            let trimmedGenre = genre.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                            let genreLink = document.createElement("a")
+                            genreLink.setAttribute("href", value: "http://www.imdb.com/genre/\(trimmedGenre)")
+                            genreLink.textContent = trimmedGenre
+                            imdbGenre.appendChild(genreLink)
+                            
+                            /* Seperate the items in the list with commas, making sure not to append a comma to the last item. */
+                            if genre != seperatedGenres.last {
+                                imdbGenre.appendChild(document.createTextNode(", "))
+                            }
+                        }
+                        imdbInfobar.appendChild(imdbGenre)
+                    }
+                    
+                    if releaseDate != "N/A" {
+                        /* Create the release information link for this title */
+                        let imdbReleaseInfo = document.createElement("a")
+                        imdbReleaseInfo.className = "inline_media_imdb_releaseinfo"
+                        imdbReleaseInfo.setAttribute("href", value: "http://www.imdb.com/title/\(requestString)/releaseinfo")
+                        imdbReleaseInfo.textContent = "\(releaseDate) (\(country))"
+                        imdbInfobar.appendChild(imdbReleaseInfo)
+                    }
                     
                     
                     /* Create the container holding all the rating information */
@@ -212,35 +222,41 @@ class imdb: NSObject, InlineMediaHandler {
                     creditContainer.className = "inline_media_imdb_credit"
                     infoContainer.appendChild(creditContainer)
                     
-                    /* Insert the director info */
-                    let imdbDirectorTitle = document.createElement("strong")
-                    imdbDirectorTitle.textContent = "Director: "
-                    creditContainer.appendChild(imdbDirectorTitle)
+                    if director != "N/A" {
+                        /* Insert the director info */
+                        let imdbDirectorTitle = document.createElement("strong")
+                        imdbDirectorTitle.textContent = "Director: "
+                        creditContainer.appendChild(imdbDirectorTitle)
+                        
+                        let imdbDirector = document.createElement("span")
+                        imdbDirector.className = "inline_media_imdb_director"
+                        imdbDirector.textContent = director
+                        creditContainer.appendChild(imdbDirector)
+                    }
                     
-                    let imdbDirector = document.createElement("span")
-                    imdbDirector.className = "inline_media_imdb_director"
-                    imdbDirector.textContent = director
-                    creditContainer.appendChild(imdbDirector)
+                    if writers != "N/A" {
+                        /* Insert the writers info  */
+                        let imdbWritersTitle = document.createElement("strong")
+                        imdbWritersTitle.textContent = "Writers: "
+                        creditContainer.appendChild(imdbWritersTitle)
+                        
+                        let imdbWriters = document.createElement("span")
+                        imdbWriters.className = "inline_media_imdb_writers"
+                        imdbWriters.textContent = writers
+                        creditContainer.appendChild(imdbWriters)
+                    }
                     
-                    /* Insert the writers info  */
-                    let imdbWritersTitle = document.createElement("strong")
-                    imdbWritersTitle.textContent = "Writers: "
-                    creditContainer.appendChild(imdbWritersTitle)
-                    
-                    let imdbWriters = document.createElement("span")
-                    imdbWriters.className = "inline_media_imdb_writers"
-                    imdbWriters.textContent = writers
-                    creditContainer.appendChild(imdbWriters)
-                    
-                    /* Insert the stars info */
-                    let imdbStarsTitle = document.createElement("strong")
-                    imdbStarsTitle.textContent = "Stars: "
-                    creditContainer.appendChild(imdbStarsTitle)
-                    
-                    let imdbStars = document.createElement("span")
-                    imdbStars.className = "inline_media_imdb_strs"
-                    imdbStars.textContent = stars
-                    creditContainer.appendChild(imdbStars)
+                    if starring != "N/A" {
+                        /* Insert the starring actors info */
+                        let imdbStarsTitle = document.createElement("strong")
+                        imdbStarsTitle.textContent = "Stars: "
+                        creditContainer.appendChild(imdbStarsTitle)
+                        
+                        let imdbStars = document.createElement("span")
+                        imdbStars.className = "inline_media_imdb_strs"
+                        imdbStars.textContent = starring
+                        creditContainer.appendChild(imdbStars)
+                    }
                     
                     /* Insert the IMDB card into the chat  */
                     InlineMedia.insert(controller, line: line, node: imdbContainer, url: url.absoluteString)
