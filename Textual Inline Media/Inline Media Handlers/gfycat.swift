@@ -40,7 +40,6 @@ class gfycat: NSObject, InlineMediaHandler {
         self.init()
         /* Create a request to the gfycat API to find the mp4 version of this link.  */
         if let requestString = url.URLByDeletingPathExtension?.pathComponents?[1] {
-            NSLog(requestString)
             let requestUrl = NSURL(string: "http://gfycat.com/cajax/get/\(requestString)")
             guard requestUrl != nil else {
                 return
