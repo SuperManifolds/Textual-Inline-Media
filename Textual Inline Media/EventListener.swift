@@ -81,6 +81,8 @@ class ShowElementEventListener: NSObject, DOMEventListener {
             let mediaElement = linkElement.parentElement.querySelector(".inlineMediaCell[href='\(url)']")
             if let index = mediaElement.classList.indexOf("hidden") {
                 mediaElement.classList.removeAtIndex(index)
+            } else {
+                mediaElement.classList += ["hidden"]
             }
             event.preventDefault()
         }

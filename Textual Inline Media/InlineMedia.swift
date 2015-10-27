@@ -294,7 +294,10 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                 let node = messageLinks.item(index)
                 if let element = node as? DOMElement {
                     if element.getAttribute("href") == url {
-                        element.addEventListener("click", listener: showListener, useCapture: false)
+                        let newElement = element.cloneNode(true) as! DOMElement
+                        newElement.removeAttribute("onclick");
+                        element.parentNode.replaceChild(newElement, oldChild: element)
+                        newElement.addEventListener("click", listener: showListener, useCapture: false)
                     }
                 }
             }
