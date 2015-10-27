@@ -1,6 +1,9 @@
 .inlineMediaCell {
+    margin-top: 10px;
     display: block;
     text-indent: 0 !important;
+    border-radius: 5px;
+    background: rgba(190,190,190, 0.15);
 }
 
 .inlineMediaCell.hidden {
@@ -17,10 +20,6 @@
 .inline_media_wiki,
 .inline_media_imdb,
 .inline_media_xkcd {
-    margin-top: 5px;
-    border-radius: 5px;
-    background: rgba(255,255,255,0.1);
-    -webkit-backdrop-filter: brightness(95%);
     padding: 10px;
     overflow: auto;
     display: -webkit-flex;
