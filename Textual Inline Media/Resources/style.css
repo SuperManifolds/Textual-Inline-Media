@@ -44,6 +44,7 @@
 
 .inline_media_website_desc,
 .inline_media_wiki_desc {
+    line-height: 1.4em;
     color: white;
 }
 
