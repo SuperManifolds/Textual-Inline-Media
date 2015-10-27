@@ -19,7 +19,7 @@
 .inline_media_xkcd {
     margin-top: 5px;
     border-radius: 5px;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.1);
     -webkit-backdrop-filter: brightness(95%);
     padding: 10px;
     overflow: auto;
