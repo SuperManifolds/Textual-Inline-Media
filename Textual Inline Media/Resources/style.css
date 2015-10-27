@@ -36,7 +36,7 @@
 }
 
 .inline_media_wiki_title {
-    font-size: 150%;
+    font-size: 1.4em;
     color: white;
     font-family: Georgia, Times, serif;
     text-decoration: underline;
@@ -51,8 +51,8 @@
 .inline_media_youtube_author,
 .inline_media_youtube_views {
     color: #ccc;
-    font-size: 90%;
-    line-height: 18px;
+    font-size: 0.9em;
+    line-height: 1.5em;
 }
 
 .inline_media_website_thumbnail,
@@ -80,7 +80,7 @@
     height: 14px;
     line-height: 14px;
     background: #000;
-    font-size: 11px;
+    font-size: 0.75em;
     color: #fff;
     font-weight: bold;
     padding-left: 2px;
@@ -115,7 +115,7 @@ blockquote.twitter-tweet p {
 
 blockquote.twitter-tweet a[href^="https://twitter.com"] {
     font-weight: normal;
-    font-size: 12px;
+    font-size: 1em;
 }
 
 .inline_media_xkcd {
@@ -123,7 +123,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 }
 
 .inline_media_xkcd_title {
-    font-size: 125%;
+    font-size: 1.25em;
     margin-bottom: 10px;
 }
 
@@ -140,13 +140,13 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 .inline_media_imdb_title {
     display: inline;
     margin: 0;
-    font-size: 175%;
+    font-size: 1.74em;
     font-weight: 300;
     padding-right: 10px;
 }
 
 .inline_media_imdb_infobar {
-    font-size: 80%;
+    font-size: 0.9em;
     padding-top: 5px;
     padding-bottom: 10px;
     color: #eee;
@@ -170,7 +170,6 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 
 .inline_media_imdb_starbox {
     height: 66px;
-    width: 200px;
     display: table;
     text-align: left;
 }
@@ -186,7 +185,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    font-size: 15px;
+    font-size: 1.2em;
     font-weight: bold;
     float: left;
     color: #fff;
@@ -195,20 +194,20 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 
 .inline_media_imdb_rating_details {
     display: table-cell;
-    font-size: 80%;
+    font-size: 0.9em;
     color: #eee;
     vertical-align: middle;
     margin-left: -50px;
-    line-height: 1.5;
+    line-height: 1.5em;
 }
 
 .inline_media_imdb_description {
-    line-height: 1.5;
+    line-height: 1.5em;
 }
 
 .inline_media_imdb_credit {
     padding-top: 10px;
-    line-height: 1.25;
+    line-height: 1.25em;
 }
 
 .inline_media_imdb_credit > span::after {
