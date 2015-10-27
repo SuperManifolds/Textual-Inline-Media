@@ -7,6 +7,10 @@
     display: none;
 }
 
+.inlineMediaCell > a:link {
+    color: inherit;
+}
+
 .inline_media_website,
 .inline_media_youtube,
 .inline_media_twitter,
@@ -15,7 +19,8 @@
 .inline_media_xkcd {
     margin-top: 5px;
     border-radius: 5px;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.15);
+    -webkit-backdrop-filter: brightness(95%);
     padding: 10px;
     overflow: auto;
     display: -webkit-flex;
@@ -32,12 +37,10 @@
 .inline_media_website_title,
 .inline_media_youtube_title {
     font-weight: bold;
-    color: white;
 }
 
 .inline_media_wiki_title {
     font-size: 1.4em;
-    color: white;
     font-family: Georgia, Times, serif;
     text-decoration: underline;
 }
@@ -45,7 +48,6 @@
 .inline_media_website_desc,
 .inline_media_wiki_desc {
     line-height: 1.4em;
-    color: white;
 }
 
 
@@ -82,7 +84,6 @@
     line-height: 14px;
     background: #000;
     font-size: 0.75em;
-    color: #fff;
     font-weight: bold;
     padding-left: 2px;
     padding-right: 2px;
@@ -153,9 +154,10 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
     color: #eee;
 }
 
-.inline_media_imdb_infobar a {
+.inline_media_imdb_infobar a:link {
     text-decoration: none !important;
     border-bottom: none !important;
+    color: inherit !important;
 }
 
 .inline_media_imdb_infobar > ::before {
@@ -189,7 +191,6 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
     font-size: 1.2em;
     font-weight: bold;
     float: left;
-    color: #fff;
     padding-right: 5px;
 }
 
@@ -200,6 +201,11 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
     vertical-align: middle;
     margin-left: -50px;
     line-height: 1.5em;
+}
+
+.inline_media_imdb_year a:link,
+.inline_media_imdb_rating_details a:link {
+    color: inherit;
 }
 
 .inline_media_imdb_description {
