@@ -41,6 +41,7 @@
 		FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */; };
 		FA6F488E1B963E56000280E0 /* WebpageInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F488D1B963E56000280E0 /* WebpageInformation.swift */; };
 		FA9B5F591BE6FE6300094F58 /* InlineMediaElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B5F581BE6FE6300094F58 /* InlineMediaElements.swift */; };
+		FA9B5F611BE725FF00094F58 /* Streamable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B5F601BE725FF00094F58 /* Streamable.swift */; };
 		FABCD7721BA8BF0E00A74D75 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCD7711BA8BF0E00A74D75 /* Preferences.swift */; };
 		FAC0403F1B5446C6002480BB /* InlineMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0403E1B5446C6002480BB /* InlineMedia.swift */; };
 		FAC93D9D1BA4D8DF00B9896C /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = FAC93D9C1BA4D8DF00B9896C /* dsa_pub.pem */; };
@@ -110,6 +111,7 @@
 		FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineMediaHandler.swift; path = "Inline Media Handlers/InlineMediaHandler.swift"; sourceTree = "<group>"; };
 		FA6F488D1B963E56000280E0 /* WebpageInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebpageInformation.swift; sourceTree = "<group>"; };
 		FA9B5F581BE6FE6300094F58 /* InlineMediaElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineMediaElements.swift; sourceTree = "<group>"; };
+		FA9B5F601BE725FF00094F58 /* Streamable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Streamable.swift; path = "Inline Media Handlers/Streamable.swift"; sourceTree = "<group>"; };
 		FABCD7711BA8BF0E00A74D75 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		FAC040321B544536002480BB /* Textual Inline Media.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Textual Inline Media.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC040351B544536002480BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				FA0DF97D1BAFD6CA004142FD /* xkcd.swift */,
 				FAEB67171BC87AE40060A162 /* gfycat.swift */,
 				FAEB67191BC881620060A162 /* imdb.swift */,
+				FA9B5F601BE725FF00094F58 /* Streamable.swift */,
 			);
 			name = "Inline Media Handlers";
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				FA39B2571B9717CC0034B0C7 /* OGElement.m in Sources */,
 				FA39B24F1B9717CC0034B0C7 /* tokenizer.c in Sources */,
 				FA39B2511B9717CC0034B0C7 /* util.c in Sources */,
+				FA9B5F611BE725FF00094F58 /* Streamable.swift in Sources */,
 				FA39B24D1B9717CC0034B0C7 /* string_piece.c in Sources */,
 				FA39B24A1B9717CC0034B0C7 /* error.c in Sources */,
 				FAC0403F1B5446C6002480BB /* InlineMedia.swift in Sources */,

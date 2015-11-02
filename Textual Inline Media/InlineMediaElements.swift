@@ -135,6 +135,7 @@ extension TVCLogController {
         let video = document.createElement("video")
         video.setAttribute("loop", value: loop.description)
         video.setAttribute("autoplay", value: autoPlay.description)
+        video.setAttribute("muted", value: "true")
         
         /* Set the event listener to start/pause it when the user clicks it. */
         let listener = VideoEventListener()
