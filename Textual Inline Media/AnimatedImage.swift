@@ -31,8 +31,8 @@
 
 import Foundation
 
-class GifConversion: NSObject {
-    static func displayLoopingAnimation(url: NSURL, controller: TVCLogController, line: String) {
+class AnimatedImage: NSObject {
+    static func create(controller: TVCLogController, url: NSURL, line: String) {
         if url.host!.hasSuffix("imgur.com") {
             /* Imgur already has video versions of gifs so we will not need to convert these, we will just change the extension to .mp4 and make it a video element. */
             let imgurVideoUrl = "\(url.URLByDeletingPathExtension!).mp4"

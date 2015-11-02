@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4C8799E11BA47A7600099E13 /* CocoaExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8799E01BA47A5B00099E13 /* CocoaExtensions.framework */; };
 		4C8CF6F11BA12A6E0030BC21 /* AutoHyperlinks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8CF6F01BA12A670030BC21 /* AutoHyperlinks.framework */; };
-		FA02C4531B987F0300144323 /* GifConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02C4521B987F0300144323 /* GifConversion.swift */; };
+		FA02C4531B987F0300144323 /* AnimatedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02C4521B987F0300144323 /* AnimatedImage.swift */; };
 		FA02C4561B98E3BD00144323 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = FA02C4551B98E3BD00144323 /* style.css */; };
 		FA0DF97E1BAFD6CA004142FD /* xkcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DF97D1BAFD6CA004142FD /* xkcd.swift */; };
 		FA13CED61B9E02CD00FA1475 /* media.js in Resources */ = {isa = PBXBuildFile; fileRef = FA13CED51B9E02CD00FA1475 /* media.js */; };
@@ -57,7 +57,7 @@
 /* Begin PBXFileReference section */
 		4C8799E01BA47A5B00099E13 /* CocoaExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaExtensions.framework; path = ../../../../Applications/Textual.app/Contents/Frameworks/CocoaExtensions.framework; sourceTree = "<group>"; };
 		4C8CF6F01BA12A670030BC21 /* AutoHyperlinks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AutoHyperlinks.framework; path = /Applications/Textual.app/Contents/Frameworks/AutoHyperlinks.framework; sourceTree = "<absolute>"; };
-		FA02C4521B987F0300144323 /* GifConversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifConversion.swift; sourceTree = "<group>"; };
+		FA02C4521B987F0300144323 /* AnimatedImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedImage.swift; sourceTree = "<group>"; };
 		FA02C4551B98E3BD00144323 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = Resources/style.css; sourceTree = "<group>"; };
 		FA0DF97D1BAFD6CA004142FD /* xkcd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = xkcd.swift; path = "Inline Media Handlers/xkcd.swift"; sourceTree = "<group>"; };
 		FA13CED51B9E02CD00FA1475 /* media.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = media.js; path = Resources/media.js; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 				FAE219A11B9B969700CDF0E4 /* EventListener.swift */,
 				FA6F488D1B963E56000280E0 /* WebpageHandler.swift */,
 				FAD0EE211B9773A80015A5B4 /* Extensions.swift */,
-				FA02C4521B987F0300144323 /* GifConversion.swift */,
+				FA02C4521B987F0300144323 /* AnimatedImage.swift */,
 				FA9B5F581BE6FE6300094F58 /* InlineMediaElements.swift */,
 				FAC93DAA1BA626A800B9896C /* User Interface */,
 				FA4FE0DC1B986A2C00F84701 /* Overrides */,
@@ -390,7 +390,7 @@
 				FADAFB311B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m in Sources */,
 				FA39B2491B9717CC0034B0C7 /* char_ref.c in Sources */,
 				FA6F488E1B963E56000280E0 /* WebpageHandler.swift in Sources */,
-				FA02C4531B987F0300144323 /* GifConversion.swift in Sources */,
+				FA02C4531B987F0300144323 /* AnimatedImage.swift in Sources */,
 				FA39B2541B9717CC0034B0C7 /* NSString+OGString.m in Sources */,
 				FAEB671A1BC881620060A162 /* imdb.swift in Sources */,
 				FADAFB341B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m in Sources */,

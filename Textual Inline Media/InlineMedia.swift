@@ -180,7 +180,7 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                     /* Check if this is a link to a gif. */
                     if fileExtension.lowercaseString == "gif" && Bool(defaults.integerForKey("displayAnimatedImages")) {
                         self.performBlockOnMainThread({
-                            GifConversion.displayLoopingAnimation(url, controller: logController, line: messageObject.lineNumber)
+                            AnimatedImage.create(logController, url: url, line: messageObject.lineNumber)
                         })
                         continue
                     } else if (isDirectImageLink) {
