@@ -40,13 +40,8 @@ class VideoEventListener: NSObject, DOMEventListener {
     func handleEvent(event: DOMEvent!) {
         if let video = event.target as? DOMElement {
             let paused = video.valueForKey("paused") as? Bool
-            if (paused == true) {
-                video.callWebScriptMethod("play", withArguments: nil)
-            } else {
-                video.callWebScriptMethod("pause", withArguments: nil)
-            }
+            video.callWebScriptMethod(paused == true ? "play" : "pause", withArguments: nil)
         }
-        
     }
 }
 
