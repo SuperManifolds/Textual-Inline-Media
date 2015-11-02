@@ -31,8 +31,8 @@
 
 import Foundation
 
-class WebpageHandler: NSObject {
-    static func displayInformation(url: NSURL, controller: TVCLogController, line: String) {
+class WebpageInformation: NSObject {
+    static func create(url: NSURL, controller: TVCLogController, line: String) {
         let request = NSMutableURLRequest(URL: url)
             
         let session = NSURLSession.sharedSession()
@@ -45,7 +45,6 @@ class WebpageHandler: NSObject {
             /* Validate that the server obeyed our request to only receive HTML, abort if otherwise. */
             let contentType = httpResponse.allHeaderFields["Content-Type"]
             guard contentType?.contains("text/html") == true else {
-               
                 return
             }
             

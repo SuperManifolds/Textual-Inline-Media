@@ -206,7 +206,7 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                 }
                 
                 /* There were no media handlers for this url, we will attempt to retrieve the title, description, and preview thumbnail of the webpage instead. */
-                WebpageHandler.displayInformation(url, controller: logController, line: messageObject.lineNumber)
+                WebpageInformation.create(url, controller: logController, line: messageObject.lineNumber)
             }
         }
         
