@@ -14,7 +14,6 @@
 		FA0DF97E1BAFD6CA004142FD /* xkcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DF97D1BAFD6CA004142FD /* xkcd.swift */; };
 		FA13CED61B9E02CD00FA1475 /* media.js in Resources */ = {isa = PBXBuildFile; fileRef = FA13CED51B9E02CD00FA1475 /* media.js */; };
 		FA13CEDD1B9E62ED00FA1475 /* FileServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA13CEDC1B9E62ED00FA1475 /* FileServiceHandler.swift */; };
-		FA2A0B041BA4D09F00B4CEDF /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA2A0B031BA4D09F00B4CEDF /* Sparkle.framework */; };
 		FA37789F1BAD6C12002D4083 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3778A11BAD6C12002D4083 /* Preferences.xib */; };
 		FA39B2481B9717CC0034B0C7 /* attribute.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2201B9717CC0034B0C7 /* attribute.c */; };
 		FA39B2491B9717CC0034B0C7 /* char_ref.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2221B9717CC0034B0C7 /* char_ref.c */; };
@@ -42,6 +41,8 @@
 		FA6F488E1B963E56000280E0 /* WebpageInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F488D1B963E56000280E0 /* WebpageInformation.swift */; };
 		FA9B5F591BE6FE6300094F58 /* InlineMediaElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B5F581BE6FE6300094F58 /* InlineMediaElements.swift */; };
 		FA9B5F611BE725FF00094F58 /* Streamable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B5F601BE725FF00094F58 /* Streamable.swift */; };
+		FA9B5F621BE72FB200094F58 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA2A0B031BA4D09F00B4CEDF /* Sparkle.framework */; };
+		FA9B5F641BE7302500094F58 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA2A0B031BA4D09F00B4CEDF /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FABCD7721BA8BF0E00A74D75 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABCD7711BA8BF0E00A74D75 /* Preferences.swift */; };
 		FAC0403F1B5446C6002480BB /* InlineMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0403E1B5446C6002480BB /* InlineMedia.swift */; };
 		FAC93D9D1BA4D8DF00B9896C /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = FAC93D9C1BA4D8DF00B9896C /* dsa_pub.pem */; };
@@ -54,6 +55,19 @@
 		FAEB67181BC87AE40060A162 /* gfycat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB67171BC87AE40060A162 /* gfycat.swift */; };
 		FAEB671A1BC881620060A162 /* imdb.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB67191BC881620060A162 /* imdb.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FA9B5F631BE7300600094F58 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FA9B5F641BE7302500094F58 /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4C8799E01BA47A5B00099E13 /* CocoaExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaExtensions.framework; path = ../../../../Applications/Textual.app/Contents/Frameworks/CocoaExtensions.framework; sourceTree = "<group>"; };
@@ -134,8 +148,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA9B5F621BE72FB200094F58 /* Sparkle.framework in Frameworks */,
 				4C8CF6F11BA12A6E0030BC21 /* AutoHyperlinks.framework in Frameworks */,
-				FA2A0B041BA4D09F00B4CEDF /* Sparkle.framework in Frameworks */,
 				4C8799E11BA47A7600099E13 /* CocoaExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +317,7 @@
 				FAC0402E1B544536002480BB /* Sources */,
 				FAC0402F1B544536002480BB /* Frameworks */,
 				FAC040301B544536002480BB /* Resources */,
+				FA9B5F631BE7300600094F58 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -519,10 +534,13 @@
 					"$(PROJECT_DIR)/Textual",
 					Inline,
 					Media/Frameworks,
+					"$(PROJECT_DIR)/Textual",
+					Inline,
+					Media/Frameworks,
 				);
 				HEADER_SEARCH_PATHS = "\"/Applications/Textual.app/Contents/Headers/**\"";
 				INFOPLIST_FILE = "Textual Inline Media/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sorlie.Textual-Inline-Media";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -547,10 +565,13 @@
 					"$(PROJECT_DIR)/Textual",
 					Inline,
 					Media/Frameworks,
+					"$(PROJECT_DIR)/Textual",
+					Inline,
+					Media/Frameworks,
 				);
 				HEADER_SEARCH_PATHS = "\"/Applications/Textual.app/Contents/Headers/**\"";
 				INFOPLIST_FILE = "Textual Inline Media/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sorlie.Textual-Inline-Media";
 				PRODUCT_NAME = "$(TARGET_NAME)";

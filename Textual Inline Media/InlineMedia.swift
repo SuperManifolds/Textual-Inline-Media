@@ -71,14 +71,6 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
         preferences = Preferences()
         NSBundle(forClass: object_getClass(self)).loadNibNamed("Preferences", owner: preferences, topLevelObjects: nil)
         self.preferencesView = preferences.preferences
-        
-        #if TEXTUAL_BUILT_INSIDE_SANDBOX
-            let alert = NSAlert()
-            alert.messageText = "Textual Inline Media Plugin"
-            alert.addButtonWithTitle("OK")
-            alert.informativeText = "This plugin will not work correctly because it is not compatible with your version of Textual"
-            alert.runModal()
-        #endif
     }
     
     func pathToRelaunchForUpdater(updater: SUUpdater!) -> String! {
