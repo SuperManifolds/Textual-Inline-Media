@@ -61,7 +61,7 @@ class WebpageInformation: NSObject {
                             for index in 0...messageLinks.length {
                                 let node = messageLinks.item(index)
                                 if let element = node as? DOMElement {
-                                    if element.getAttribute("href") == url {
+                                    if element.getAttribute("href") == url.absoluteString {
                                         let onclickComponents = element.getAttribute("onclick").componentsSeparatedByString("'")
                                         let uuid = onclickComponents[1]
                                         
