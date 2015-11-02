@@ -36,10 +36,10 @@ class GifConversion: NSObject {
         if url.host!.hasSuffix("imgur.com") {
             /* Imgur already has video versions of gifs so we will not need to convert these, we will just change the extension to .mp4 and make it a video element. */
             let imgurVideoUrl = "\(url.URLByDeletingPathExtension!).mp4"
-            let video = InlineMedia.inlineVideo(controller, source: imgurVideoUrl, loop: true, autoPlay: true)
+            let video = controller.createInlineVideo(imgurVideoUrl, loop: true, autoPlay: true)
             
             /* Insert the element into Textual's view. */
-            InlineMedia.insert(controller, line: line, node: video, url: url.absoluteString)
+            controller.insertInlineMedia(line, node: video, url: url.absoluteString)
         } else {
             /* Create a request to the gfycat API to convert this gif into a video file. */
             let requestString = url.absoluteString.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
@@ -60,10 +60,10 @@ class GifConversion: NSObject {
                     if let videoUrl = root["mp4Url"] as? String {
                         self.performBlockOnMainThread({
                             /* Create the video tag and set it to automatically play, and loop continously. */
-                            let video = InlineMedia.inlineVideo(controller, source: videoUrl, loop: true, autoPlay: true)
+                            let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: true)
                             
                             /* Insert the element into Textual's view. */
-                            InlineMedia.insert(controller, line: line, node: video, url: url.absoluteString)
+                            controller.insertInlineMedia(line, node: video, url: url.absoluteString)
                         })
                     } else {
                         /* The image conversation was unsuccessful, this is most likely not an animated gif, we will fall back to displaying the normal image. */

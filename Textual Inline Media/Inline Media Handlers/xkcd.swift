@@ -87,7 +87,7 @@ class xkcd: NSObject, InlineMediaHandler {
                             xkcdImage.setAttribute("title", value: comicAlt)
                             xkcdContainer.appendChild(xkcdImage)
                             
-                            InlineMedia.insert(controller, line: line, node: xkcdContainer, url: url.absoluteString)
+                            controller.insertInlineMedia(line, node: xkcdContainer, url: url.absoluteString)
                         })
                     }
                     

@@ -58,10 +58,10 @@ class gfycat: NSObject, InlineMediaHandler {
                         if let videoUrl = gfyItem["mp4Url"] as? String {
                             self.performBlockOnMainThread({
                                 /* Create the video tag and set it to automatically play, and loop continously. */
-                                let video = InlineMedia.inlineVideo(controller, source: videoUrl, loop: true, autoPlay: true)
+                                let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: true)
                                 
                                 /* Insert the element into Textual's view. */
-                                InlineMedia.insert(controller, line: line, node: video, url: url.absoluteString)
+                                controller.insertInlineMedia(line, node: video, url: url.absoluteString)
                             })
                         }
                     }

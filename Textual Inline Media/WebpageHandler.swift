@@ -35,14 +35,17 @@ class WebpageHandler: NSObject {
     static func displayInformation(url: NSURL, controller: TVCLogController, line: String) {
         let request = NSMutableURLRequest(URL: url)
             
-        /* Inform the server that we only accept HTML documents, it should reject our connection otherwise. */
-        request.setValue("text/html", forHTTPHeaderField: "Content-Type")
-        
         let session = NSURLSession.sharedSession()
         session.dataTaskWithRequest(request, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
         if let httpResponse = response as? NSHTTPURLResponse {
+            guard data != nil else {
+                return
+            }
+            
             /* Validate that the server obeyed our request to only receive HTML, abort if otherwise. */
-            guard httpResponse.allHeaderFields["Content-Type"]?.contains("text/html") == true && data != nil else {
+            let contentType = httpResponse.allHeaderFields["Content-Type"]
+            guard contentType?.contains("text/html") == true else {
+               
                 return
             }
             
@@ -123,7 +126,7 @@ class WebpageHandler: NSObject {
                             descriptionElement.appendChild(document.createTextNode(description))
                             infoContainer.appendChild(descriptionElement)
                         }
-                        InlineMedia.insert(controller, line: line, node: websiteContainer, url: url.absoluteString)
+                        controller.insertInlineMedia(line, node: websiteContainer, url: url.absoluteString)
                     })
                 }
             }

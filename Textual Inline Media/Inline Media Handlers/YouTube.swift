@@ -160,7 +160,7 @@ class YouTube: NSObject, InlineMediaHandler {
                                 infoContainer.appendChild(videoViews)
                                 
                                 /* Insert the element into Textual's view. */
-                                InlineMedia.insert(controller, line: line, node: ytContainer, url: url.absoluteString)
+                                controller.insertInlineMedia(line, node: ytContainer, url: url.absoluteString)
                             })
                         }
                     }

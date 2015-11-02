@@ -259,7 +259,7 @@ class imdb: NSObject, InlineMediaHandler {
                     }
                     
                     /* Insert the IMDB card into the chat  */
-                    InlineMedia.insert(controller, line: line, node: imdbContainer, url: url.absoluteString)
+                    controller.insertInlineMedia(line, node: imdbContainer, url: url.absoluteString)
                 })
 
             } catch {
