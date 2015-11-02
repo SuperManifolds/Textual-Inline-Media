@@ -45,6 +45,39 @@ class WebpageInformation: NSObject {
             /* Validate that the server obeyed our request to only receive HTML, abort if otherwise. */
             let contentType = httpResponse.allHeaderFields["Content-Type"]
             guard contentType?.contains("text/html") == true else {
+                if contentType?.hasPrefix("image/gif") == true {
+                    AnimatedImage.create(controller, url: httpResponse.URL!, line: line)
+                } else if contentType?.hasPrefix("image/") == true {
+                    let redirectUrl = httpResponse.URL!.absoluteString
+                    
+                    self.performBlockOnMainThread({
+                        
+                        let document = controller.webView.mainFrameDocument
+                        if let line = document.getElementById("line-" + line) {
+                            let message = line.querySelector(".innerMessage")
+                            
+                            
+                            let messageLinks = message.querySelectorAll("a");
+                            for index in 0...messageLinks.length {
+                                let node = messageLinks.item(index)
+                                if let element = node as? DOMElement {
+                                    if element.getAttribute("href") == url {
+                                        let onclickComponents = element.getAttribute("onclick").componentsSeparatedByString("'")
+                                        let uuid = onclickComponents[1]
+                                        
+                                        let image = controller.createInlineImage(redirectUrl, uuid: uuid)
+                                        message.appendChild(image)
+                                        
+                                        let imageURLLoader = TVCImageURLoader()
+                                        imageURLLoader.delegate = controller
+                                        imageURLLoader.assesURL(redirectUrl, withID: uuid)
+                                    }
+                                }
+                            }
+                            
+                        }
+                    })
+                }
                 return
             }
             

@@ -77,8 +77,8 @@ extension TVCLogController {
     
     - returns: An HTML DOM Node containing the inline image element.
     */
-    func createInlineImage(source: String) -> DOMNode {
-        return self.createInlineImage(source, link: source)
+    func createInlineImage(source: String, uuid: String) -> DOMNode {
+        return self.createInlineImage(source, link: source, uuid: uuid)
     }
     
     
@@ -90,17 +90,33 @@ extension TVCLogController {
     
     - returns: An HTML DOM Node containing the inline image element.
     */
-    func createInlineImage(source: String, link: String) -> DOMNode {
+    func createInlineImage(source: String, link: String, uuid: String) -> DOMNode {
         let document = self.webView.mainFrameDocument
+        
+        let inlineImageCell = document.createElement("span")
+        inlineImageCell.classList += ["inlineImageCell"]
+        inlineImageCell.setAttribute("id", value: "inlineImage-\(uuid)")
+        inlineImageCell.setAttribute("style", value: "display: none;")
+        
+        let closeButton = document.createElement("span")
+        closeButton.classList += ["closeButton"]
+        closeButton.setAttribute("href", value: "#")
+        closeButton.setAttribute("onclick", value: "Textual.toggleInlineImage('\(uuid)', false);")
+        closeButton.textContent = "x"
+        inlineImageCell.appendChild(closeButton)
         
         let imageLink = document.createElement("a")
         imageLink.setAttribute("href", value: link)
+        imageLink.setAttribute("onclick", value: "return InlineImageLiveResize.negateAnchorOpen()")
+        inlineImageCell.appendChild(imageLink)
         
         let image = document.createElement("img")
-        image.setAttribute("src", value: link)
-        
+        image.setAttribute("src", value: source)
+        image.classList += ["image"]
+        image.setAttribute("style", value: "max-width: \(TPCPreferences.inlineImagesMaxWidth())px;")
         imageLink.appendChild(image)
-        return imageLink
+        
+        return inlineImageCell
     }
     
     /**
