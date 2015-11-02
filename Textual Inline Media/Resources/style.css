@@ -1,6 +1,6 @@
 .inlineMediaCell {
     margin-top: 10px;
-    display: block;
+    display: inline;
     text-indent: 0 !important;
     border-radius: 5px;
     background: rgba(190,190,190, 0.15);
@@ -219,4 +219,8 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 .inline_media_imdb_credit > span::after {
     display: block;
     content: ' '
+}
+
+.inlineMediaCell video {
+    max-width: 80%;
 }
