@@ -61,7 +61,11 @@ class Wikipedia: NSObject, InlineMediaHandler {
                         /* Attempt to serialise the JSON results into a dictionary. */
                         let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
                         let query = root["query"] as! Dictionary<String, AnyObject>
-                        let pages = query["pages"] as! Dictionary<String, AnyObject>
+                        guard let pages = query["pages"] as? Dictionary<String, AnyObject> else {
+                            WebpageInformation.create(url, controller: controller, line: line)
+                            return
+                        }
+                        
                         let page = pages.first!
                         if (page.0 != "-1") {
                             let article = page.1 as! Dictionary<String, AnyObject>
