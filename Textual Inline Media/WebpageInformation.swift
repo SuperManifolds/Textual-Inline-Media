@@ -98,7 +98,7 @@ class WebpageInformation: NSObject {
                     /* Attempt to retrieve the webpage description, and the og:image website thumbnail. */
                     let metaElements = node.elementsWithTag(GUMBO_TAG_META)
                     for element in metaElements {
-                        if (element.attributes["name"]?.lowercaseString == "description") {
+                        if (element.attributes["name"]?.lowercaseString == "description") || element.attributes["property"]?.lowercaseString == "og:description" {
                             if let descriptionText = element.attributes["content"] as? String {
                                 description = descriptionText
                                 if (description.characters.count > 0 && previewImageUrl.characters.count > 0) {
