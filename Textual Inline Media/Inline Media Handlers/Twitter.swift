@@ -74,7 +74,7 @@ class Twitter: NSObject, InlineMediaHandler {
         }
     }
     
-    static func matchesServiceSchema(url: NSURL, hasImageExtension: Bool) -> Bool {
+    static func matchesServiceSchema(url: NSURL) -> Bool {
         return url.host?.hasSuffix("twitter.com") == true && url.path?.lowercaseString.containsString("/status/") == true
     }
 }

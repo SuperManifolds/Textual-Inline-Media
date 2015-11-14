@@ -122,7 +122,7 @@ class Wikipedia: NSObject, InlineMediaHandler {
         }
     }
     
-    static func matchesServiceSchema(url: NSURL, hasImageExtension: Bool) -> Bool {
+    static func matchesServiceSchema(url: NSURL) -> Bool {
         if url.host?.hasSuffix(".wikipedia.org") == true && url.pathComponents?.count === 3 {
             return url.pathComponents![1] == "wiki"
         }

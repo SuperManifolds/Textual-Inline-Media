@@ -96,7 +96,7 @@ class xkcd: NSObject, InlineMediaHandler {
         }).resume()
     }
     
-    static func matchesServiceSchema(url: NSURL, hasImageExtension: Bool) -> Bool {
+    static func matchesServiceSchema(url: NSURL) -> Bool {
         return url.host!.hasSuffix("xkcd.com")
     }
 }

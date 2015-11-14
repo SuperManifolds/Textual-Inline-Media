@@ -74,7 +74,6 @@ extension TVCLogController {
     Create an inline image from a link.
     
     - parameter source:     The source link for the image to display.
-    
     - returns: An HTML DOM Node containing the inline image element.
     */
     func createInlineImage(source: String, uuid: String) -> DOMNode {

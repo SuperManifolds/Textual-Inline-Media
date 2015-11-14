@@ -134,7 +134,7 @@ class Vimeo: NSObject, InlineMediaHandler {
         }
     }
     
-    static func matchesServiceSchema(url: NSURL, hasImageExtension: Bool) -> Bool {
+    static func matchesServiceSchema(url: NSURL) -> Bool {
         return url.host?.hasSuffix("vimeo.com") == true  && url.path?.characters.count > 5
     }
 }

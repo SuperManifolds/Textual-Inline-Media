@@ -171,7 +171,7 @@ class YouTube: NSObject, InlineMediaHandler {
         }
     }
     
-    static func matchesServiceSchema(url: NSURL, hasImageExtension: Bool) -> Bool {
+    static func matchesServiceSchema(url: NSURL) -> Bool {
         if url.host?.hasSuffix("youtube.com") == true {
             return url.path?.hasPrefix("/watch") == true
         } else if url.host?.hasSuffix("youtu.be") == true {

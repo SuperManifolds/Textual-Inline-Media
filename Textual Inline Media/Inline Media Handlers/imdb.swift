@@ -268,7 +268,7 @@ class imdb: NSObject, InlineMediaHandler {
         }).resume()
     }
     
-    static func matchesServiceSchema(url: NSURL, hasImageExtension: Bool) -> Bool {
+    static func matchesServiceSchema(url: NSURL) -> Bool {
         return url.host?.hasSuffix("imdb.com") == true && url.path?.hasPrefix("/title/") == true
     }
 }

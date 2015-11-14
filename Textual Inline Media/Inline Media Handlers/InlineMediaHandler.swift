@@ -62,11 +62,10 @@ import Foundation
     Called to check whether the current URL matches the requirements for the inline media handler
     
     - parameter url:               The URL to test against
-    - parameter hasImageExtension: Whether or not the URL has a valid image file extension
     
     - returns: A boolean representing whether or not this URL can be handled by this media handler
     */
-    optional static func matchesServiceSchema(url: NSURL, hasImageExtension: Bool) -> Bool
+    optional static func matchesServiceSchema(url: NSURL) -> Bool
     
     /**
     Given an URL, returns a corrected URL with a direct link to an image, to be displayed in Textual.
