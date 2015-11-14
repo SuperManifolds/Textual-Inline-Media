@@ -77,6 +77,113 @@ class WebpageInformation: NSObject {
                             
                         }
                     })
+                } else {
+                    /* This is a file type that we do not have a special preview for, we will display a generic file information preview with file name, file type, file icon, and file size.  */
+                    guard let fileType = contentType as? String else {
+                        return
+                    }
+                    
+                    let workspace = NSWorkspace.sharedWorkspace()
+                    let fileManager = NSFileManager.defaultManager()
+                    /* Request the 'human readable' localised file type for this file and the finder image for this filetype. */
+                    if let fileTypeSystemIdentifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, fileType, nil)?.takeRetainedValue() {
+                        let localisedFileType = workspace.localizedDescriptionForType(fileTypeSystemIdentifier as String)
+                        let icon = workspace.iconForFileType(fileTypeSystemIdentifier as String)
+                        
+                        /* OSX returns an NSImage for the file icon, which is not useable in Webkit. We will therefor create a temporary file on disk to refer to in the image tag. */
+                        let iconData = icon.TIFFRepresentation
+                        let tempDir = fileManager.getTemporaryDirectory("textual_inline_media")
+                        if tempDir != nil && iconData != nil {
+                            /* Create a checsum of the icon and use it for the filename, so we can reuse it if we already have a temp file for this file type. */
+                            let iconFileLocation = tempDir!.URLByAppendingPathComponent("\(iconData!.sha1).tif")
+                            if fileManager.fileExistsAtPath(iconFileLocation.absoluteString) == false {
+                                iconData!.writeToURL(iconFileLocation, atomically: true)
+                            }
+                            
+                            let fileName = httpResponse.URL!.lastPathComponent
+                            
+                            var size = "Unknown Size"
+                            if let contentLength = httpResponse.allHeaderFields["Content-Length"] {
+                                size = NSByteCountFormatter.stringFromByteCountWithPaddedDigits(contentLength.longLongValue)
+                            }
+                            
+                            var modified: String? = nil
+                            if let dateModified = httpResponse.allHeaderFields["Last-Modified"] as? String {
+                                let dateFormatter = NSDateFormatter()
+                                dateFormatter.dateFormat = "EEE, dd MMM y hh:mm:ss zzz"
+                                if let date = dateFormatter.dateFromString(dateModified) {
+                                    dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+                                    dateFormatter.timeStyle = NSDateFormatterStyle.MediumStyle
+                                    modified = dateFormatter.stringFromDate(date)
+                                } else {
+                                    modified = dateModified
+                                }
+                            }
+                            
+                            self.performBlockOnMainThread({
+                                let document = controller.webView.mainFrameDocument
+                                
+                                let fileContainer = document.createElement("div")
+                                fileContainer.className = "inline_media_file"
+                                
+                                let fileIcon = document.createElement("img")
+                                fileIcon.className = "inline_media_file_icon"
+                                fileIcon.setAttribute("src", value: iconFileLocation.absoluteString)
+                                fileContainer.appendChild(fileIcon)
+                                
+                                let fileInfo = document.createElement("div")
+                                fileInfo.className = "inline_media_file_info"
+                                fileContainer.appendChild(fileInfo)
+                                
+                                let fileTitle = document.createElement("p")
+                                fileTitle.className = "inline_media_file_title"
+                                fileTitle.textContent = fileName
+                                fileInfo.appendChild(fileTitle)
+                                
+                                
+                                let fileKindContainer = document.createElement("p")
+                                fileInfo.appendChild(fileKindContainer)
+                                
+                                let fileKindLabel = document.createElement("strong")
+                                fileKindLabel.textContent = "Kind: "
+                                fileKindContainer.appendChild(fileKindLabel)
+                                
+                                let fileKind = document.createElement("spam")
+                                fileKind.className = "inline_media_file_kind"
+                                fileKind.textContent = localisedFileType!
+                                fileKindContainer.appendChild(fileKind)
+                                
+                                
+                                let fileSizeContainer = document.createElement("p")
+                                fileInfo.appendChild(fileSizeContainer)
+                                
+                                let fileSizeLabel = document.createElement("strong")
+                                fileSizeLabel.textContent = "Size: "
+                                fileSizeContainer.appendChild(fileSizeLabel)
+                                
+                                let fileSize = document.createElement("spam")
+                                fileSize.className = "inline_media_file_size"
+                                fileSize.textContent = size
+                                fileSizeContainer.appendChild(fileSize)
+                                
+                                if modified != nil {
+                                    let fileModifiedContainer = document.createElement("p")
+                                    fileInfo.appendChild(fileModifiedContainer)
+                                    
+                                    let fileModifiedLabel = document.createElement("strong")
+                                    fileModifiedLabel.textContent = "Last Modified: "
+                                    fileModifiedContainer.appendChild(fileModifiedLabel)
+                                    
+                                    let fileModified = document.createElement("spam")
+                                    fileModified.className = "inline_media_file_mod"
+                                    fileModified.textContent = modified
+                                    fileModifiedContainer.appendChild(fileModified)
+                                }
+                                
+                                controller.insertInlineMedia(line, node: fileContainer, url: url.absoluteString)
+                            })
+                        }
+                    }
                 }
                 return
             }

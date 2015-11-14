@@ -15,6 +15,7 @@
 }
 
 .inline_media_website,
+.inline_media_file,
 .inline_media_youtube,
 .inline_media_vimeo,
 .inline_media_twitter,
@@ -28,6 +29,7 @@
     border: none;
 }
 
+.inline_media_file,
 .inline_media_imdb {
     align-items: center;
     justify-content: center;
@@ -36,7 +38,8 @@
 
 .inline_media_website_title,
 .inline_media_youtube_title,
-.inline_media_vimeo_title {
+.inline_media_vimeo_title,
+.inline_media_file_title {
     font-weight: bold;
 }
 
@@ -98,12 +101,35 @@
     max-height: 160px;
 }
 
+.inline_media_file_icon {
+    width: auto;
+    height: auto;
+    max-width: 80px;
+    max-height: 80px;
+    margin-right: 15px;
+    position: relative;
+}
+
 .inline_media_website_info,
 .inline_media_youtube_info,
 .inline_media_vimeo_info,
-.inline_media_wiki_info {
+.inline_media_wiki_info,
+.inline_media_file_info {
     -webkit-flex: 1;
     flex: 1;
+}
+
+.inline_media_file_info p {
+    font-size: 0.8em;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    line-height: 1em;
+}
+
+.inline_media_file_info .inline_media_file_title {
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 5px;
 }
 
 blockquote.twitter-tweet {

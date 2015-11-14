@@ -51,6 +51,21 @@ extension DOMElement {
     }
 }
 
+extension NSFileManager {
+    func getTemporaryDirectory(name: String) -> NSURL? {
+        let tempDirURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(name)
+    
+        if NSFileManager.defaultManager().fileExistsAtPath(tempDirURL.absoluteString) == false {
+            do {
+                try NSFileManager.defaultManager().createDirectoryAtURL(tempDirURL, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                return nil
+            }
+        }
+        return tempDirURL
+    }
+}
+
 
 extension NSTimeInterval {
     init?(iso8601String: String) {
