@@ -31,6 +31,8 @@
 
 import Foundation
 
+let MAXIMUM_RESPONSE_BODY_SIZE = 4194304
+
 class WebRequest: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
     private var session: NSURLSession!
     private let url: NSURL
@@ -112,6 +114,11 @@ class WebRequest: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSUR
     */
     func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
         self.data.appendData(data)
+        
+        /* Disconnect if the response body is larger than the allowed request body size  */
+        if self.data.length > MAXIMUM_RESPONSE_BODY_SIZE {
+            dataTask.cancel()
+        }
     }
     
     /**
