@@ -31,7 +31,7 @@
 
 #import "TextualApplication.h"
 #import "IRCAddressBookEntry+Overrides.h"
-
+#import "Textual_Inline_Media-Swift.h"
 
 @implementation TVCLogController (Overrides)
 
@@ -59,6 +59,7 @@
         IRCUser *user = [[self associatedChannel] findMember:nickname];
         IRCAddressBookEntry *ignore = [[self associatedClient] checkIgnoreAgainstHostmask:[user hostmask] withMatches:@[IRCAddressBookDictionaryValueIgnoreInlineMediaKey]];
         if ([ignore ignoreInlineMedia] == NO) {
+            [InlineMedia isSafeToPresentImageWithID:uniqueID onController:self];
             [self __tpi_isSafeToPresentImageWithID:uniqueID];
         }
     }

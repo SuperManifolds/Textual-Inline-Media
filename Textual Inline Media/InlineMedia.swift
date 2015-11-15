@@ -32,7 +32,7 @@
 import Foundation
 import Sparkle
 
-class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoaderDelegate {
+public class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate {
     static let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
     let inlineMediaMessageTypes = [TVCLogLineType.ActionType, TVCLogLineType.PrivateMessageType]
     static let mediaHandlers = [Twitter.self, YouTube.self, Wikipedia.self, xkcd.self, gfycat.self, imdb.self, Streamable.self, Vimeo.self, Imgur.self]
@@ -41,18 +41,18 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
     var preferencesView: NSView!
     var preferences: Preferences!
     
-    var pluginPreferencesPaneMenuItemName: String {
+    public var pluginPreferencesPaneMenuItemName: String {
         return "Inline Media"
     }
     
-    var pluginPreferencesPaneView: NSView? {
+    public var pluginPreferencesPaneView: NSView? {
         return preferencesView
     }
     
     /**
     Called when the plugin has been loaded into memory.
     */
-    func pluginLoadedIntoMemory() {
+    public func pluginLoadedIntoMemory() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "logControllerViewFinishedLoading:", name: TVCLogControllerViewFinishedLoadingNotification, object: nil)
         
         let updater = SUUpdater(forBundle: NSBundle(forClass: object_getClass(self)))
@@ -73,11 +73,11 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
         self.preferencesView = preferences.preferences
     }
     
-    func pathToRelaunchForUpdater(updater: SUUpdater!) -> String! {
+    public func pathToRelaunchForUpdater(updater: SUUpdater!) -> String! {
         return NSBundle.mainBundle().bundlePath
     }
     
-    func updater(updater: SUUpdater!, didFindValidUpdate item: SUAppcastItem!) {
+    public func updater(updater: SUUpdater!, didFindValidUpdate item: SUAppcastItem!) {
         let updateNotification = NSUserNotification()
         updateNotification.title = "Textual Plugin Update Found"
         updateNotification.informativeText = "An update to Textual Inline Media Plugin was found."
@@ -91,7 +91,7 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
     - parameter messageObject: An object containing all message information related to this line.
     - parameter logController: The Textual "Log Controller" responsible for the event.
     */
-    func didPostNewMessage(messageObject: THOPluginDidPostNewMessageConcreteObject!, forViewController logController: TVCLogController!) {
+    public func didPostNewMessage(messageObject: THOPluginDidPostNewMessageConcreteObject!, forViewController logController: TVCLogController!) {
         
         guard !messageObject.isProcessedInBulk && inlineMediaMessageTypes.contains(messageObject.lineType) && logController.inlineImagesEnabledForView == true else {
             return
@@ -217,7 +217,7 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
     
     - returns: A URL that can be shown as an inline image in relation to resource or nil to ignore.
     */
-    func processInlineMediaContentURL(resource: String!) -> String! {
+    public func processInlineMediaContentURL(resource: String!) -> String! {
         if let url = NSString(string: resource).URLUsingWebKitPasteboard {
             /* Iterate over the available media handlers and see if we have one that supports this url. */
             for mediaHandlerType in InlineMedia.mediaHandlers {
@@ -266,11 +266,14 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
         })
     }
     
-    func isNotSafeToPresentImageWithID(uniqueID: String!) {
-        
-    }
-    
-    func isSafeToPresentImageWithID(uniqueID: String!) {
-        
+    public static func isSafeToPresentImageWithID(uniqueID: String!, onController controller: TVCLogController) {
+        self.performBlockOnMainThread({
+            let document = controller.webView.mainFrameDocument
+            NSLog("#inlineImage-\(uniqueID) img")
+            if let image = document.querySelector("#inlineImage-\(uniqueID) img") {
+                let toggleInlineImage = TextualToggleInlineImageEventListener()
+                image.addEventListener("click", listener: toggleInlineImage, useCapture: false)
+            }
+        })
     }
 }

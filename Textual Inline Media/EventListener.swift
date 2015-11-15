@@ -84,3 +84,16 @@ class ShowElementEventListener: NSObject, DOMEventListener {
     }
 }
 
+class TextualToggleInlineImageEventListener: NSObject, DOMEventListener {
+    func handleEvent(event: DOMEvent!) {
+        let mouseEvent = event as! DOMMouseEvent
+        if mouseEvent.shiftKey == true {
+            NSLog("Shift click!")
+            if let image = event.target as? DOMElement {
+                let imageCell = image.parentElement.parentElement
+                imageCell.setAttribute("style", value: "display: none;")
+                event.preventDefault()
+            }
+        }
+    }
+}
