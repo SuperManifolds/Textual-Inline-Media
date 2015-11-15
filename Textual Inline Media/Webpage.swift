@@ -59,6 +59,11 @@ class Webpage: NSObject {
     Display the inline media in Textual
     */
     func start() {
+        /* ObjectiveGumbo has no gracefully error handling for failure to decode data, so we will validate the data beforehand. */
+        guard NSString(data: data, encoding: NSUTF8StringEncoding) != nil else {
+            return
+        }
+        
         /* Create an HTML parser object of the website using ObjectiveGumbo. */
         if let node = ObjectiveGumbo.parseDocumentWithData(data, encoding: NSUTF8StringEncoding) {
             /* Attempt to retrieve the website title, if it cannot be located, we will not bother continuing. */
