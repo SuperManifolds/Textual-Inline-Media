@@ -64,7 +64,14 @@ class FileInformation: NSObject {
         let fileManager = NSFileManager.defaultManager()
         /* Request the 'human readable' localised file type for this file and the finder image for this filetype. */
         if let fileTypeSystemIdentifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, fileType, nil)?.takeRetainedValue() {
-            let icon = workspace.iconForFileType(fileTypeSystemIdentifier as String)
+            var localisedFileType = workspace.localizedDescriptionForType(fileTypeSystemIdentifier as String)
+            var icon = workspace.iconForFileType(fileTypeSystemIdentifier as String)
+            if localisedFileType == nil && response.URL!.pathExtension != nil {
+                if let fileExtensionSystemIdentifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, response.URL!.pathExtension!, nil)?.takeRetainedValue() {
+                    localisedFileType = workspace.localizedDescriptionForType(fileExtensionSystemIdentifier as String)
+                    icon = workspace.iconForFileType(fileExtensionSystemIdentifier as String)
+                }
+            }
             
             /* OSX returns an NSImage for the file icon, which is not useable in Webkit. We will therefor create a temporary file on disk to refer to in the image tag. */
             let iconData = icon.TIFFRepresentation
@@ -77,11 +84,6 @@ class FileInformation: NSObject {
                 }
                 
                 let fileName = response.URL!.lastPathComponent
-                
-                var localisedFileType = workspace.localizedDescriptionForType(fileTypeSystemIdentifier as String)
-                if localisedFileType == nil {
-                    localisedFileType = "Unknown"
-                }
                 
                 var size = "Unknown Size"
                 if let contentLength = response.allHeaderFields["Content-Length"] {
@@ -131,7 +133,7 @@ class FileInformation: NSObject {
                     
                     let fileKind = document.createElement("spam")
                     fileKind.className = "inline_media_file_kind"
-                    fileKind.textContent = localisedFileType
+                    fileKind.textContent = localisedFileType != nil ? localisedFileType : "Unknown"
                     fileKindContainer.appendChild(fileKind)
                     
                     
