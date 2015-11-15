@@ -62,7 +62,7 @@ class Wikipedia: NSObject, InlineMediaHandler {
                         let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
                         let query = root["query"] as! Dictionary<String, AnyObject>
                         guard let pages = query["pages"] as? Dictionary<String, AnyObject> else {
-                            WebpageInformation.create(url, controller: controller, line: line)
+                            WebRequest(url: response!.URL!, controller: controller, line: line).start()
                             return
                         }
                         

@@ -33,7 +33,7 @@ import Foundation
 import Sparkle
 
 class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoaderDelegate {
-    let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
+    static let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
     let inlineMediaMessageTypes = [TVCLogLineType.ActionType, TVCLogLineType.PrivateMessageType]
     static let mediaHandlers = [Twitter.self, YouTube.self, Wikipedia.self, xkcd.self, gfycat.self, imdb.self, Streamable.self, Vimeo.self, Imgur.self]
     var previouslyDisplayedLinks: [String] = []
@@ -161,44 +161,53 @@ class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate, TVCImageURLoa
                     previouslyDisplayedLinks.removeAtIndex(0)
                 }
                 previouslyDisplayedLinks.append(url.absoluteString)
-                
-                /* If Textual already handles this link, we will not attempt to. */
-                if url.host?.hasSuffix("youtube.com") == false && url.host?.hasSuffix("youtu.be") == false  {
-                    guard TVCImageURLParser.imageURLFromBase(url.absoluteString) == nil else {
-                        continue
-                    }
-                }
-                
-                /* Iterate over the available media handlers and see if we have one that supports this url. */
-                for mediaHandlerType in InlineMedia.mediaHandlers {
-                    if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
-                        if mediaHandler.matchesServiceSchema?(url) == true {
-                            mediaHandler.init(url: url, controller: logController, line: messageObject.lineNumber)
-                            continue linkLoop
-                        }
-                    }
-                }
-                
-                /* Check if the url is a direct link to an image with a valid image file extension. */
-                if let fileExtension = url.pathExtension {
-                    let isDirectImageLink = imageFileExtensions.contains(fileExtension.lowercaseString)
-                    
-                    /* Check if this is a link to a gif. */
-                    if fileExtension.lowercaseString == "gif" && Bool(defaults.integerForKey("displayAnimatedImages")) {
-                        self.performBlockOnMainThread({
-                            AnimatedImage.create(logController, url: url, line: messageObject.lineNumber)
-                        })
-                        continue
-                    } else if (isDirectImageLink) {
-                        continue
-                    }
-                }
-                
-                /* There were no media handlers for this url, we will attempt to retrieve the title, description, and preview thumbnail of the webpage instead. */
-                WebpageInformation.create(url, controller: logController, line: messageObject.lineNumber)
+                InlineMedia.processInlineMediaFromUrl(url, controller: logController, line: messageObject.lineNumber)
             }
         }
         
+    }
+    
+    /**
+    Process a URL to display inline media
+    
+    - parameter url:         The URL that needs to be processed
+    - parameter controller:  A Textual "Log Controller" for the view we want to insert the inline media
+    - parameter line:        The unique identifier of the line we want to insert the inline media into
+    - parameter originalUrl: The original url if this call is the result of a previous redirect
+    */
+    static func processInlineMediaFromUrl(url: NSURL, controller: TVCLogController, line: String, originalUrl: NSURL? = nil) -> Bool {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        /* If Textual already handles this link, we will not attempt to. */
+        if url.host?.hasSuffix("youtube.com") == false && url.host?.hasSuffix("youtu.be") == false && originalUrl == nil {
+            guard TVCImageURLParser.imageURLFromBase(url.absoluteString) == nil else {
+                return true
+            }
+        }
+        
+        /* Iterate over the available media handlers and see if we have one that supports this url. */
+        for mediaHandlerType in InlineMedia.mediaHandlers {
+            if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
+                if mediaHandler.matchesServiceSchema?(url) == true {
+                    mediaHandler.init(url: url, controller: controller, line: line)
+                    return true
+                }
+            }
+        }
+        
+        /* Check if the url is a direct link to an image with a valid image file extension. */
+        if let fileExtension = url.pathExtension {
+            /* Check if this is a link to a gif. */
+            if fileExtension.lowercaseString == "gif" && Bool(defaults.integerForKey("displayAnimatedImages")) {
+                self.performBlockOnMainThread({
+                    AnimatedImage.create(controller, url: url, line: line)
+                })
+                return true
+            }
+        }
+        /* There were no media handlers for this url, we will attempt to connect to this URL to retrieve basic information */
+        WebRequest(url: url, controller: controller, line: line, originalUrl: originalUrl).start()
+        return true
     }
     
     /**

@@ -36,9 +36,12 @@
 		FA39B25A1B9717CC0034B0C7 /* OGUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2471B9717CC0034B0C7 /* OGUtility.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FA39B25C1B97407F0034B0C7 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39B25B1B97407F0034B0C7 /* Twitter.swift */; };
 		FA56C1D31BA4B45F0084BED6 /* TVCLogController+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FA56C1D21BA4B45F0084BED6 /* TVCLogController+Overrides.m */; };
+		FA60A73E1BF7D0940093EA0B /* WebRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA60A73D1BF7D0940093EA0B /* WebRequest.swift */; };
+		FA60A7401BF7DFD00093EA0B /* FileInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA60A73F1BF7DFD00093EA0B /* FileInformation.swift */; };
+		FA60A7421BF7E78D0093EA0B /* InlineImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA60A7411BF7E78D0093EA0B /* InlineImage.swift */; };
 		FA6E76851BA1071500948E03 /* Wikipedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6E76841BA1071500948E03 /* Wikipedia.swift */; };
 		FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */; };
-		FA6F488E1B963E56000280E0 /* WebpageInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F488D1B963E56000280E0 /* WebpageInformation.swift */; };
+		FA6F488E1B963E56000280E0 /* Webpage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F488D1B963E56000280E0 /* Webpage.swift */; };
 		FA97AC2E1BECFB96004C00AC /* Imgur.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA97AC2D1BECFB96004C00AC /* Imgur.swift */; };
 		FA9B5F591BE6FE6300094F58 /* InlineMediaElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B5F581BE6FE6300094F58 /* InlineMediaElements.swift */; };
 		FA9B5F611BE725FF00094F58 /* Streamable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B5F601BE725FF00094F58 /* Streamable.swift */; };
@@ -123,9 +126,12 @@
 		FA39B2471B9717CC0034B0C7 /* OGUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGUtility.m; sourceTree = "<group>"; };
 		FA39B25B1B97407F0034B0C7 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Twitter.swift; path = "Inline Media Handlers/Twitter.swift"; sourceTree = "<group>"; };
 		FA56C1D21BA4B45F0084BED6 /* TVCLogController+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TVCLogController+Overrides.m"; path = "Overrides/TVCLogController+Overrides.m"; sourceTree = "<group>"; };
+		FA60A73D1BF7D0940093EA0B /* WebRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRequest.swift; sourceTree = "<group>"; };
+		FA60A73F1BF7DFD00093EA0B /* FileInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileInformation.swift; path = "Inline Media Handlers/FileInformation.swift"; sourceTree = "<group>"; };
+		FA60A7411BF7E78D0093EA0B /* InlineImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineImage.swift; path = "Inline Media Handlers/InlineImage.swift"; sourceTree = "<group>"; };
 		FA6E76841BA1071500948E03 /* Wikipedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Wikipedia.swift; path = "Inline Media Handlers/Wikipedia.swift"; sourceTree = "<group>"; };
 		FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineMediaHandler.swift; path = "Inline Media Handlers/InlineMediaHandler.swift"; sourceTree = "<group>"; };
-		FA6F488D1B963E56000280E0 /* WebpageInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebpageInformation.swift; sourceTree = "<group>"; };
+		FA6F488D1B963E56000280E0 /* Webpage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Webpage.swift; sourceTree = "<group>"; };
 		FA97AC2D1BECFB96004C00AC /* Imgur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Imgur.swift; path = "Inline Media Handlers/Imgur.swift"; sourceTree = "<group>"; };
 		FA9B5F581BE6FE6300094F58 /* InlineMediaElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineMediaElements.swift; sourceTree = "<group>"; };
 		FA9B5F601BE725FF00094F58 /* Streamable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Streamable.swift; path = "Inline Media Handlers/Streamable.swift"; sourceTree = "<group>"; };
@@ -263,6 +269,9 @@
 				FA9B5F601BE725FF00094F58 /* Streamable.swift */,
 				FADBE7761BE9F3FF00E5C89A /* Vimeo.swift */,
 				FA97AC2D1BECFB96004C00AC /* Imgur.swift */,
+				FA6F488D1B963E56000280E0 /* Webpage.swift */,
+				FA60A73F1BF7DFD00093EA0B /* FileInformation.swift */,
+				FA60A7411BF7E78D0093EA0B /* InlineImage.swift */,
 			);
 			name = "Inline Media Handlers";
 			sourceTree = "<group>";
@@ -293,10 +302,10 @@
 				FAC040351B544536002480BB /* Info.plist */,
 				FAC0403D1B5446C5002480BB /* Textual Inline Media-Bridging-Header.h */,
 				FAE219A11B9B969700CDF0E4 /* EventListener.swift */,
-				FA6F488D1B963E56000280E0 /* WebpageInformation.swift */,
 				FAD0EE211B9773A80015A5B4 /* Extensions.swift */,
 				FA02C4521B987F0300144323 /* AnimatedImage.swift */,
 				FA9B5F581BE6FE6300094F58 /* InlineMediaElements.swift */,
+				FA60A73D1BF7D0940093EA0B /* WebRequest.swift */,
 				FAC93DAA1BA626A800B9896C /* User Interface */,
 				FA4FE0DC1B986A2C00F84701 /* Overrides */,
 				FA39B21E1B9717CC0034B0C7 /* ObjectiveGumbo */,
@@ -400,6 +409,8 @@
 				FA39B2551B9717CC0034B0C7 /* ObjectiveGumbo.m in Sources */,
 				FA39B2521B9717CC0034B0C7 /* vector.c in Sources */,
 				FA39B2581B9717CC0034B0C7 /* OGNode.m in Sources */,
+				FA60A7401BF7DFD00093EA0B /* FileInformation.swift in Sources */,
+				FA60A73E1BF7D0940093EA0B /* WebRequest.swift in Sources */,
 				FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */,
 				FAEB67181BC87AE40060A162 /* gfycat.swift in Sources */,
 				FA39B2571B9717CC0034B0C7 /* OGElement.m in Sources */,
@@ -408,6 +419,7 @@
 				FADBE7771BE9F3FF00E5C89A /* Vimeo.swift in Sources */,
 				FA39B2511B9717CC0034B0C7 /* util.c in Sources */,
 				FA9B5F611BE725FF00094F58 /* Streamable.swift in Sources */,
+				FA60A7421BF7E78D0093EA0B /* InlineImage.swift in Sources */,
 				FA39B24D1B9717CC0034B0C7 /* string_piece.c in Sources */,
 				FA39B24A1B9717CC0034B0C7 /* error.c in Sources */,
 				FAC0403F1B5446C6002480BB /* InlineMedia.swift in Sources */,
@@ -416,7 +428,7 @@
 				FA39B24C1B9717CC0034B0C7 /* string_buffer.c in Sources */,
 				FADAFB311B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m in Sources */,
 				FA39B2491B9717CC0034B0C7 /* char_ref.c in Sources */,
-				FA6F488E1B963E56000280E0 /* WebpageInformation.swift in Sources */,
+				FA6F488E1B963E56000280E0 /* Webpage.swift in Sources */,
 				FA02C4531B987F0300144323 /* AnimatedImage.swift in Sources */,
 				FA39B2541B9717CC0034B0C7 /* NSString+OGString.m in Sources */,
 				FAEB671A1BC881620060A162 /* imdb.swift in Sources */,
