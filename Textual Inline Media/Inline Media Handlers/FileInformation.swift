@@ -93,10 +93,10 @@ class FileInformation: NSObject {
                 var modified: String? = nil
                 if let dateModified = response.allHeaderFields["Last-Modified"] as? String {
                     let dateFormatter = NSDateFormatter()
-                    dateFormatter.dateFormat = "EEE, dd MMM y hh:mm:ss zzz"
+                    dateFormatter.dateFormat = "EEE, dd MMM y HH:mm:ss zzz"
                     if let date = dateFormatter.dateFromString(dateModified) {
                         dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
-                        dateFormatter.timeStyle = NSDateFormatterStyle.MediumStyle
+                        dateFormatter.timeStyle = NSDateFormatterStyle.LongStyle
                         modified = dateFormatter.stringFromDate(date)
                     } else {
                         modified = dateModified
