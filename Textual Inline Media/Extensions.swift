@@ -39,6 +39,10 @@ extension String {
     subscript(range: Range<Int>) -> String {
         return self[startIndex.advancedBy(range.startIndex)..<startIndex.advancedBy(range.endIndex)]
     }
+    
+    func trim() -> String {
+        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    }
 }
 
 extension DOMElement {

@@ -93,6 +93,18 @@ class Webpage: NSObject {
                     }
                 }
                 
+                /* For websites that does not offer a description in any way we will desperately try to grab the first paragraph on the page */
+                let paragraphs = node.elementsWithTag(GUMBO_TAG_P)
+                for paragraph in paragraphs {
+                    if paragraph.text != nil {
+                        let descriptionText = paragraph.text!.trim()
+                        if descriptionText.characters.count > 0 {
+                            description = descriptionText
+                            break
+                        }
+                    }
+                }
+                
                 /* The og:image may be specified as a relative URL, if so, we will attemp to use NSURLs relativeToUrl feature to resolve the absolute path to this image file. */
                 if (previewImageUrl.characters.count > 0) {
                     if previewImageUrl.hasPrefix("data:image/") == false && previewImageUrl.hasPrefix("http://") == false && previewImageUrl.hasPrefix("https://") == false {
