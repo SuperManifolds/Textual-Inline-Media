@@ -66,7 +66,7 @@ class FileInformation: NSObject {
         if let fileTypeSystemIdentifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, fileType, nil)?.takeRetainedValue() {
             var localisedFileType = workspace.localizedDescriptionForType(fileTypeSystemIdentifier as String)
             var icon = workspace.iconForFileType(fileTypeSystemIdentifier as String)
-            if localisedFileType == nil && response.URL!.pathExtension != nil {
+            if (localisedFileType == nil || localisedFileType == "data") && response.URL!.pathExtension != nil {
                 if let fileExtensionSystemIdentifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, response.URL!.pathExtension!, nil)?.takeRetainedValue() {
                     localisedFileType = workspace.localizedDescriptionForType(fileExtensionSystemIdentifier as String)
                     icon = workspace.iconForFileType(fileExtensionSystemIdentifier as String)
