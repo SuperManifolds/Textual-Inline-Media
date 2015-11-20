@@ -35,7 +35,7 @@ import Sparkle
 public class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate {
     static let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
     let inlineMediaMessageTypes = [TVCLogLineType.ActionType, TVCLogLineType.PrivateMessageType]
-    static let mediaHandlers = [Twitter.self, YouTube.self, Wikipedia.self, xkcd.self, gfycat.self, imdb.self, Streamable.self, Vimeo.self, Imgur.self]
+    static let mediaHandlers = [Twitter.self, YouTube.self, Wikipedia.self, xkcd.self, gfycat.self, imdb.self, Streamable.self, Vimeo.self, Imgur.self, bash.self]
     var previouslyDisplayedLinks: [String] = []
     
     var preferencesView: NSView!

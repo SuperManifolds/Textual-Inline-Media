@@ -21,7 +21,8 @@
 .inline_media_twitter,
 .inline_media_wiki,
 .inline_media_imdb,
-.inline_media_xkcd {
+.inline_media_xkcd,
+inline_media_bash {
     padding: 10px;
     overflow: auto;
     display: -webkit-flex;
@@ -39,7 +40,8 @@
 .inline_media_website_title,
 .inline_media_youtube_title,
 .inline_media_vimeo_title,
-.inline_media_file_title {
+.inline_media_file_title,
+.inline_media_bash_title {
     font-weight: bold;
 }
 
@@ -256,4 +258,9 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 
 .inlineMediaCell video {
     max-width: 80%;
+}
+
+.inline_media_bash_text {
+    border-left: 2px solid #777;
+    padding-left: 10px;
 }

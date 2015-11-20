@@ -35,6 +35,7 @@
 		FA39B2591B9717CC0034B0C7 /* OGText.m in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2451B9717CC0034B0C7 /* OGText.m */; };
 		FA39B25A1B9717CC0034B0C7 /* OGUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2471B9717CC0034B0C7 /* OGUtility.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		FA39B25C1B97407F0034B0C7 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39B25B1B97407F0034B0C7 /* Twitter.swift */; };
+		FA536BB51BFF98D0003CFEBB /* bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA536BB41BFF98D0003CFEBB /* bash.swift */; };
 		FA56C1D31BA4B45F0084BED6 /* TVCLogController+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FA56C1D21BA4B45F0084BED6 /* TVCLogController+Overrides.m */; };
 		FA60A73E1BF7D0940093EA0B /* WebRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA60A73D1BF7D0940093EA0B /* WebRequest.swift */; };
 		FA60A7401BF7DFD00093EA0B /* FileInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA60A73F1BF7DFD00093EA0B /* FileInformation.swift */; };
@@ -125,6 +126,7 @@
 		FA39B2461B9717CC0034B0C7 /* OGUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGUtility.h; sourceTree = "<group>"; };
 		FA39B2471B9717CC0034B0C7 /* OGUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGUtility.m; sourceTree = "<group>"; };
 		FA39B25B1B97407F0034B0C7 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Twitter.swift; path = "Inline Media Handlers/Twitter.swift"; sourceTree = "<group>"; };
+		FA536BB41BFF98D0003CFEBB /* bash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = bash.swift; path = "Inline Media Handlers/bash.swift"; sourceTree = "<group>"; };
 		FA56C1D21BA4B45F0084BED6 /* TVCLogController+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TVCLogController+Overrides.m"; path = "Overrides/TVCLogController+Overrides.m"; sourceTree = "<group>"; };
 		FA60A73D1BF7D0940093EA0B /* WebRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRequest.swift; sourceTree = "<group>"; tabWidth = 5; };
 		FA60A73F1BF7DFD00093EA0B /* FileInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileInformation.swift; path = "Inline Media Handlers/FileInformation.swift"; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				FA6F488D1B963E56000280E0 /* Webpage.swift */,
 				FA60A73F1BF7DFD00093EA0B /* FileInformation.swift */,
 				FA60A7411BF7E78D0093EA0B /* InlineImage.swift */,
+				FA536BB41BFF98D0003CFEBB /* bash.swift */,
 			);
 			name = "Inline Media Handlers";
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				FA6F488E1B963E56000280E0 /* Webpage.swift in Sources */,
 				FA02C4531B987F0300144323 /* AnimatedImage.swift in Sources */,
 				FA39B2541B9717CC0034B0C7 /* NSString+OGString.m in Sources */,
+				FA536BB51BFF98D0003CFEBB /* bash.swift in Sources */,
 				FAEB671A1BC881620060A162 /* imdb.swift in Sources */,
 				FADAFB341B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m in Sources */,
 				FAE219A21B9B969700CDF0E4 /* EventListener.swift in Sources */,
