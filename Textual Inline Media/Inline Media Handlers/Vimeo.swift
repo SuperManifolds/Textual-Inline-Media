@@ -36,6 +36,10 @@ class Vimeo: NSObject, InlineMediaHandler {
         return "Vimeo"
     }
     
+    static func icon() -> NSImage? {
+        return NSImage(named: "vimeo")
+    }
+    
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         

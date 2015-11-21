@@ -57,6 +57,7 @@
 		FADAFB311B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */; };
 		FADAFB341B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */; };
 		FADBE7771BE9F3FF00E5C89A /* Vimeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADBE7761BE9F3FF00E5C89A /* Vimeo.swift */; };
+		FAE121431C00FB4C000CC09B /* PreferencesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE121421C00FB4C000CC09B /* PreferencesTableView.swift */; };
 		FAE219A21B9B969700CDF0E4 /* EventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE219A11B9B969700CDF0E4 /* EventListener.swift */; };
 		FAEB67181BC87AE40060A162 /* gfycat.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB67171BC87AE40060A162 /* gfycat.swift */; };
 		FAEB671A1BC881620060A162 /* imdb.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEB67191BC881620060A162 /* imdb.swift */; };
@@ -150,6 +151,7 @@
 		FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "IRCAddressBookEntry+Overrides.m"; path = "Overrides/IRCAddressBookEntry+Overrides.m"; sourceTree = "<group>"; };
 		FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TDCAddressBookSheet+Overrides.m"; path = "Overrides/TDCAddressBookSheet+Overrides.m"; sourceTree = "<group>"; };
 		FADBE7761BE9F3FF00E5C89A /* Vimeo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Vimeo.swift; path = "Inline Media Handlers/Vimeo.swift"; sourceTree = "<group>"; };
+		FAE121421C00FB4C000CC09B /* PreferencesTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesTableView.swift; sourceTree = "<group>"; };
 		FAE219A11B9B969700CDF0E4 /* EventListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListener.swift; sourceTree = "<group>"; };
 		FAEB67171BC87AE40060A162 /* gfycat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = gfycat.swift; path = "Inline Media Handlers/gfycat.swift"; sourceTree = "<group>"; };
 		FAEB67191BC881620060A162 /* imdb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = imdb.swift; path = "Inline Media Handlers/imdb.swift"; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 			children = (
 				FA3778A11BAD6C12002D4083 /* Preferences.xib */,
 				FABCD7711BA8BF0E00A74D75 /* Preferences.swift */,
+				FAE121421C00FB4C000CC09B /* PreferencesTableView.swift */,
 			);
 			name = "User Interface";
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				FA39B2591B9717CC0034B0C7 /* OGText.m in Sources */,
 				FA0DF97E1BAFD6CA004142FD /* xkcd.swift in Sources */,
 				FA39B2501B9717CC0034B0C7 /* utf8.c in Sources */,
+				FAE121431C00FB4C000CC09B /* PreferencesTableView.swift in Sources */,
 				FAD0EE201B975D7E0015A5B4 /* YouTube.swift in Sources */,
 				FA39B2551B9717CC0034B0C7 /* ObjectiveGumbo.m in Sources */,
 				FA39B2521B9717CC0034B0C7 /* vector.c in Sources */,

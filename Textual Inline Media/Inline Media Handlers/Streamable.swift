@@ -36,6 +36,10 @@ class Streamable: NSObject, InlineMediaHandler {
         return "Streamable"
     }
     
+    static func icon() -> NSImage? {
+        return NSImage(named: "streamable")
+    }
+    
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         /* Get the mp4 version of this link  */

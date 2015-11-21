@@ -36,6 +36,10 @@ class gfycat: NSObject, InlineMediaHandler {
         return "Gfycat"
     }
     
+    static func icon() -> NSImage? {
+        return NSImage(named: "gfycat")
+    }
+    
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         /* Create a request to the gfycat API to find the mp4 version of this link.  */

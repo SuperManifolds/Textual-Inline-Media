@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9046" systemVersion="15B38b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9046" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9046"/>
@@ -38,12 +38,12 @@
                     <animations/>
                     <tabViewItems>
                         <tabViewItem label="General" identifier="1" id="ZPk-hh-DwJ">
-                            <view key="view" ambiguous="YES" id="ArE-bA-jF3">
-                                <rect key="frame" x="10" y="25" width="123" height="0.0"/>
+                            <view key="view" id="ArE-bA-jF3">
+                                <rect key="frame" x="10" y="25" width="543" height="345"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wVD-DL-wd2">
-                                        <rect key="frame" x="88" y="-48" width="324" height="18"/>
+                                        <rect key="frame" x="88" y="297" width="324" height="18"/>
                                         <animations/>
                                         <buttonCell key="cell" type="check" title="Display information for links posted multiple times" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Yad-2Q-wVW">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -53,19 +53,8 @@
                                             <action selector="displayInformationForDuplicatesChange:" target="-2" id="Ski-rF-ymO"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wf2-rg-z3h">
-                                        <rect key="frame" x="195" y="-335" width="152" height="32"/>
-                                        <animations/>
-                                        <buttonCell key="cell" type="push" title="Check for updates" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yBg-ph-yql">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="checkForUpdatesClicked:" target="-2" id="1eY-FT-YG1"/>
-                                        </connections>
-                                    </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzi-WV-qnd">
-                                        <rect key="frame" x="117" y="-71" width="280" height="17"/>
+                                        <rect key="frame" x="117" y="274" width="280" height="17"/>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Maximum displayed previews per message" id="beM-DK-2Ok">
                                             <font key="font" metaFont="system"/>
@@ -74,7 +63,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IQ1-hr-vXF">
-                                        <rect key="frame" x="185" y="-95" width="173" height="18"/>
+                                        <rect key="frame" x="185" y="250" width="173" height="18"/>
                                         <animations/>
                                         <buttonCell key="cell" type="check" title="Display animated images" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="IZT-DT-ZJ0">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -85,7 +74,7 @@
                                         </connections>
                                     </button>
                                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sry-gC-KY8">
-                                        <rect key="frame" x="391" y="-74" width="37" height="22"/>
+                                        <rect key="frame" x="391" y="271" width="37" height="22"/>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="" drawsBackground="YES" id="VeN-rH-BCc">
                                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="sqp-a5-wqP"/>
@@ -97,25 +86,33 @@
                                             <action selector="maximumPreviewsPerMessageChange:" target="-2" id="q8L-Nj-CHF"/>
                                         </connections>
                                     </textField>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wf2-rg-z3h">
+                                        <rect key="frame" x="195" y="10" width="152" height="32"/>
+                                        <animations/>
+                                        <buttonCell key="cell" type="push" title="Check for updates" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yBg-ph-yql">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="checkForUpdatesClicked:" target="-2" id="1eY-FT-YG1"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Wf2-rg-z3h" secondAttribute="bottom" constant="4" id="c7D-lb-zi8"/>
-                                </constraints>
                                 <animations/>
                             </view>
                         </tabViewItem>
-                        <tabViewItem label="Services" identifier="" id="qRF-y0-p74">
-                            <view key="view" id="YMz-XB-ImU">
+                        <tabViewItem label="Services" identifier="2" id="qRF-y0-p74">
+                            <view key="view" ambiguous="YES" id="YMz-XB-ImU">
                                 <rect key="frame" x="10" y="25" width="543" height="345"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGP-wT-JWw">
+                                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGP-wT-JWw">
                                         <rect key="frame" x="-3" y="-3" width="174" height="348"/>
                                         <clipView key="contentView" ambiguous="YES" id="3XR-L2-q3b">
                                             <rect key="frame" x="1" y="1" width="172" height="346"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" viewBased="YES" id="QiI-KA-24e">
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="QiI-KA-24e">
                                                     <rect key="frame" x="0.0" y="0.0" width="172" height="346"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <animations/>
@@ -123,7 +120,7 @@
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn width="169" minWidth="40" maxWidth="1000" id="0Fa-1y-yJk">
+                                                        <tableColumn identifier="mediahandler" width="169" minWidth="40" maxWidth="1000" id="0Fa-1y-yJk">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -135,35 +132,12 @@
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                            <prototypeCellViews>
-                                                                <tableCellView id="riO-cC-eZS">
-                                                                    <rect key="frame" x="1" y="1" width="169" height="20"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                    <subviews>
-                                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="giB-u1-t5h">
-                                                                            <rect key="frame" x="3" y="3" width="17" height="17"/>
-                                                                            <animations/>
-                                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="95D-ZI-keZ"/>
-                                                                        </imageView>
-                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5op-W9-ymk">
-                                                                            <rect key="frame" x="25" y="3" width="105" height="17"/>
-                                                                            <animations/>
-                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="sqI-H8-mln">
-                                                                                <font key="font" metaFont="system"/>
-                                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                            </textFieldCell>
-                                                                        </textField>
-                                                                    </subviews>
-                                                                    <animations/>
-                                                                    <connections>
-                                                                        <outlet property="imageView" destination="giB-u1-t5h" id="y2c-U7-bF7"/>
-                                                                        <outlet property="textField" destination="5op-W9-ymk" id="qI1-se-e7n"/>
-                                                                    </connections>
-                                                                </tableCellView>
-                                                            </prototypeCellViews>
                                                         </tableColumn>
                                                     </tableColumns>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="JYg-kS-gCm" id="Hjm-Fu-S0x"/>
+                                                        <outlet property="delegate" destination="JYg-kS-gCm" id="sTQ-is-QwQ"/>
+                                                    </connections>
                                                 </tableView>
                                             </subviews>
                                             <animations/>
@@ -225,8 +199,10 @@
             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="324.5" y="949"/>
         </box>
+        <customObject id="JYg-kS-gCm" customClass="PreferencesTableView" customModule="Textual_Inline_Media" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="QiI-KA-24e" id="7DH-mu-agB"/>
+            </connections>
+        </customObject>
     </objects>
-    <resources>
-        <image name="NSActionTemplate" width="14" height="14"/>
-    </resources>
 </document>

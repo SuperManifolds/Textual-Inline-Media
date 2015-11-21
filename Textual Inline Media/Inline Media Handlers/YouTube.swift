@@ -36,6 +36,10 @@ class YouTube: NSObject, InlineMediaHandler {
         return "YouTube"
     }
     
+    static func icon() -> NSImage? {
+        return NSImage(named: "youtube")
+    }
+    
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         var videoID = ""

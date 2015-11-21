@@ -36,6 +36,10 @@ class bash: NSObject, InlineMediaHandler {
         return "Bash.org"
     }
     
+    static func icon() -> NSImage? {
+        return NSImage(named: "bash")
+    }
+    
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         let session = NSURLSession.sharedSession()

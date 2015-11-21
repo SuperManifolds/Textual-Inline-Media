@@ -36,6 +36,10 @@ class xkcd: NSObject, InlineMediaHandler {
         return "xkcd"
     }
     
+    static func icon() -> NSImage? {
+        return NSImage(named: "xkcd")
+    }
+    
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         let request = NSMutableURLRequest(URL: url)

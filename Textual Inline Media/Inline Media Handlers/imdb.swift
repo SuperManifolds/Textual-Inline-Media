@@ -36,6 +36,10 @@ class imdb: NSObject, InlineMediaHandler {
         return "IMDB"
     }
     
+    static func icon() -> NSImage? {
+        return NSImage(named: "icon")
+    }
+    
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         let requestString = url.pathComponents![2]

@@ -31,37 +31,30 @@
 
 import Foundation
 
-class Imgur: NSObject, InlineMediaHandler {
-    static let supportedExtensions = ["mp4", "gif", "gifv", "webm"]
+class PreferencesTableView: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+    @IBOutlet private var tableView: NSTableView?
     
-    static func name() -> String {
-        return "Imgur"
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
-    static func icon() -> NSImage? {
-        return NSImage(named: "imgur")
+    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+        NSLog("number of rows")
+        return InlineMedia.mediaHandlers.count
     }
     
-    required convenience init(url: NSURL, controller: TVCLogController, line: String) {
-        self.init()
-        /* Get the mp4 version of this link  */
-        if let imageId = url.URLByDeletingPathExtension?.pathComponents?[1] {
-            let videoUrl = "http://i.imgur.com/\(imageId).mp4"
-            
-            self.performBlockOnMainThread({
-                /* Create the video tag and set it to automatically play, and loop continously. */
-                let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: true)
-                
-                /* Insert the element into Textual's view. */
-                controller.insertInlineMedia(line, node: video, url: url.absoluteString)
-            })
+    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        NSLog("Table view row")
+        var result = tableView.makeViewWithIdentifier("mediahandler", owner: self) as? NSTableCellView
+        if result == nil {
+            result = NSTableCellView(frame: NSRect(x: 0, y: 0, width: 170, height: 20))
+            result?.identifier = "mediahandler"
         }
-    }
-    
-    static func matchesServiceSchema(url: NSURL) -> Bool {
-        if let pathExtension = url.pathExtension {
-            return url.host?.hasSuffix("i.imgur.com") == true && Imgur.supportedExtensions.contains(pathExtension.lowercaseString)
-        }
-        return false
+        
+        let mediaHandler = InlineMedia.mediaHandlers[row] as! InlineMediaHandler.Type
+        result?.objectValue = mediaHandler
+        result?.textField?.stringValue = mediaHandler.name()
+        result?.imageView?.image = mediaHandler.icon?()
+        return result
     }
 }

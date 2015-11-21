@@ -36,6 +36,10 @@ class Wikipedia: NSObject, InlineMediaHandler {
         return "Wikipedia"
     }
     
+    static func icon() -> NSImage? {
+        return NSImage(named: "wikipedia")
+    }
+    
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         if let query = url.pathComponents?[2] {
