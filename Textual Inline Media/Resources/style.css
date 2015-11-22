@@ -264,3 +264,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
     border-left: 2px solid #777;
     padding-left: 10px;
 }
+
+.inline_media_youtube_video {
+    display: block;
+}

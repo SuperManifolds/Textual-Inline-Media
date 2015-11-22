@@ -56,6 +56,7 @@
 		FAD0EE221B9773A80015A5B4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0EE211B9773A80015A5B4 /* Extensions.swift */; };
 		FAD24D701C016952004DE4A8 /* Streamable.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD24D6F1C016952004DE4A8 /* Streamable.xib */; };
 		FAD24D781C0182C1004DE4A8 /* InlineMediaPreferenceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD24D771C0182C1004DE4A8 /* InlineMediaPreferenceHandler.swift */; };
+		FAD24D7C1C0230A7004DE4A8 /* YouTube.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD24D7B1C0230A7004DE4A8 /* YouTube.xib */; };
 		FADAFB311B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */; };
 		FADAFB341B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */; };
 		FADBE7771BE9F3FF00E5C89A /* Vimeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADBE7761BE9F3FF00E5C89A /* Vimeo.swift */; };
@@ -151,6 +152,7 @@
 		FAD0EE211B9773A80015A5B4 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FAD24D6F1C016952004DE4A8 /* Streamable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Streamable.xib; path = "User Interface/Media Handler Preferences/Streamable.xib"; sourceTree = "<group>"; };
 		FAD24D771C0182C1004DE4A8 /* InlineMediaPreferenceHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineMediaPreferenceHandler.swift; path = "Inline Media Handlers/InlineMediaPreferenceHandler.swift"; sourceTree = "<group>"; };
+		FAD24D7B1C0230A7004DE4A8 /* YouTube.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YouTube.xib; sourceTree = "<group>"; };
 		FADAFB2F1B9BABB200273C13 /* IRCAddressBookEntry+Overrides.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "IRCAddressBookEntry+Overrides.h"; path = "Overrides/IRCAddressBookEntry+Overrides.h"; sourceTree = "<group>"; };
 		FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "IRCAddressBookEntry+Overrides.m"; path = "Overrides/IRCAddressBookEntry+Overrides.m"; sourceTree = "<group>"; };
 		FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TDCAddressBookSheet+Overrides.m"; path = "Overrides/TDCAddressBookSheet+Overrides.m"; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				FAD24D6F1C016952004DE4A8 /* Streamable.xib */,
+				FAD24D7B1C0230A7004DE4A8 /* YouTube.xib */,
 			);
 			name = "Media Handler Preferences";
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAC93D9F1BA4FD2200B9896C /* Assets.xcassets in Resources */,
+				FAD24D7C1C0230A7004DE4A8 /* YouTube.xib in Resources */,
 				FA39B2531B9717CC0034B0C7 /* LICENSE in Resources */,
 				FAC93D9D1BA4D8DF00B9896C /* dsa_pub.pem in Resources */,
 				FA13CED61B9E02CD00FA1475 /* media.js in Resources */,

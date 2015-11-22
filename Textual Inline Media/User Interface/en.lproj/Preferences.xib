@@ -216,7 +216,7 @@
                 </tabView>
             </subviews>
             <animations/>
-            <point key="canvasLocation" x="-76.5" y="626.5"/>
+            <point key="canvasLocation" x="564.5" y="720.5"/>
         </customView>
         <box title="Box" borderType="line" id="cIL-dn-BUe">
             <rect key="frame" x="0.0" y="0.0" width="177" height="114"/>

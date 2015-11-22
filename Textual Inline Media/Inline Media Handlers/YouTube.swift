@@ -31,13 +31,43 @@
 
 import Foundation
 
-class YouTube: NSViewController, InlineMediaHandler {
+class YouTube: NSObject, InlineMediaHandler, InlineMediaPreferenceHandler {
+    @IBOutlet var preferenceView: NSView!
+    @IBOutlet weak var displayVideosInsteadOfPreview: NSButton!
+    @IBOutlet weak var startVideoWithAudioPlaying: NSButton!
+    @IBOutlet weak var displayVideoInPausedState: NSButton!
+    
     static func name() -> String {
         return "YouTube"
     }
     
     static func icon() -> NSImage? {
         return NSImage.fromAssetCatalogue("YouTube")
+    }
+    
+    func preferences() -> NSView? {
+        return self.preferenceView
+    }
+    
+    override func awakeFromNib() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        self.displayVideosInsteadOfPreview.state = defaults.integerForKey("youtubeDisplayVideoInsteadOfPreview")
+        self.startVideoWithAudioPlaying.state = defaults.integerForKey("youtubeAutomaticallyPlayAudio")
+        self.displayVideoInPausedState.state = defaults.integerForKey("youtubeDisplayVideoAsPaused")
+        
+        self.updateVideoEnabledCheckboxState()
+    }
+    
+    required override init() {
+        super.init()
+        let defaultConfiguration: [String : AnyObject] = [
+            "youtubeDisplayVideoInsteadOfPreview": 0,
+            "youtubeAutomaticallyPlayAudio": 0,
+            "youtubeDisplayVideoAsPaused": 1
+        ]
+        NSUserDefaults.standardUserDefaults().registerDefaults(defaultConfiguration)
+        
+        NSBundle(forClass: object_getClass(self)).loadNibNamed("YouTube", owner: self, topLevelObjects: nil)
     }
     
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
@@ -68,110 +98,131 @@ class YouTube: NSViewController, InlineMediaHandler {
         }
         
         if videoID.characters.count > 0 {
-            let requestUrl = NSURL(string: "https://www.googleapis.com/youtube/v3/videos?id=\(videoID)&part=snippet,contentDetails,statistics&key=AIzaSyDzFtmfVnm9-iGnmrpJeR-26rau1SGjq04")
-            guard requestUrl != nil else {
-                return
-            }
-            
-            
-            /* Rquest information about this video from the YouTube API. */
-            let session = NSURLSession.sharedSession()
-            session.dataTaskWithURL(requestUrl!, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-                guard data != nil else {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            if Bool(defaults.integerForKey("youtubeDisplayVideoInsteadOfPreview")) {
+                self.performBlockOnMainThread({
+                    let document = controller.webView.mainFrameDocument
+                    let youtubeVideo = document.createElement("iframe")
+                    youtubeVideo.className = "inline_media_youtube_video"
+                    youtubeVideo.setAttribute("width", value: "560")
+                    youtubeVideo.setAttribute("height", value: "315")
+                    youtubeVideo.setAttribute("frameborder", value: "0")
+                    youtubeVideo.setAttribute("allowfullscreen", value: "0")
+                    youtubeVideo.setAttribute("enablejsapi", value: "1")
+                    youtubeVideo.setAttribute("src", value: "https://www.youtube.com/embed/\(videoID)")
+                    
+                    let autoplay = !Bool(defaults.integerForKey("youtubeDisplayVideoAsPaused"))
+                    if autoplay == true {
+                        youtubeVideo.setAttribute("autoplay", value: "1")
+                    }
+                    
+                    controller.insertInlineMedia(line, node: youtubeVideo, url: url.absoluteString)
+                })
+            } else {
+                let requestUrl = NSURL(string: "https://www.googleapis.com/youtube/v3/videos?id=\(videoID)&part=snippet,contentDetails,statistics&key=AIzaSyDzFtmfVnm9-iGnmrpJeR-26rau1SGjq04")
+                guard requestUrl != nil else {
                     return
                 }
                 
-                do {
-                    /* Attempt to serialise the JSON results into a dictionary. */
-                    let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
-                    if let items = root["items"] as? [AnyObject] {
-                        guard items.count > 0 else {
-                            return
-                        }
-                        
-                        let item = items[0]
-                        if let video = item["snippet"] as? Dictionary<String, AnyObject> {
-                            /* Retrieve the video title. */
-                            let title = video["title"] as! String
-                            
-                            /* Retrieve the author  */
-                            let author = video["channelTitle"] as! String
-                            
-                            /* Retrieve the view count */
-                            let statistics = item["statistics"] as! Dictionary<String, AnyObject>
-                            let numberFormatter = NSNumberFormatter()
-                            numberFormatter.numberStyle = .DecimalStyle
-                            let unformattedViewCount = statistics["viewCount"] as! String
-                            let viewCount = numberFormatter.stringFromNumber(Int(unformattedViewCount)!)
-                            
-                            /* Retrieve the thumbnail of the video. */
-                            let thumbnails = video["thumbnails"] as! Dictionary<String, AnyObject>
-                            let standardThumbnail = thumbnails["medium"] as! Dictionary<String, AnyObject>
-                            let thumbnailUrl = standardThumbnail["url"] as! String
-                            
-                            /* Retrieve the length of the video */
-                            let contentDetails = item["contentDetails"] as! Dictionary<String, AnyObject>
-                            let timeInterval = NSTimeInterval(iso8601String: contentDetails["duration"] as! String)
-                            let formatter = NSDateComponentsFormatter()
-                            
-                            formatter.allowedUnits = timeInterval >= 3600 ? [.Hour, .Minute, .Second] : [.Minute, .Second]
-                            formatter.zeroFormattingBehavior = .Pad
-                            let duration = formatter.stringFromTimeInterval(timeInterval!)
-                            
-                            self.performBlockOnMainThread({
-                                let document = controller.webView.mainFrameDocument
-                                
-                                /* Create the container for the complete inline media item. */
-                                let ytContainer = document.createElement("a")
-                                ytContainer.setAttribute("href", value: url.absoluteString)
-                                ytContainer.className = "inline_media_youtube"
-                                
-                                let thumbnailContainer = document.createElement("div")
-                                thumbnailContainer.className = "inline_media_youtube_thumbnail"
-                                ytContainer.appendChild(thumbnailContainer)
-                                
-                                /* Create the thumbnail image. */
-                                let thumbnailImage = document.createElement("img")
-                                thumbnailImage.setAttribute("src", value: thumbnailUrl)
-                                thumbnailContainer.appendChild(thumbnailImage)
-                                
-                                /* Include the video length inside the thumbnail */
-                                let videoLength = document.createElement("span")
-                                videoLength.appendChild(document.createTextNode(duration))
-                                thumbnailContainer.appendChild(videoLength)
-                                
-                                /* Create the container that holds the title and description. */
-                                let infoContainer = document.createElement("div")
-                                infoContainer.className = "inline_media_youtube_info"
-                                ytContainer.appendChild(infoContainer)
-                                
-                                /* Create the title */
-                                let videoTitle = document.createElement("p")
-                                videoTitle.className = "inline_media_youtube_title"
-                                videoTitle.appendChild(document.createTextNode(title))
-                                infoContainer.appendChild(videoTitle)
-                                
-                                /* Create the author  */
-                                let videoAuthor = document.createElement("p")
-                                videoAuthor.className = "inline_media_youtube_author"
-                                videoAuthor.appendChild(document.createTextNode("by " + author))
-                                infoContainer.appendChild(videoAuthor)
-                                
-                                /* Create the view count  */
-                                let videoViews = document.createElement("p")
-                                videoViews.className = "inline_media_youtube_views"
-                                videoViews.appendChild(document.createTextNode(viewCount! + " views"))
-                                infoContainer.appendChild(videoViews)
-                                
-                                /* Insert the element into Textual's view. */
-                                controller.insertInlineMedia(line, node: ytContainer, url: url.absoluteString)
-                            })
-                        }
+                /* Rquest information about this video from the YouTube API. */
+                let session = NSURLSession.sharedSession()
+                session.dataTaskWithURL(requestUrl!, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+                    guard data != nil else {
+                        return
                     }
-                } catch {
-                    return
-                }
-            }).resume()
+                    
+                    do {
+                        /* Attempt to serialise the JSON results into a dictionary. */
+                        let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+                        if let items = root["items"] as? [AnyObject] {
+                            guard items.count > 0 else {
+                                return
+                            }
+                            
+                            let item = items[0]
+                            if let video = item["snippet"] as? Dictionary<String, AnyObject> {
+                                /* Retrieve the video title. */
+                                let title = video["title"] as! String
+                                
+                                /* Retrieve the author  */
+                                let author = video["channelTitle"] as! String
+                                
+                                /* Retrieve the view count */
+                                let statistics = item["statistics"] as! Dictionary<String, AnyObject>
+                                let numberFormatter = NSNumberFormatter()
+                                numberFormatter.numberStyle = .DecimalStyle
+                                let unformattedViewCount = statistics["viewCount"] as! String
+                                let viewCount = numberFormatter.stringFromNumber(Int(unformattedViewCount)!)
+                                
+                                /* Retrieve the thumbnail of the video. */
+                                let thumbnails = video["thumbnails"] as! Dictionary<String, AnyObject>
+                                let standardThumbnail = thumbnails["medium"] as! Dictionary<String, AnyObject>
+                                let thumbnailUrl = standardThumbnail["url"] as! String
+                                
+                                /* Retrieve the length of the video */
+                                let contentDetails = item["contentDetails"] as! Dictionary<String, AnyObject>
+                                let timeInterval = NSTimeInterval(iso8601String: contentDetails["duration"] as! String)
+                                let formatter = NSDateComponentsFormatter()
+                                
+                                formatter.allowedUnits = timeInterval >= 3600 ? [.Hour, .Minute, .Second] : [.Minute, .Second]
+                                formatter.zeroFormattingBehavior = .Pad
+                                let duration = formatter.stringFromTimeInterval(timeInterval!)
+                                
+                                self.performBlockOnMainThread({
+                                    let document = controller.webView.mainFrameDocument
+                                    
+                                    /* Create the container for the complete inline media item. */
+                                    let ytContainer = document.createElement("a")
+                                    ytContainer.setAttribute("href", value: url.absoluteString)
+                                    ytContainer.className = "inline_media_youtube"
+                                    
+                                    let thumbnailContainer = document.createElement("div")
+                                    thumbnailContainer.className = "inline_media_youtube_thumbnail"
+                                    ytContainer.appendChild(thumbnailContainer)
+                                    
+                                    /* Create the thumbnail image. */
+                                    let thumbnailImage = document.createElement("img")
+                                    thumbnailImage.setAttribute("src", value: thumbnailUrl)
+                                    thumbnailContainer.appendChild(thumbnailImage)
+                                    
+                                    /* Include the video length inside the thumbnail */
+                                    let videoLength = document.createElement("span")
+                                    videoLength.appendChild(document.createTextNode(duration))
+                                    thumbnailContainer.appendChild(videoLength)
+                                    
+                                    /* Create the container that holds the title and description. */
+                                    let infoContainer = document.createElement("div")
+                                    infoContainer.className = "inline_media_youtube_info"
+                                    ytContainer.appendChild(infoContainer)
+                                    
+                                    /* Create the title */
+                                    let videoTitle = document.createElement("p")
+                                    videoTitle.className = "inline_media_youtube_title"
+                                    videoTitle.appendChild(document.createTextNode(title))
+                                    infoContainer.appendChild(videoTitle)
+                                    
+                                    /* Create the author  */
+                                    let videoAuthor = document.createElement("p")
+                                    videoAuthor.className = "inline_media_youtube_author"
+                                    videoAuthor.appendChild(document.createTextNode("by " + author))
+                                    infoContainer.appendChild(videoAuthor)
+                                    
+                                    /* Create the view count  */
+                                    let videoViews = document.createElement("p")
+                                    videoViews.className = "inline_media_youtube_views"
+                                    videoViews.appendChild(document.createTextNode(viewCount! + " views"))
+                                    infoContainer.appendChild(videoViews)
+                                    
+                                    /* Insert the element into Textual's view. */
+                                    controller.insertInlineMedia(line, node: ytContainer, url: url.absoluteString)
+                                })
+                            }
+                        }
+                    } catch {
+                        return
+                    }
+                }).resume()
+            }
         }
     }
     
@@ -182,5 +233,36 @@ class YouTube: NSViewController, InlineMediaHandler {
             return url.path?.characters.count > 1
         }
         return false
+    }
+    
+    func updateVideoEnabledCheckboxState() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let inlineVideoEnabled = Bool(defaults.integerForKey("youtubeDisplayVideoInsteadOfPreview"))
+        
+        self.displayVideoInPausedState.enabled = inlineVideoEnabled
+        self.startVideoWithAudioPlaying.enabled = inlineVideoEnabled
+    }
+    
+    
+    @IBAction func displayVideoInsteadOfPreviewChange(sender: NSButton) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(sender.state, forKey: "youtubeDisplayVideoInsteadOfPreview")
+        defaults.synchronize()
+        
+        self.updateVideoEnabledCheckboxState()
+    }
+    
+    
+    @IBAction func displayVideoInPausedStateChange(sender: NSButton) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(sender.state, forKey: "youtubeDisplayVideoAsPaused")
+        defaults.synchronize()
+    }
+    
+    
+    @IBAction func startVideoWithAudioPlayingChange(sender: NSButton) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(sender.state, forKey: "youtubeAutomaticallyPlayAudio")
+        defaults.synchronize()
     }
 }
