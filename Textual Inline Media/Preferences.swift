@@ -19,6 +19,7 @@ import Sparkle
 class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
     @IBOutlet weak var preferences: NSView!
     @IBOutlet weak var displayInformationForDuplicates: NSButton!
+    @IBOutlet var noPreferencesView: NSView!
     @IBOutlet weak var maximumPreviewsPerMessage: NSTextField!
     @IBOutlet weak var displayAnimatedImages: NSButton!
     @IBOutlet weak var tabView: NSTabView!
@@ -82,6 +83,9 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
         if let preferenceMediaHandler = InlineMedia.mediaHandlers[sender.selectedRow] as? InlineMediaPreferenceHandler.Type {
             let handlerInstance = preferenceMediaHandler.init()
             self.extensionPreferenceView.attachSubview(handlerInstance.preferences()!, adjustedWidthConstraint: self.servicesContentViewWidthConstraint, adjustedHeightConstraint: self.servicesContentViewHeigtConstraint)
+        } else {
+            NSLog("Showing no preferences")
+            self.extensionPreferenceView.attachSubview(self.noPreferencesView, adjustedWidthConstraint: self.servicesContentViewWidthConstraint, adjustedHeightConstraint: self.servicesContentViewHeigtConstraint)
         }
     }
 }

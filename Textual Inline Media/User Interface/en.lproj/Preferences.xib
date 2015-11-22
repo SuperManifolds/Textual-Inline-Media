@@ -12,6 +12,7 @@
                 <outlet property="displayInformationForDuplicates" destination="wVD-DL-wd2" id="4Zb-3t-GSP"/>
                 <outlet property="extensionPreferenceView" destination="doD-i6-bdA" id="V1N-yQ-I33"/>
                 <outlet property="maximumPreviewsPerMessage" destination="Sry-gC-KY8" id="fhA-fb-9Xx"/>
+                <outlet property="noPreferencesView" destination="ZDr-ie-0bx" id="nDK-3Q-aYL"/>
                 <outlet property="preferences" destination="Dn3-xq-8rf" id="5Hp-n8-B1W"/>
                 <outlet property="servicesContentViewHeigtConstraint" destination="Ekj-cU-fuz" id="QKA-dJ-bl9"/>
                 <outlet property="servicesContentViewWidthConstraint" destination="AYz-Ii-hLg" id="uGe-IA-das"/>
@@ -116,7 +117,7 @@
                                             <rect key="frame" x="1" y="1" width="172" height="346"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="QiI-KA-24e">
+                                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="QiI-KA-24e">
                                                     <rect key="frame" x="0.0" y="0.0" width="172" height="346"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <animations/>
@@ -196,9 +197,9 @@
                                         <animations/>
                                     </customView>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="doM-RQ-tY5">
-                                        <rect key="frame" x="203" y="7" width="136" height="18"/>
+                                        <rect key="frame" x="203" y="7" width="71" height="18"/>
                                         <animations/>
-                                        <buttonCell key="cell" type="check" title="Enable this service" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="g8B-bo-bHz">
+                                        <buttonCell key="cell" type="check" title="Enabled" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="g8B-bo-bHz">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -231,6 +232,34 @@
                 <outlet property="tableView" destination="QiI-KA-24e" id="7DH-mu-agB"/>
             </connections>
         </customObject>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZDr-ie-0bx">
+            <rect key="frame" x="0.0" y="0.0" width="360" height="314"/>
+            <subviews>
+                <box fixedFrame="YES" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="2WR-mH-NDx">
+                    <rect key="frame" x="40" y="114" width="281" height="90"/>
+                    <view key="contentView" id="GLK-6h-FNY">
+                        <rect key="frame" x="1" y="1" width="279" height="74"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z24-b0-faB">
+                                <rect key="frame" x="14" y="29" width="250" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="There are no preferences for this service" id="2NH-In-EWB">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <animations/>
+                    </view>
+                    <animations/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </box>
+            </subviews>
+            <animations/>
+        </customView>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
