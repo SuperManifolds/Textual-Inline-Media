@@ -149,7 +149,7 @@
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="Khu-2y-mRH"/>
                                                                         </imageView>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p55-0n-BRq">
-                                                                            <rect key="frame" x="27" y="2" width="105" height="17"/>
+                                                                            <rect key="frame" x="27" y="1" width="105" height="17"/>
                                                                             <animations/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="kCA-dY-IDh">
                                                                                 <font key="font" metaFont="system"/>

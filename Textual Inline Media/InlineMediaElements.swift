@@ -124,17 +124,18 @@ extension TVCLogController {
     - parameter source:     The source link for the video to display.
     - parameter loop:       Whether this video should be continously looped.
     - parameter autoPlay:   Whether this video should start playing automatically.
+    - parameter muteAudio:  Whether the audio should be muted when the video begins. (True by default)
     
     - returns: An HTML DOM Node containing the video element.
     */
-    func createInlineVideo(source: String, loop: Bool, autoPlay: Bool) -> DOMNode {
+    func createInlineVideo(source: String, loop: Bool, autoPlay: Bool, muteAudio: Bool = true) -> DOMNode {
         let document = self.webView.mainFrameDocument
         
         /* Create the video tag  */
         let video = document.createElement("video")
         video.setAttribute("loop", value: loop.description)
         video.setAttribute("autoplay", value: autoPlay.description)
-        video.setAttribute("muted", value: "true")
+        video.setAttribute("muted", value: muteAudio.description)
         
         /* Set the event listener to start/pause it when the user clicks it. */
         let listener = VideoEventListener()

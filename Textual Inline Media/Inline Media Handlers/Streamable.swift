@@ -32,6 +32,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import Foundation
 
 class Streamable: NSObject, InlineMediaHandler, InlineMediaPreferenceHandler {
+    @IBOutlet weak var automaticallyPlayAudioCheckbox: NSButton!
+    @IBOutlet weak var displayVideoAsPausedCheckbox: NSButton!
     @IBOutlet var preferenceView: NSView!
     
     static func name() -> String {
@@ -46,8 +48,21 @@ class Streamable: NSObject, InlineMediaHandler, InlineMediaPreferenceHandler {
         return self.preferenceView
     }
     
+    override func awakeFromNib() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        self.automaticallyPlayAudioCheckbox.state = defaults.integerForKey("streamableAutomaticallyPlayAudio")
+        self.displayVideoAsPausedCheckbox.state = defaults.integerForKey("streamableDisplayVideoAsPaused")
+    }
+    
     required override init() {
         super.init()
+        let defaultConfiguration: [String : AnyObject] = [
+            "streamableAutomaticallyPlayAudio": 0,
+            "streamableDisplayVideoAsPaused": 0
+        ]
+        NSUserDefaults.standardUserDefaults().registerDefaults(defaultConfiguration)
+        
         NSBundle(forClass: object_getClass(self)).loadNibNamed("Streamable", owner: self, topLevelObjects: nil)
     }
     
@@ -58,13 +73,29 @@ class Streamable: NSObject, InlineMediaHandler, InlineMediaPreferenceHandler {
             let videoUrl = "https://cdn.streamable.com/video/mp4/\(requestString).mp4"
             
             self.performBlockOnMainThread({
+                let defaults = NSUserDefaults.standardUserDefaults()
+                
                 /* Create the video tag and set it to automatically play, and loop continously. */
-                let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: true)
+                let automaticallyPlay = Bool(defaults.integerForKey("streamableAutomaticallyPlayAudio"))
+                let playAudio = Bool(defaults.integerForKey("streamableDisplayVideoAsPaused"))
+                let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: automaticallyPlay, muteAudio: !playAudio)
                 
                 /* Insert the element into Textual's view. */
                 controller.insertInlineMedia(line, node: video, url: url.absoluteString)
             })
         }
+    }
+    
+    @IBAction func automaticallyPlayAudioChange(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(sender.state, forKey: "streamableAutomaticallyPlayAudio")
+        defaults.synchronize()
+    }
+    
+    @IBAction func displayVideoAsPausedChange(sender: NSButton) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(sender.state, forKey: "streamableDisplayVideoAsPaused")
+        defaults.synchronize()
     }
     
     static func matchesServiceSchema(url: NSURL) -> Bool {
