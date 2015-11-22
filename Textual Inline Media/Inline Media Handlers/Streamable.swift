@@ -32,7 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import Foundation
 
 class Streamable: NSObject, InlineMediaHandler, InlineMediaPreferenceHandler {
-    @IBOutlet weak var preferenceView: NSView!
+    @IBOutlet var preferenceView: NSView!
     
     static func name() -> String {
         return "Streamable"
@@ -48,7 +48,7 @@ class Streamable: NSObject, InlineMediaHandler, InlineMediaPreferenceHandler {
     
     required override init() {
         super.init()
-        NSBundle.loadPreferenceView("Streamable")
+        NSBundle(forClass: object_getClass(self)).loadNibNamed("Streamable", owner: self, topLevelObjects: nil)
     }
     
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {

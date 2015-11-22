@@ -7,7 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="Streamable" customModule="Textual_Inline_Media" customModuleProvider="target">
             <connections>
-                <outlet property="preferenceView" destination="c22-O7-iKe" id="i7B-VD-5Xz"/>
+                <outlet property="preferenceView" destination="c22-O7-iKe" id="5sH-I0-qsw"/>
                 <outlet property="preferencesView" destination="c22-O7-iKe" id="I1u-Gw-QkX"/>
             </connections>
         </customObject>

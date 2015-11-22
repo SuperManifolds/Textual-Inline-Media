@@ -77,12 +77,6 @@ extension NSImage {
     }
 }
 
-extension NSBundle {
-    static func loadPreferenceView(name: String) {
-        NSBundle(forClass: object_getClass(self)).loadNibNamed(name, owner: self, topLevelObjects: nil)
-    }
-}
-
 extension NSTimeInterval {
     init?(iso8601String: String) {
         if iso8601String.hasPrefix("P") && iso8601String.containsString("T") {
