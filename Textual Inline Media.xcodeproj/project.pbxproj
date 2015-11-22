@@ -54,6 +54,8 @@
 		FAC93D9F1BA4FD2200B9896C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAC93D9E1BA4FD2200B9896C /* Assets.xcassets */; };
 		FAD0EE201B975D7E0015A5B4 /* YouTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0EE1F1B975D7E0015A5B4 /* YouTube.swift */; };
 		FAD0EE221B9773A80015A5B4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0EE211B9773A80015A5B4 /* Extensions.swift */; };
+		FAD24D701C016952004DE4A8 /* Streamable.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD24D6F1C016952004DE4A8 /* Streamable.xib */; };
+		FAD24D781C0182C1004DE4A8 /* InlineMediaPreferenceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD24D771C0182C1004DE4A8 /* InlineMediaPreferenceHandler.swift */; };
 		FADAFB311B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */; };
 		FADAFB341B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */; };
 		FADBE7771BE9F3FF00E5C89A /* Vimeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADBE7761BE9F3FF00E5C89A /* Vimeo.swift */; };
@@ -147,6 +149,8 @@
 		FAC93D9E1BA4FD2200B9896C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
 		FAD0EE1F1B975D7E0015A5B4 /* YouTube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YouTube.swift; path = "Inline Media Handlers/YouTube.swift"; sourceTree = "<group>"; };
 		FAD0EE211B9773A80015A5B4 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FAD24D6F1C016952004DE4A8 /* Streamable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Streamable.xib; path = "User Interface/Media Handler Preferences/Streamable.xib"; sourceTree = "<group>"; };
+		FAD24D771C0182C1004DE4A8 /* InlineMediaPreferenceHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineMediaPreferenceHandler.swift; path = "Inline Media Handlers/InlineMediaPreferenceHandler.swift"; sourceTree = "<group>"; };
 		FADAFB2F1B9BABB200273C13 /* IRCAddressBookEntry+Overrides.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "IRCAddressBookEntry+Overrides.h"; path = "Overrides/IRCAddressBookEntry+Overrides.h"; sourceTree = "<group>"; };
 		FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "IRCAddressBookEntry+Overrides.m"; path = "Overrides/IRCAddressBookEntry+Overrides.m"; sourceTree = "<group>"; };
 		FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TDCAddressBookSheet+Overrides.m"; path = "Overrides/TDCAddressBookSheet+Overrides.m"; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */,
+				FAD24D771C0182C1004DE4A8 /* InlineMediaPreferenceHandler.swift */,
 				FA39B25B1B97407F0034B0C7 /* Twitter.swift */,
 				FAD0EE1F1B975D7E0015A5B4 /* YouTube.swift */,
 				FA13CEDC1B9E62ED00FA1475 /* FileServiceHandler.swift */,
@@ -321,11 +326,20 @@
 		FAC93DAA1BA626A800B9896C /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				FAD24D6E1C0168B9004DE4A8 /* Media Handler Preferences */,
 				FA3778A11BAD6C12002D4083 /* Preferences.xib */,
 				FABCD7711BA8BF0E00A74D75 /* Preferences.swift */,
 				FAE121421C00FB4C000CC09B /* PreferencesTableView.swift */,
 			);
 			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		FAD24D6E1C0168B9004DE4A8 /* Media Handler Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				FAD24D6F1C016952004DE4A8 /* Streamable.xib */,
+			);
+			name = "Media Handler Preferences";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -393,6 +407,7 @@
 				FA39B2531B9717CC0034B0C7 /* LICENSE in Resources */,
 				FAC93D9D1BA4D8DF00B9896C /* dsa_pub.pem in Resources */,
 				FA13CED61B9E02CD00FA1475 /* media.js in Resources */,
+				FAD24D701C016952004DE4A8 /* Streamable.xib in Resources */,
 				FA37789F1BAD6C12002D4083 /* Preferences.xib in Resources */,
 				FA02C4561B98E3BD00144323 /* style.css in Resources */,
 			);
@@ -409,6 +424,7 @@
 				FA13CEDD1B9E62ED00FA1475 /* FileServiceHandler.swift in Sources */,
 				FA39B25A1B9717CC0034B0C7 /* OGUtility.m in Sources */,
 				FA39B2591B9717CC0034B0C7 /* OGText.m in Sources */,
+				FAD24D781C0182C1004DE4A8 /* InlineMediaPreferenceHandler.swift in Sources */,
 				FA0DF97E1BAFD6CA004142FD /* xkcd.swift in Sources */,
 				FA39B2501B9717CC0034B0C7 /* utf8.c in Sources */,
 				FAE121431C00FB4C000CC09B /* PreferencesTableView.swift in Sources */,
@@ -488,6 +504,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer: Alex Sorlie Glomsaas (C6R37Z9WN2)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -532,6 +549,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer: Alex Sorlie Glomsaas (C6R37Z9WN2)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -556,6 +574,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer: Alex Sorlie Glomsaas (C6R37Z9WN2)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Applications/Textual.app/Contents/Frameworks/**",
 					"$(PROJECT_DIR)",
@@ -587,6 +606,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer: Alex Sorlie Glomsaas (C6R37Z9WN2)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Applications/Textual.app/Contents/Frameworks/**",
 					"$(PROJECT_DIR)",

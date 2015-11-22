@@ -31,13 +31,13 @@
 
 import Foundation
 
-class YouTube: NSObject, InlineMediaHandler {
+class YouTube: NSViewController, InlineMediaHandler {
     static func name() -> String {
         return "YouTube"
     }
     
     static func icon() -> NSImage? {
-        return NSImage(named: "youtube")
+        return NSImage.fromAssetCatalogue("YouTube")
     }
     
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {

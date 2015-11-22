@@ -37,7 +37,7 @@ class Twitter: NSObject, InlineMediaHandler {
     }
     
     static func icon() -> NSImage? {
-        return NSImage(named: "twitter")
+        return NSImage.fromAssetCatalogue("Twitter")
     }
     
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {

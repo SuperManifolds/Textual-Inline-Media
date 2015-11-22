@@ -22,6 +22,10 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
     @IBOutlet weak var maximumPreviewsPerMessage: NSTextField!
     @IBOutlet weak var displayAnimatedImages: NSButton!
     @IBOutlet weak var tabView: NSTabView!
+    @IBOutlet var extensionPreferenceView: NSView!
+    @IBOutlet var servicesTableView: PreferencesTableView!
+    @IBOutlet var servicesContentViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var servicesContentViewHeigtConstraint: NSLayoutConstraint!
     
     var updater: SUUpdater?
     
@@ -71,5 +75,13 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setInteger(sender.state, forKey: "displayAnimatedImages")
         defaults.synchronize()
+    }
+    
+    
+    @IBAction func tableViewSelectionChanged(sender: NSTableView) {
+        if let preferenceMediaHandler = InlineMedia.mediaHandlers[sender.selectedRow] as? InlineMediaPreferenceHandler.Type {
+            let handlerInstance = preferenceMediaHandler.init()
+            self.extensionPreferenceView.attachSubview(handlerInstance.preferences()!, adjustedWidthConstraint: self.servicesContentViewWidthConstraint, adjustedHeightConstraint: self.servicesContentViewHeigtConstraint)
+        }
     }
 }

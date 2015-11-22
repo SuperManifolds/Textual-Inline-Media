@@ -36,15 +36,14 @@ class PreferencesTableView: NSViewController, NSTableViewDataSource, NSTableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView?.selectRowIndexes(NSIndexSet(index: 0), byExtendingSelection: false)
     }
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        NSLog("number of rows")
         return InlineMedia.mediaHandlers.count
     }
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        NSLog("Table view row")
         var result = tableView.makeViewWithIdentifier("mediahandler", owner: self) as? NSTableCellView
         if result == nil {
             result = NSTableCellView(frame: NSRect(x: 0, y: 0, width: 170, height: 20))
@@ -56,5 +55,9 @@ class PreferencesTableView: NSViewController, NSTableViewDataSource, NSTableView
         result?.textField?.stringValue = mediaHandler.name()
         result?.imageView?.image = mediaHandler.icon?()
         return result
+    }
+    
+    func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        return 20.0
     }
 }

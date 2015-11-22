@@ -37,7 +37,7 @@ class bash: NSObject, InlineMediaHandler {
     }
     
     static func icon() -> NSImage? {
-        return NSImage(named: "bash")
+        return NSImage.fromAssetCatalogue("bash")
     }
     
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {

@@ -31,37 +31,18 @@
 
 import Foundation
 
-class Imgur: NSObject, InlineMediaHandler {
-    static let supportedExtensions = ["mp4", "gif", "gifv", "webm"]
+@objc protocol InlineMediaPreferenceHandler: InlineMediaHandler {
+    /**
+    Preferences View for this media handler
     
-    static func name() -> String {
-        return "Imgur"
-    }
+    - returns: A preference view to show in this extension tab
+    */
+    func preferences() -> NSView?
     
-    static func icon() -> NSImage? {
-        return NSImage.fromAssetCatalogue("Imgur")
-    }
+    /**
+    Preferences view controller initialiser
     
-    required convenience init(url: NSURL, controller: TVCLogController, line: String) {
-        self.init()
-        /* Get the mp4 version of this link  */
-        if let imageId = url.URLByDeletingPathExtension?.pathComponents?[1] {
-            let videoUrl = "http://i.imgur.com/\(imageId).mp4"
-            
-            self.performBlockOnMainThread({
-                /* Create the video tag and set it to automatically play, and loop continously. */
-                let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: true)
-                
-                /* Insert the element into Textual's view. */
-                controller.insertInlineMedia(line, node: video, url: url.absoluteString)
-            })
-        }
-    }
-    
-    static func matchesServiceSchema(url: NSURL) -> Bool {
-        if let pathExtension = url.pathExtension {
-            return url.host?.hasSuffix("i.imgur.com") == true && Imgur.supportedExtensions.contains(pathExtension.lowercaseString)
-        }
-        return false
-    }
+    - returns: An instance of an Inlien Media Preference Handler
+    */
+    init()
 }

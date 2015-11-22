@@ -37,7 +37,7 @@ class Wikipedia: NSObject, InlineMediaHandler {
     }
     
     static func icon() -> NSImage? {
-        return NSImage(named: "wikipedia")
+        return NSImage.fromAssetCatalogue("Wikipedia")
     }
     
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {

@@ -37,7 +37,7 @@ class gfycat: NSObject, InlineMediaHandler {
     }
     
     static func icon() -> NSImage? {
-        return NSImage(named: "gfycat")
+        return NSImage.fromAssetCatalogue("gfycat")
     }
     
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {

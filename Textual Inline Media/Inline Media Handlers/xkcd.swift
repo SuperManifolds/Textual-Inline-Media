@@ -37,7 +37,7 @@ class xkcd: NSObject, InlineMediaHandler {
     }
     
     static func icon() -> NSImage? {
-        return NSImage(named: "xkcd")
+        return NSImage.fromAssetCatalogue("xkcd")
     }
     
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {

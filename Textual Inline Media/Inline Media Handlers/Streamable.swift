@@ -31,13 +31,24 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import Foundation
 
-class Streamable: NSObject, InlineMediaHandler {
+class Streamable: NSObject, InlineMediaHandler, InlineMediaPreferenceHandler {
+    @IBOutlet weak var preferenceView: NSView!
+    
     static func name() -> String {
         return "Streamable"
     }
     
     static func icon() -> NSImage? {
-        return NSImage(named: "streamable")
+        return NSImage.fromAssetCatalogue("Streamable")
+    }
+    
+    func preferences() -> NSView? {
+        return self.preferenceView
+    }
+    
+    required override init() {
+        super.init()
+        NSBundle.loadPreferenceView("Streamable")
     }
     
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {

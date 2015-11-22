@@ -10,8 +10,12 @@
             <connections>
                 <outlet property="displayAnimatedImages" destination="IQ1-hr-vXF" id="s7S-zD-QLR"/>
                 <outlet property="displayInformationForDuplicates" destination="wVD-DL-wd2" id="4Zb-3t-GSP"/>
+                <outlet property="extensionPreferenceView" destination="doD-i6-bdA" id="V1N-yQ-I33"/>
                 <outlet property="maximumPreviewsPerMessage" destination="Sry-gC-KY8" id="fhA-fb-9Xx"/>
                 <outlet property="preferences" destination="Dn3-xq-8rf" id="5Hp-n8-B1W"/>
+                <outlet property="servicesContentViewHeigtConstraint" destination="Ekj-cU-fuz" id="QKA-dJ-bl9"/>
+                <outlet property="servicesContentViewWidthConstraint" destination="AYz-Ii-hLg" id="uGe-IA-das"/>
+                <outlet property="servicesTableView" destination="JYg-kS-gCm" id="eaO-nk-btr"/>
                 <outlet property="tabView" destination="SFS-Ap-QZe" id="12B-z3-yE8"/>
                 <outlet property="view" destination="Dn3-xq-8rf" id="EtX-ne-7ha"/>
             </connections>
@@ -132,9 +136,37 @@
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                            <prototypeCellViews>
+                                                                <tableCellView id="hY3-7N-W1s">
+                                                                    <rect key="frame" x="1" y="1" width="169" height="17"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <subviews>
+                                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Scw-1q-ugD">
+                                                                            <rect key="frame" x="8" y="0.0" width="17" height="17"/>
+                                                                            <animations/>
+                                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="Khu-2y-mRH"/>
+                                                                        </imageView>
+                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p55-0n-BRq">
+                                                                            <rect key="frame" x="27" y="2" width="105" height="17"/>
+                                                                            <animations/>
+                                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="kCA-dY-IDh">
+                                                                                <font key="font" metaFont="system"/>
+                                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                            </textFieldCell>
+                                                                        </textField>
+                                                                    </subviews>
+                                                                    <animations/>
+                                                                    <connections>
+                                                                        <outlet property="imageView" destination="Scw-1q-ugD" id="4HV-oN-z4D"/>
+                                                                        <outlet property="textField" destination="p55-0n-BRq" id="GWE-PF-5os"/>
+                                                                    </connections>
+                                                                </tableCellView>
+                                                            </prototypeCellViews>
                                                         </tableColumn>
                                                     </tableColumns>
                                                     <connections>
+                                                        <action selector="tableViewSelectionChanged:" target="-2" id="LeF-Uu-hiV"/>
                                                         <outlet property="dataSource" destination="JYg-kS-gCm" id="Hjm-Fu-S0x"/>
                                                         <outlet property="delegate" destination="JYg-kS-gCm" id="sTQ-is-QwQ"/>
                                                     </connections>
@@ -155,21 +187,16 @@
                                             <animations/>
                                         </scroller>
                                     </scrollView>
-                                    <tabView fixedFrame="YES" drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="G6r-I4-UMI">
-                                        <rect key="frame" x="172" y="38" width="375" height="307"/>
+                                    <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="doD-i6-bdA">
+                                        <rect key="frame" x="179" y="31" width="360" height="314"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="360" id="AYz-Ii-hLg"/>
+                                            <constraint firstAttribute="height" constant="314" id="Ekj-cU-fuz"/>
+                                        </constraints>
                                         <animations/>
-                                        <font key="font" metaFont="system"/>
-                                        <tabViewItems>
-                                            <tabViewItem label="Tab" identifier="1" id="WHU-6u-JwM">
-                                                <view key="view" ambiguous="YES" id="MdR-fe-G5r">
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <animations/>
-                                                </view>
-                                            </tabViewItem>
-                                        </tabViewItems>
-                                    </tabView>
+                                    </customView>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="doM-RQ-tY5">
-                                        <rect key="frame" x="186" y="7" width="136" height="18"/>
+                                        <rect key="frame" x="203" y="7" width="136" height="18"/>
                                         <animations/>
                                         <buttonCell key="cell" type="check" title="Enable this service" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="g8B-bo-bHz">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -184,7 +211,7 @@
                 </tabView>
             </subviews>
             <animations/>
-            <point key="canvasLocation" x="373.5" y="570.5"/>
+            <point key="canvasLocation" x="-76.5" y="626.5"/>
         </customView>
         <box title="Box" borderType="line" id="cIL-dn-BUe">
             <rect key="frame" x="0.0" y="0.0" width="177" height="114"/>
@@ -205,4 +232,7 @@
             </connections>
         </customObject>
     </objects>
+    <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
+    </resources>
 </document>
