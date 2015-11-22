@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="displayAnimatedImages" destination="IQ1-hr-vXF" id="s7S-zD-QLR"/>
                 <outlet property="displayInformationForDuplicates" destination="wVD-DL-wd2" id="4Zb-3t-GSP"/>
+                <outlet property="enableInlineMediaService" destination="doM-RQ-tY5" id="nrA-zs-N3D"/>
                 <outlet property="extensionPreferenceView" destination="doD-i6-bdA" id="V1N-yQ-I33"/>
                 <outlet property="maximumPreviewsPerMessage" destination="Sry-gC-KY8" id="fhA-fb-9Xx"/>
                 <outlet property="noPreferencesView" destination="ZDr-ie-0bx" id="nDK-3Q-aYL"/>
@@ -199,10 +200,13 @@
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="doM-RQ-tY5">
                                         <rect key="frame" x="203" y="7" width="71" height="18"/>
                                         <animations/>
-                                        <buttonCell key="cell" type="check" title="Enabled" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="g8B-bo-bHz">
+                                        <buttonCell key="cell" type="check" title="Enabled" bezelStyle="regularSquare" imagePosition="left" inset="2" id="g8B-bo-bHz">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="serviceIsEnabledChange:" target="-2" id="vMM-5Y-8Uh"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <animations/>

@@ -188,7 +188,7 @@ public class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate {
         /* Iterate over the available media handlers and see if we have one that supports this url. */
         for mediaHandlerType in InlineMedia.mediaHandlers {
             if let mediaHandler = mediaHandlerType as? InlineMediaHandler.Type {
-                if mediaHandler.matchesServiceSchema?(url) == true {
+                if Preferences.serviceIsEnabled(mediaHandler) && mediaHandler.matchesServiceSchema?(url) == true {
                     mediaHandler.init(url: url, controller: controller, line: line)
                     return true
                 }

@@ -22,6 +22,7 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
     @IBOutlet var noPreferencesView: NSView!
     @IBOutlet weak var maximumPreviewsPerMessage: NSTextField!
     @IBOutlet weak var displayAnimatedImages: NSButton!
+    @IBOutlet weak var enableInlineMediaService: NSButton!
     @IBOutlet weak var tabView: NSTabView!
     @IBOutlet var extensionPreferenceView: NSView!
     @IBOutlet var servicesTableView: PreferencesTableView!
@@ -85,8 +86,28 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
             let handlerInstance = preferenceMediaHandler.init()
             self.extensionPreferenceView.attachSubview(handlerInstance.preferences()!, adjustedWidthConstraint: self.servicesContentViewWidthConstraint, adjustedHeightConstraint: self.servicesContentViewHeigtConstraint)
         } else {
-            NSLog("Showing no preferences")
             self.extensionPreferenceView.attachSubview(self.noPreferencesView, adjustedWidthConstraint: self.servicesContentViewWidthConstraint, adjustedHeightConstraint: self.servicesContentViewHeigtConstraint)
         }
+        
+        if let mediaHandler = InlineMedia.mediaHandlers[sender.selectedRow] as? InlineMediaHandler.Type {
+            self.enableInlineMediaService.state = Int(Preferences.serviceIsEnabled(mediaHandler))
+        }
+    }
+    
+    
+    @IBAction func serviceIsEnabledChange(sender: NSButton) {
+        if let mediaHandler = InlineMedia.mediaHandlers[self.servicesTableView.tableView!.selectedRow] as? InlineMediaHandler.Type {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setInteger(sender.state, forKey: "\(mediaHandler.name()) enabled")
+            defaults.synchronize()
+        }
+    }
+    
+    static func serviceIsEnabled(service: InlineMediaHandler.Type) -> Bool {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.objectForKey("\(service.name()) enabled") != nil {
+            return defaults.integerForKey("\(service.name()) enabled") == 1
+        }
+        return true
     }
 }
