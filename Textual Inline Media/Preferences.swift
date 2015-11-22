@@ -29,6 +29,7 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
     @IBOutlet var servicesContentViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet var servicesContentViewHeigtConstraint: NSLayoutConstraint!
     
+    var mediaHandlerInstances = [InlineMediaPreferenceHandler]()
     var updater: SUUpdater?
     
     @IBAction func checkForUpdatesClicked(sender: AnyObject) {
@@ -84,6 +85,7 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
     @IBAction func tableViewSelectionChanged(sender: NSTableView) {
         if let preferenceMediaHandler = InlineMedia.mediaHandlers[sender.selectedRow] as? InlineMediaPreferenceHandler.Type {
             let handlerInstance = preferenceMediaHandler.init()
+            self.mediaHandlerInstances.append(handlerInstance)
             self.extensionPreferenceView.attachSubview(handlerInstance.preferences()!, adjustedWidthConstraint: self.servicesContentViewWidthConstraint, adjustedHeightConstraint: self.servicesContentViewHeigtConstraint)
         } else {
             self.extensionPreferenceView.attachSubview(self.noPreferencesView, adjustedWidthConstraint: self.servicesContentViewWidthConstraint, adjustedHeightConstraint: self.servicesContentViewHeigtConstraint)
