@@ -44,6 +44,7 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
         self.displayInformationForDuplicates.state = defaults.integerForKey("displayInformationForDuplicates")
         self.maximumPreviewsPerMessage.stringValue = String(defaults.integerForKey("maximumPreviewsPerMessage"))
         self.displayAnimatedImages.state           = defaults.integerForKey("displayAnimatedImages")
+        self.tableViewSelectionChanged(self.servicesTableView.tableView!)
     }
     
     func pathToRelaunchForUpdater(updater: SUUpdater!) -> String! {

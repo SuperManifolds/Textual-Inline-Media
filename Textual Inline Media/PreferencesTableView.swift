@@ -32,7 +32,7 @@
 import Foundation
 
 class PreferencesTableView: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
-    @IBOutlet private var tableView: NSTableView?
+    @IBOutlet var tableView: NSTableView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
