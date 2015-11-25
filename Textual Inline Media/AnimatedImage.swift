@@ -62,8 +62,8 @@ class AnimatedImage: NSObject {
                     self.performBlockOnMainThread({
                         let document = controller.webView.mainFrameDocument
                         if let line = document.getElementById("line-" + line) {
-                            let image = line.querySelector(".inlineImageCell a[href='\(url.absoluteString)']").parentElement
-                            if let imageId = image.getAttribute("id") {
+                            if let imageLink = line.querySelector(".inlineImageCell a[href='\(url.absoluteString)']") {
+                                let imageId = imageLink.parentElement.getAttribute("id")
                                 if let eventSink = controller.valueForKey("webViewScriptSink") as? TVCLogScriptEventSink {
                                     eventSink.toggleInlineImage(imageId)
                                 }
