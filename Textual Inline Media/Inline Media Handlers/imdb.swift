@@ -31,7 +31,7 @@
 
 import Foundation
 
-class imdb: NSObject, InlineMediaHandler {
+class IMDB: NSObject, InlineMediaHandler {
     static func name() -> String {
         return "IMDB"
     }
@@ -49,7 +49,7 @@ class imdb: NSObject, InlineMediaHandler {
         }
         
         let session = NSURLSession.sharedSession()
-        session.dataTaskWithURL(requestUrl!, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        session.dataTaskWithURL(requestUrl!, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             guard data != nil else {
                 return
             }
@@ -57,25 +57,25 @@ class imdb: NSObject, InlineMediaHandler {
             do {
                 /* Attempt to serialise the JSON results into a dictionary. */
                 let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
-                let response = root["Response"] as! String
+                let response = root["Response"] as? String
                 guard response == "True" else {
                     return
                 }
                 
-                let title       = root["Title"]      as! String
-                let pgRating    = root["Rated"]      as! String
-                let year        = root["Year"]       as! String
-                let releaseDate = root["Released"]   as! String
-                let runtime     = root["Runtime"]    as! String
-                let genres      = root["Genre"]      as! String
-                let director    = root["Director"]   as! String
-                let writers     = root["Writer"]     as! String
-                let starring    = root["Actors"]     as! String
-                let description = root["Plot"]       as! String
-                let country     = root["Country"]    as! String
-                let metascore   = root["Metascore"]  as! String
-                let rating      = root["imdbRating"] as! String
-                let thumbnail   = root["Poster"]     as! String
+                let title       = root["Title"]      as? String
+                let pgRating    = root["Rated"]      as? String
+                let year        = root["Year"]       as? String
+                let releaseDate = root["Released"]   as? String
+                let runtime     = root["Runtime"]    as? String
+                let genres      = root["Genre"]      as? String
+                let director    = root["Director"]   as? String
+                let writers     = root["Writer"]     as? String
+                let starring    = root["Actors"]     as? String
+                let description = root["Plot"]       as? String
+                let country     = root["Country"]    as? String
+                let metascore   = root["Metascore"]  as? String
+                let rating      = root["imdbRating"] as? String
+                let thumbnail   = root["Poster"]     as? String
                 
                 self.performBlockOnMainThread({
                     let document = controller.webView.mainFrameDocument
@@ -149,7 +149,7 @@ class imdb: NSObject, InlineMediaHandler {
                         /* Create the list of genres for this title */
                         let imdbGenre = document.createElement("span")
                         imdbGenre.className = "inline_media_imdb_genre"
-                        let seperatedGenres = genres.componentsSeparatedByString(",")
+                        let seperatedGenres = genres!.componentsSeparatedByString(",")
                         
                         /* The API gives us the genres in a comma seperated plain text list.
                         We will seperate them into an array, trim the whitespace, and turn it into a list of links.*/

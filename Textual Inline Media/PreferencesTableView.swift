@@ -50,7 +50,10 @@ class PreferencesTableView: NSViewController, NSTableViewDataSource, NSTableView
             result?.identifier = "mediahandler"
         }
         
-        let mediaHandler = InlineMedia.mediaHandlers[row] as! InlineMediaHandler.Type
+        guard let mediaHandler = InlineMedia.mediaHandlers[row] as? InlineMediaHandler.Type else {
+            return nil
+        }
+        
         result?.objectValue = mediaHandler
         result?.textField?.stringValue = mediaHandler.name()
         result?.imageView?.image = mediaHandler.icon?()

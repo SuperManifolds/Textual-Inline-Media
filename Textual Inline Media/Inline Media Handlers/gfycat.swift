@@ -31,7 +31,7 @@
 
 import Foundation
 
-class gfycat: NSObject, InlineMediaHandler {
+class Gfycat: NSObject, InlineMediaHandler {
     static func name() -> String {
         return "Gfycat"
     }
@@ -50,7 +50,7 @@ class gfycat: NSObject, InlineMediaHandler {
             }
             
             let session = NSURLSession.sharedSession()
-            session.dataTaskWithURL(requestUrl!, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            session.dataTaskWithURL(requestUrl!, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
                 guard data != nil else {
                     return
                 }

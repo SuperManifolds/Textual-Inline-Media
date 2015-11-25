@@ -91,7 +91,7 @@ class YouTube: NSObject, InlineMediaHandler, InlineMediaPreferenceHandler {
                 }
             }
         } else if url.host?.hasSuffix("youtu.be") == true {
-            if (url.path?.characters.count > 1) {
+            if url.path?.characters.count > 1 {
                 let path = url.path!
                 videoID = path[1..<path.characters.count]
             }
@@ -126,7 +126,7 @@ class YouTube: NSObject, InlineMediaHandler, InlineMediaPreferenceHandler {
                 
                 /* Rquest information about this video from the YouTube API. */
                 let session = NSURLSession.sharedSession()
-                session.dataTaskWithURL(requestUrl!, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+                session.dataTaskWithURL(requestUrl!, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
                     guard data != nil else {
                         return
                     }
@@ -142,26 +142,27 @@ class YouTube: NSObject, InlineMediaHandler, InlineMediaPreferenceHandler {
                             let item = items[0]
                             if let video = item["snippet"] as? Dictionary<String, AnyObject> {
                                 /* Retrieve the video title. */
-                                let title = video["title"] as! String
+                                let title = video["title"] as? String
                                 
                                 /* Retrieve the author  */
-                                let author = video["channelTitle"] as! String
+                                let author = video["channelTitle"] as? String
                                 
                                 /* Retrieve the view count */
-                                let statistics = item["statistics"] as! Dictionary<String, AnyObject>
+                                let statistics = item["statistics"] as? Dictionary<String, AnyObject>
                                 let numberFormatter = NSNumberFormatter()
                                 numberFormatter.numberStyle = .DecimalStyle
-                                let unformattedViewCount = statistics["viewCount"] as! String
-                                let viewCount = numberFormatter.stringFromNumber(Int(unformattedViewCount)!)
+                                let unformattedViewCount = statistics!["viewCount"] as? String
+                                let viewCount = numberFormatter.stringFromNumber(Int(unformattedViewCount!)!)
                                 
                                 /* Retrieve the thumbnail of the video. */
-                                let thumbnails = video["thumbnails"] as! Dictionary<String, AnyObject>
-                                let standardThumbnail = thumbnails["medium"] as! Dictionary<String, AnyObject>
-                                let thumbnailUrl = standardThumbnail["url"] as! String
+                                let thumbnails = video["thumbnails"] as? Dictionary<String, AnyObject>
+                                let standardThumbnail = thumbnails!["medium"] as? Dictionary<String, AnyObject>
+                                let thumbnailUrl = standardThumbnail!["url"] as? String
                                 
                                 /* Retrieve the length of the video */
-                                let contentDetails = item["contentDetails"] as! Dictionary<String, AnyObject>
-                                let timeInterval = NSTimeInterval(iso8601String: contentDetails["duration"] as! String)
+                                let contentDetails = item["contentDetails"] as? Dictionary<String, AnyObject>
+                                let durationString = contentDetails!["duration"] as? String
+                                let timeInterval = NSTimeInterval(iso8601String: durationString!)
                                 let formatter = NSDateComponentsFormatter()
                                 
                                 formatter.allowedUnits = timeInterval >= 3600 ? [.Hour, .Minute, .Second] : [.Minute, .Second]
@@ -204,7 +205,7 @@ class YouTube: NSObject, InlineMediaHandler, InlineMediaPreferenceHandler {
                                     /* Create the author  */
                                     let videoAuthor = document.createElement("p")
                                     videoAuthor.className = "inline_media_youtube_author"
-                                    videoAuthor.appendChild(document.createTextNode("by " + author))
+                                    videoAuthor.appendChild(document.createTextNode("by " + author!))
                                     infoContainer.appendChild(videoAuthor)
                                     
                                     /* Create the view count  */

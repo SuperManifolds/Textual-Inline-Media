@@ -79,14 +79,14 @@ class Webpage: NSObject {
                     if (element.attributes["name"]?.lowercaseString == "description") || element.attributes["property"]?.lowercaseString == "og:description" {
                         if let descriptionText = element.attributes["content"] as? String {
                             description = descriptionText
-                            if (description.characters.count > 0 && previewImageUrl.characters.count > 0) {
+                            if description.characters.count > 0 && previewImageUrl.characters.count > 0 {
                                 break
                             }
                         }
-                    } else if (element.attributes["property"]?.lowercaseString == "og:image") {
+                    } else if element.attributes["property"]?.lowercaseString == "og:image" {
                         if let previewImageUrlTag = element.attributes["content"] as? String {
                             previewImageUrl = previewImageUrlTag
-                            if (description.characters.count > 0 && previewImageUrl.characters.count > 0) {
+                            if description.characters.count > 0 && previewImageUrl.characters.count > 0 {
                                 break
                             }
                         }
@@ -106,7 +106,7 @@ class Webpage: NSObject {
                 }
                 
                 /* The og:image may be specified as a relative URL, if so, we will attemp to use NSURLs relativeToUrl feature to resolve the absolute path to this image file. */
-                if (previewImageUrl.characters.count > 0) {
+                if previewImageUrl.characters.count > 0 {
                     if previewImageUrl.hasPrefix("data:image/") == false && previewImageUrl.hasPrefix("http://") == false && previewImageUrl.hasPrefix("https://") == false {
                         if let resolvedRelativeUrl = NSURL(string: previewImageUrl, relativeToURL: response.URL) {
                             previewImageUrl = resolvedRelativeUrl.absoluteString
@@ -123,7 +123,7 @@ class Webpage: NSObject {
                     websiteContainer.className = "inline_media_website"
                     
                     /* If we found a preview image element, we will add it. */
-                    if (previewImageUrl.characters.count > 0) {
+                    if previewImageUrl.characters.count > 0 {
                         let previewImage = document.createElement("img")
                         previewImage.className = "inline_media_website_thumbnail"
                         previewImage.setAttribute("src", value: previewImageUrl)
@@ -142,7 +142,7 @@ class Webpage: NSObject {
                     infoContainer.appendChild(titleElement)
                     
                     /* If we found a description, create the description element. */
-                    if (description.characters.count > 0) {
+                    if description.characters.count > 0 {
                         let descriptionElement = document.createElement("div")
                         descriptionElement.className = "inline_media_website_desc"
                         descriptionElement.appendChild(document.createTextNode(description))

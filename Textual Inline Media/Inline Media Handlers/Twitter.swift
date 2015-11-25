@@ -42,7 +42,7 @@ class Twitter: NSObject, InlineMediaHandler {
     
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
-        if (url.pathComponents!.count > 3) {
+        if url.pathComponents!.count > 3 {
             let tweetId = url.pathComponents![3]
             let requestUrl = NSURL(string: "https://api.twitter.com/1/statuses/oembed.json?id=\(tweetId)&omit_script=true&align=left&maxwidth=550")
             guard requestUrl != nil else {
@@ -51,7 +51,7 @@ class Twitter: NSObject, InlineMediaHandler {
             
             /* Rquest information about this tweet from the Twitter API. */
             let session = NSURLSession.sharedSession()
-            session.dataTaskWithURL(requestUrl!, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            session.dataTaskWithURL(requestUrl!, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
                 guard data != nil else {
                     return
                 }

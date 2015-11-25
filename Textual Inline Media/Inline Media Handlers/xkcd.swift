@@ -31,7 +31,7 @@
 
 import Foundation
 
-class xkcd: NSObject, InlineMediaHandler {
+class Xkcd: NSObject, InlineMediaHandler {
     static func name() -> String {
         return "xkcd"
     }
@@ -48,7 +48,7 @@ class xkcd: NSObject, InlineMediaHandler {
         request.setValue("text/html", forHTTPHeaderField: "Content-Type")
         
         let session = NSURLSession.sharedSession()
-        session.dataTaskWithRequest(request, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        session.dataTaskWithRequest(request, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             if let httpResponse = response as? NSHTTPURLResponse {
                 /* Validate that the server obeyed our request to only receive HTML, abort if otherwise. */
                 guard httpResponse.allHeaderFields["Content-Type"]?.contains("text/html") == true && data != nil else {
@@ -63,15 +63,17 @@ class xkcd: NSObject, InlineMediaHandler {
                 /* Create an HTML parser object of the website using ObjectiveGumbo. */
                 if let node = ObjectiveGumbo.parseDocumentWithData(data, encoding: NSUTF8StringEncoding) {
                     if let comicContainer = node.elementsWithID("comic").first as? OGElement {
-                        let comic = comicContainer.elementsWithTag(GUMBO_TAG_IMG).first as! OGElement
+                        guard let comic = comicContainer.elementsWithTag(GUMBO_TAG_IMG).first as? OGElement else {
+                            return
+                        }
                         
                         /* Retrieve the image source and alternate text */
-                        let comicUrl = comic.attributes["src"] as! String
-                        let comicAlt = comic.attributes["title"] as! String
+                        let comicUrl = comic.attributes["src"] as? String
+                        let comicAlt = comic.attributes["title"] as? String
                         
                         /* Retrieve the image title */
-                        let comicTitle = node.elementsWithID("ctitle").first as! OGElement
-                        let comicTitleText = comicTitle.text()
+                        let comicTitle = node.elementsWithID("ctitle").first as? OGElement
+                        let comicTitleText = comicTitle!.text()
                         
                         
                         self.performBlockOnMainThread({
@@ -87,7 +89,7 @@ class xkcd: NSObject, InlineMediaHandler {
                             
                             let xkcdImage = document.createElement("img")
                             xkcdImage.className = "inline_media_xkcd_image"
-                            xkcdImage.setAttribute("src", value: "https:" + comicUrl)
+                            xkcdImage.setAttribute("src", value: "https:" + comicUrl!)
                             xkcdImage.setAttribute("title", value: comicAlt)
                             xkcdContainer.appendChild(xkcdImage)
                             

@@ -66,7 +66,7 @@ class InlineImage: NSObject {
                 let message = line.querySelector(".innerMessage")
                 
                 
-                let messageLinks = message.querySelectorAll("a");
+                let messageLinks = message.querySelectorAll("a")
                 for index in 0...messageLinks.length {
                     let node = messageLinks.item(index)
                     if let element = node as? DOMElement {

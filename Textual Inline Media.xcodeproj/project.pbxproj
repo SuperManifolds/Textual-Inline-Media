@@ -14,6 +14,7 @@
 		FA0DF97E1BAFD6CA004142FD /* xkcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DF97D1BAFD6CA004142FD /* xkcd.swift */; };
 		FA13CED61B9E02CD00FA1475 /* media.js in Resources */ = {isa = PBXBuildFile; fileRef = FA13CED51B9E02CD00FA1475 /* media.js */; };
 		FA13CEDD1B9E62ED00FA1475 /* FileServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA13CEDC1B9E62ED00FA1475 /* FileServiceHandler.swift */; };
+		FA1ABCD41C063B3A0024374A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = FA1ABCD31C063B3A0024374A /* .swiftlint.yml */; };
 		FA37789F1BAD6C12002D4083 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3778A11BAD6C12002D4083 /* Preferences.xib */; };
 		FA39B2481B9717CC0034B0C7 /* attribute.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2201B9717CC0034B0C7 /* attribute.c */; };
 		FA39B2491B9717CC0034B0C7 /* char_ref.c in Sources */ = {isa = PBXBuildFile; fileRef = FA39B2221B9717CC0034B0C7 /* char_ref.c */; };
@@ -87,6 +88,7 @@
 		FA0DF97D1BAFD6CA004142FD /* xkcd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = xkcd.swift; path = "Inline Media Handlers/xkcd.swift"; sourceTree = "<group>"; };
 		FA13CED51B9E02CD00FA1475 /* media.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = media.js; path = Resources/media.js; sourceTree = "<group>"; };
 		FA13CEDC1B9E62ED00FA1475 /* FileServiceHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileServiceHandler.swift; path = "Inline Media Handlers/FileServiceHandler.swift"; sourceTree = "<group>"; };
+		FA1ABCD31C063B3A0024374A /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		FA2A0B031BA4D09F00B4CEDF /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Textual Inline Media/Frameworks/Sparkle.framework"; sourceTree = "<group>"; };
 		FA3778A01BAD6C12002D4083 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Preferences.xib; sourceTree = "<group>"; };
 		FA39B2201B9717CC0034B0C7 /* attribute.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = attribute.c; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 		FAC040291B544536002480BB = {
 			isa = PBXGroup;
 			children = (
+				FA1ABCD31C063B3A0024374A /* .swiftlint.yml */,
 				FAC040341B544536002480BB /* Textual Inline Media */,
 				FA02C4541B98E36200144323 /* Resources */,
 				4C8799DD1BA47A1300099E13 /* Frameworks */,
@@ -356,6 +359,7 @@
 				FAC0402F1B544536002480BB /* Frameworks */,
 				FAC040301B544536002480BB /* Resources */,
 				FA9B5F631BE7300600094F58 /* CopyFiles */,
+				FA1ABCD21C063AA70024374A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -406,6 +410,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA1ABCD41C063B3A0024374A /* .swiftlint.yml in Resources */,
 				FAC93D9F1BA4FD2200B9896C /* Assets.xcassets in Resources */,
 				FAD24D7C1C0230A7004DE4A8 /* YouTube.xib in Resources */,
 				FA39B2531B9717CC0034B0C7 /* LICENSE in Resources */,
@@ -418,6 +423,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FA1ABCD21C063AA70024374A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FAC0402E1B544536002480BB /* Sources */ = {

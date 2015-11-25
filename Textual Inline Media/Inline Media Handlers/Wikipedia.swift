@@ -56,7 +56,7 @@ class Wikipedia: NSObject, InlineMediaHandler {
             
             let session = NSURLSession(configuration: config)
             if let requestUrl = NSURL(string: "https://\(subdomain!).wikipedia.org/w/api.php?\(requestString)") {
-                session.dataTaskWithURL(requestUrl, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+                session.dataTaskWithURL(requestUrl, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
                     guard data != nil else {
                         return
                     }
@@ -64,21 +64,29 @@ class Wikipedia: NSObject, InlineMediaHandler {
                     do {
                         /* Attempt to serialise the JSON results into a dictionary. */
                         let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
-                        let query = root["query"] as! Dictionary<String, AnyObject>
+                        guard let query = root["query"] as? Dictionary<String, AnyObject> else {
+                            return
+                        }
+                        
                         guard let pages = query["pages"] as? Dictionary<String, AnyObject> else {
                             WebRequest(url: response!.URL!, controller: controller, line: line).start()
                             return
                         }
                         
                         let page = pages.first!
-                        if (page.0 != "-1") {
-                            let article = page.1 as! Dictionary<String, AnyObject>
-                            let title = article["title"] as! String
-                            let description = article["extract"] as! String
+                        if page.0 != "-1" {
+                            guard let article = page.1 as? Dictionary<String, AnyObject> else {
+                                return
+                            }
+                            let title = article["title"] as? String
+                            let description = article["extract"] as? String
                             
                             var thumbnailUrl = ""
                             if let thumbnail = article["thumbnail"] as? Dictionary<String, AnyObject> {
-                                thumbnailUrl = thumbnail["source"] as! String
+                                guard let source = thumbnail["source"] as? String else {
+                                    return
+                                }
+                                thumbnailUrl = source
                             }
                             
                             self.performBlockOnMainThread({
@@ -90,7 +98,7 @@ class Wikipedia: NSObject, InlineMediaHandler {
                                 wikiContainer.className = "inline_media_wiki"
                                 
                                 /* If we found a preview image element, we will add it. */
-                                if (thumbnailUrl.characters.count > 0) {
+                                if thumbnailUrl.characters.count > 0 {
                                     let previewImage = document.createElement("img")
                                     previewImage.className = "inline_media_wiki_thumbnail"
                                     previewImage.setAttribute("src", value: thumbnailUrl)
@@ -109,7 +117,7 @@ class Wikipedia: NSObject, InlineMediaHandler {
                                 infoContainer.appendChild(titleElement)
                                 
                                 /* If we found a description, create the description element. */
-                                if (description.characters.count > 0) {
+                                if description!.characters.count > 0 {
                                     let descriptionElement = document.createElement("div")
                                     descriptionElement.className = "inline_media_wiki_desc"
                                     descriptionElement.innerHTML = description

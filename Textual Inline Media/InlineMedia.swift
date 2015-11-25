@@ -35,7 +35,7 @@ import Sparkle
 public class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate {
     static let imageFileExtensions = ["bmp", "gif", "jpg", "jpeg", "jp2", "j2k", "jpf", "jpx", "jpm", "mj2", "png", "svg", "tiff", "tif"]
     let inlineMediaMessageTypes = [TVCLogLineType.ActionType, TVCLogLineType.PrivateMessageType]
-    static let mediaHandlers = [bash.self, gfycat.self, imdb.self, Imgur.self, Streamable.self, Twitter.self, Vimeo.self, Wikipedia.self, xkcd.self, YouTube.self]
+    static let mediaHandlers = [Bash.self, Gfycat.self, IMDB.self, Imgur.self, Streamable.self, Twitter.self, Vimeo.self, Wikipedia.self, Xkcd.self, YouTube.self]
     var previouslyDisplayedLinks: [String] = []
     
     var preferencesView: NSView!
@@ -110,7 +110,10 @@ public class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate {
             var linkPriorityDict = Dictionary<String, [NSURL]>()
             var sortedLinks: [NSURL] = []
             for result in links {
-                let rawLink = result[1] as! String
+                guard let rawLink = result[1] as? String else {
+                    return
+                }
+                
                 /* NSURL is stupid and cannot comprehend unicode in domains, so we will use this method provided by Textual to convert it to "punycode" */
                 if var link = NSString(string: rawLink).URLUsingWebKitPasteboard {
                     guard link.scheme.hasPrefix("http") else {
@@ -128,7 +131,7 @@ public class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate {
                     }
                     
                     /* Organise links into a dictionary by what domain they are from. */
-                    if (!linkPriorityDict.keys.contains(link.host!)) {
+                    if !linkPriorityDict.keys.contains(link.host!) {
                         linkPriorityDict[link.host!] = []
                     }
                     linkPriorityDict[link.host!]?.append(link)
@@ -139,8 +142,8 @@ public class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate {
             for domain in linkPriorityDict {
                 let sorted = domain.1.sort {
                     /* Terrible workaround to give subreddit links a low priority. */
-                    if ($1.pathComponents?.count > 2) {
-                        if ($1.pathComponents![1] == "r") {
+                    if $1.pathComponents?.count > 2 {
+                        if $1.pathComponents![1] == "r" {
                             return true
                         }
                     }

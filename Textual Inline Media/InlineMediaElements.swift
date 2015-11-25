@@ -52,13 +52,16 @@ extension TVCLogController {
             mediaContainer.addEventListener("click", listener: hideListener, useCapture: false)
             
             let showListener = ShowElementEventListener()
-            let messageLinks = message.querySelectorAll("a");
+            let messageLinks = message.querySelectorAll("a")
             for index in 0...messageLinks.length {
                 let node = messageLinks.item(index)
                 if let element = node as? DOMElement {
                     if element.getAttribute("href") == url {
-                        let newElement = element.cloneNode(true) as! DOMElement
-                        newElement.removeAttribute("onclick");
+                        guard let newElement = element.cloneNode(true) as? DOMElement else {
+                            continue
+                        }
+                        
+                        newElement.removeAttribute("onclick")
                         element.parentNode.replaceChild(newElement, oldChild: element)
                         newElement.addEventListener("click", listener: showListener, useCapture: false)
                     }

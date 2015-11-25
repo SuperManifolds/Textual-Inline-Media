@@ -41,7 +41,7 @@ class AnimatedImage: NSObject {
         }
         
         let session = NSURLSession.sharedSession()
-        session.dataTaskWithURL(requestUrl!, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        session.dataTaskWithURL(requestUrl!, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             guard data != nil else {
                 return
             }

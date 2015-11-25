@@ -53,7 +53,7 @@ class Vimeo: NSObject, InlineMediaHandler {
             
             /* Rquest information about this video from the YouTube API. */
             let session = NSURLSession.sharedSession()
-            session.dataTaskWithURL(requestUrl!, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            session.dataTaskWithURL(requestUrl!, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
                 guard data != nil else {
                     return
                 }
@@ -64,18 +64,23 @@ class Vimeo: NSObject, InlineMediaHandler {
                     if let title = root["title"] as? String {
                         
                         /* Retrieve the author  */
-                        let author = root["author_name"] as! String
+                        let author = root["author_name"] as? String
                         
                         /* Retrieve the first line of the video description */
-                        let fullDescription = root["description"] as! String
+                        guard let fullDescription = root["description"] as? String else {
+                            return
+                        }
                         let descriptionLines = fullDescription.componentsSeparatedByString("\n")
                         let description = descriptionLines[0]
                         
                         /* Retrieve the thumbnail of the video. */
-                        let thumbnailUrl = root["thumbnail_url"] as! String
+                        let thumbnailUrl = root["thumbnail_url"] as? String
                         
                         /* Retrieve the length of the video */
-                        let timeInterval = NSTimeInterval(root["duration"] as! Int)
+                        guard let durationLength = root["duration"] as? Int else {
+                            return
+                        }
+                        let timeInterval = NSTimeInterval(durationLength)
                         let formatter = NSDateComponentsFormatter()
                         
                         formatter.allowedUnits = timeInterval >= 3600 ? [.Hour, .Minute, .Second] : [.Minute, .Second]
@@ -118,7 +123,7 @@ class Vimeo: NSObject, InlineMediaHandler {
                             /* Create the author  */
                             let videoAuthor = document.createElement("p")
                             videoAuthor.className = "inline_media_vimeo_author"
-                            videoAuthor.appendChild(document.createTextNode("by " + author))
+                            videoAuthor.appendChild(document.createTextNode("by " + author!))
                             infoContainer.appendChild(videoAuthor)
                             
                             /* Create the video description */

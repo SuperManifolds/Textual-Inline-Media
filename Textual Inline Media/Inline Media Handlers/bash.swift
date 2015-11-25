@@ -31,11 +31,11 @@
 
 import Foundation
 
-class bash: NSObject, InlineMediaHandler {
+class Bash: NSObject, InlineMediaHandler {
     static func name() -> String {
         return "Bash.org"
     }
-    
+
     static func icon() -> NSImage? {
         return NSImage.fromAssetCatalogue("bash")
     }
@@ -43,7 +43,7 @@ class bash: NSObject, InlineMediaHandler {
     required convenience init(url: NSURL, controller: TVCLogController, line: String) {
         self.init()
         let session = NSURLSession.sharedSession()
-        session.dataTaskWithURL(url, completionHandler: {(data : NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        session.dataTaskWithURL(url, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             if let httpResponse = response as? NSHTTPURLResponse {
                 /* Validate that the server obeyed our request to only receive HTML, abort if otherwise. */
                 guard httpResponse.allHeaderFields["Content-Type"]?.contains("text/html") == true && data != nil else {
@@ -102,8 +102,8 @@ class bash: NSObject, InlineMediaHandler {
                                         /* Save the text before the < as a normal text node */
                                         var beforeToken: NSString?
                                         scanner.scanUpToCharactersFromSet(startCharacter, intoString: &beforeToken)
-                                        if (beforeToken != nil) {
-                                            let textElement = document.createTextNode(beforeToken as! String)
+                                        if beforeToken != nil {
+                                            let textElement = document.createTextNode(beforeToken as? String)
                                             bashText.appendChild(textElement)
                                         }
                                         
@@ -117,7 +117,7 @@ class bash: NSObject, InlineMediaHandler {
                                         scanner.scanUpToCharactersFromSet(endCharacter, intoString: &nicknameToken)
                                         if nicknameToken != nil {
                                             if nicknameToken?.hostmaskNickname == true {
-                                                let nickname = nicknameToken as! String
+                                                let nickname = nicknameToken as? String
                                                 
                                                 /* Create a coloured span using Textuals nickname colour generator and add it to the message */
                                                 logLine.nickname = nickname
@@ -129,7 +129,7 @@ class bash: NSObject, InlineMediaHandler {
                                                 scanner.scanLocation++
                                             } else {
                                                 /* This isn't a nickname after all, add it as normal text. */
-                                                let textElement = document.createTextNode("<\(beforeToken as! String)")
+                                                let textElement = document.createTextNode("<\(beforeToken as? String)")
                                                 bashText.appendChild(textElement)
                                             }
                                         }
