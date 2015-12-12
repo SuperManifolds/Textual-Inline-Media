@@ -92,6 +92,9 @@ public class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate {
     - parameter logController: The Textual "Log Controller" responsible for the event.
     */
     public func didPostNewMessage(messageObject: THOPluginDidPostNewMessageConcreteObject!, forViewController logController: TVCLogController!) {
+        self.performBlockOnMainThread({
+            logController.truncateLinksInUrl(messageObject.lineNumber)
+        })
         
         guard !messageObject.isProcessedInBulk && inlineMediaMessageTypes.contains(messageObject.lineType) && logController.inlineImagesEnabledForView == true else {
             return
