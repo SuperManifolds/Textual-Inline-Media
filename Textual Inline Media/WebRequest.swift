@@ -31,7 +31,7 @@
 
 import Foundation
 
-let MAXIMUM_RESPONSE_BODY_SIZE = 4194304
+let maximumResponseBodySize = 4194304
 
 class WebRequest: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
     private var session: NSURLSession!
@@ -117,7 +117,7 @@ class WebRequest: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSUR
         self.data.appendData(data)
         
         /* Disconnect if the response body is larger than the allowed request body size  */
-        if self.data.length > MAXIMUM_RESPONSE_BODY_SIZE {
+        if self.data.length > maximumResponseBodySize {
             dataTask.cancel()
         }
     }

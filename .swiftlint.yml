@@ -1,6 +1,9 @@
 disabled_rules:
     - trailing_whitespace
     - function_body_length
-    - type_body_length
-    - variable_name
+
+type_body_length:
+    - 300 # warning
+    - 400 # error
+
 line_length: 200
