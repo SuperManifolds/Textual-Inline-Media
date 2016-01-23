@@ -128,11 +128,6 @@ public class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate {
                         }
                     }
                     
-                    /* Replace Reddit shortlinks */
-                    if link.host!.hasSuffix("redd.it") {
-                        link = NSURL(string: String(format: "%@://www.reddit.com/tb%@", link.scheme, link.path!))!
-                    }
-                    
                     /* Organise links into a dictionary by what domain they are from. */
                     if !linkPriorityDict.keys.contains(link.host!) {
                         linkPriorityDict[link.host!] = []
