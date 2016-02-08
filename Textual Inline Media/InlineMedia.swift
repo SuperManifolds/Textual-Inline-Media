@@ -54,12 +54,15 @@ public class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate {
     */
     public func pluginLoadedIntoMemory() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "logControllerViewFinishedLoading:", name: TVCLogControllerViewFinishedLoadingNotification, object: nil)
-        
-        let updater = SUUpdater(forBundle: NSBundle(forClass: object_getClass(self)))
-        updater.delegate = self
-        updater.resetUpdateCycle()
-        updater.checkForUpdatesInBackground()
-        
+
+		self.performBlockOnMainThread {
+			let updater = SUUpdater(forBundle: NSBundle(forClass: object_getClass(self)))
+
+			updater.delegate = self
+			updater.resetUpdateCycle()
+			updater.checkForUpdatesInBackground()
+		}
+
         let defaults: [String : AnyObject] = [
             "displayInformationForDuplicates": 1,
             "maximumPreviewsPerMessage": 10,
