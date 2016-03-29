@@ -53,7 +53,7 @@ public class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate {
     Called when the plugin has been loaded into memory.
     */
     public func pluginLoadedIntoMemory() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "logControllerViewFinishedLoading:", name: TVCLogControllerViewFinishedLoadingNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InlineMedia.logControllerViewFinishedLoading(_:)), name: TVCLogControllerViewFinishedLoadingNotification, object: nil)
 
 		self.performBlockOnMainThread {
 			let updater = SUUpdater(forBundle: NSBundle(forClass: object_getClass(self)))
@@ -156,7 +156,7 @@ public class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate {
             
             var linkCount = 0
             linkLoop: for url in sortedLinks {
-                linkCount++
+                linkCount += 1
                 if linkCount > maximumLinkCount {
                     break
                 }

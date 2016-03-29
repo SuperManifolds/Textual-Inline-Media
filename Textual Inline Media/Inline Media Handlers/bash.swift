@@ -109,7 +109,7 @@ class Bash: NSObject, InlineMediaHandler {
                                         
                                         /* Eat the < */
                                         if scanner.atEnd == false {
-                                            scanner.scanLocation++
+                                            scanner.scanLocation += 1
                                         }
                                         
                                         /* Get the nickname inside the < and >  */
@@ -126,7 +126,7 @@ class Bash: NSObject, InlineMediaHandler {
                                                 nicknameElement.textContent = "<\(nickname)>"
                                                 bashText.appendChild(nicknameElement)
                                                 
-                                                scanner.scanLocation++
+                                                scanner.scanLocation += 1
                                             } else {
                                                 /* This isn't a nickname after all, add it as normal text. */
                                                 let textElement = document.createTextNode("<\(beforeToken as? String)")
