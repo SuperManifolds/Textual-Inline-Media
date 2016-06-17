@@ -40,29 +40,30 @@ class Bash: NSObject, InlineMediaHandler {
         return NSImage.fromAssetCatalogue("bash")
     }
     
-    required convenience init(url: NSURL, controller: TVCLogController, line: String) {
+    required convenience init(url: URL, controller: TVCLogController, line: String) {
         self.init()
-        let session = NSURLSession.sharedSession()
-        session.dataTaskWithURL(url, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-            if let httpResponse = response as? NSHTTPURLResponse {
+        let session = URLSession.shared()
+        session.dataTask(with: url, completionHandler: {(data: Data?, response: URLResponse?, error: NSError?) -> Void in
+            if let httpResponse = response as? HTTPURLResponse {
                 /* Validate that the server obeyed our request to only receive HTML, abort if otherwise. */
                 guard httpResponse.allHeaderFields["Content-Type"]?.contains("text/html") == true && data != nil else {
                     return
                 }
                 
                 /* ObjectiveGumbo has no gracefully error handling for failure to decode data, so we will validate the data beforehand. */
-                guard NSString(data: data!, encoding: NSUTF8StringEncoding) != nil else {
+                guard NSString(data: data!, encoding: String.Encoding.utf8.rawValue) != nil else {
                     return
                 }
                 
                 /* Create an HTML parser object of the website using ObjectiveGumbo. */
-                if let node = ObjectiveGumbo.parseDocumentWithData(data, encoding: NSUTF8StringEncoding) {
-                    if let quote = node.elementsWithClass("quote").first as? OGElement {
-                        let votes = quote.elementsWithTag(GUMBO_TAG_FONT).first?.text
-                        let quoteText = node.elementsWithClass("qt").first?.text
+                if let node = ObjectiveGumbo.parseDocument(with: data, encoding: String.Encoding.utf8.rawValue) {
+                    if let quote = node.elements(withClass: "quote").first as? OGElement {
+                        let votes = quote.elements(with: GUMBO_TAG_FONT).first?.text
+                        let quoteText = node.elements(withClass: "qt").first?.text
                         
-                        self.performBlockOnMainThread({
-                            let document = controller.webView.mainFrameDocument
+                        self.performBlock(onMainThread: {
+                            let document = controller.backingView
+                            /*
                             
                             let bashContainer = document.createElement("div")
                             bashContainer.className = "inline_media_bash"
@@ -137,7 +138,7 @@ class Bash: NSObject, InlineMediaHandler {
                                     bashText.appendChild(message)
                                 }
                                 controller.insertInlineMedia(line, node: bashContainer, url: url.absoluteString)
-                            }
+                            }*/
                         })
                     }
                 }
@@ -145,7 +146,7 @@ class Bash: NSObject, InlineMediaHandler {
         }).resume()
     }
     
-    static func matchesServiceSchema(url: NSURL) -> Bool {
+    static func matchesServiceSchema(_ url: URL) -> Bool {
         return url.host?.hasSuffix("bash.org") == true && url.query?.characters.count > 0
     }
 }

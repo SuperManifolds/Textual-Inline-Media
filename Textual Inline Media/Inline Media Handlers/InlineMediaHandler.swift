@@ -42,7 +42,7 @@ import Foundation
     
     - returns: An instance of an inline media handler
     */
-    init(url: NSURL, controller: TVCLogController, line: String)
+    init(url: URL, controller: TVCLogController, line: String)
     
     /**
     Name of the service this media handler is responsible for
@@ -56,7 +56,7 @@ import Foundation
     
     - returns: An image icon for the service this media handler is responsible for
     */
-    optional static func icon() -> NSImage?
+    @objc optional static func icon() -> NSImage?
     
     /**
     Called to check whether the current URL matches the requirements for the inline media handler
@@ -65,7 +65,7 @@ import Foundation
     
     - returns: A boolean representing whether or not this URL can be handled by this media handler
     */
-    optional static func matchesServiceSchema(url: NSURL) -> Bool
+    @objc optional static func matchesServiceSchema(_ url: URL) -> Bool
     
     /**
     Given an URL, returns a corrected URL with a direct link to an image, to be displayed in Textual.
@@ -74,5 +74,5 @@ import Foundation
     
     - returns: A string containing the corrected url, or nil if not applicable.
     */
-    optional static func processInlineMediaContentURL(url: NSURL) -> String?
+    @objc optional static func processInlineMediaContentURL(_ url: URL) -> String?
 }

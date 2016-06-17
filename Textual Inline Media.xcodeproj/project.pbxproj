@@ -41,6 +41,11 @@
 		FA60A73E1BF7D0940093EA0B /* WebRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA60A73D1BF7D0940093EA0B /* WebRequest.swift */; };
 		FA60A7401BF7DFD00093EA0B /* FileInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA60A73F1BF7DFD00093EA0B /* FileInformation.swift */; };
 		FA60A7421BF7E78D0093EA0B /* InlineImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA60A7411BF7E78D0093EA0B /* InlineImage.swift */; };
+		FA69B8321CAD147F003A3AA3 /* CustomElements.min.js in Resources */ = {isa = PBXBuildFile; fileRef = FA69B82D1CAD147F003A3AA3 /* CustomElements.min.js */; };
+		FA69B8331CAD147F003A3AA3 /* HTMLImports.min.js in Resources */ = {isa = PBXBuildFile; fileRef = FA69B82E1CAD147F003A3AA3 /* HTMLImports.min.js */; };
+		FA69B8341CAD147F003A3AA3 /* MutationObserver.min.js in Resources */ = {isa = PBXBuildFile; fileRef = FA69B82F1CAD147F003A3AA3 /* MutationObserver.min.js */; };
+		FA69B8351CAD147F003A3AA3 /* ShadowDOM.min.js in Resources */ = {isa = PBXBuildFile; fileRef = FA69B8301CAD147F003A3AA3 /* ShadowDOM.min.js */; };
+		FA69B8361CAD147F003A3AA3 /* webcomponents.min.js in Resources */ = {isa = PBXBuildFile; fileRef = FA69B8311CAD147F003A3AA3 /* webcomponents.min.js */; };
 		FA6E76851BA1071500948E03 /* Wikipedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6E76841BA1071500948E03 /* Wikipedia.swift */; };
 		FA6F487E1B95CAA4000280E0 /* InlineMediaHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */; };
 		FA6F488E1B963E56000280E0 /* Webpage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6F488D1B963E56000280E0 /* Webpage.swift */; };
@@ -58,6 +63,7 @@
 		FAD24D701C016952004DE4A8 /* Streamable.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD24D6F1C016952004DE4A8 /* Streamable.xib */; };
 		FAD24D781C0182C1004DE4A8 /* InlineMediaPreferenceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD24D771C0182C1004DE4A8 /* InlineMediaPreferenceHandler.swift */; };
 		FAD24D7C1C0230A7004DE4A8 /* YouTube.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD24D7B1C0230A7004DE4A8 /* YouTube.xib */; };
+		FAD2EF491CAB411500B7AB2E /* InlineMedia.js in Resources */ = {isa = PBXBuildFile; fileRef = FAD2EF481CAB411500B7AB2E /* InlineMedia.js */; };
 		FADAFB311B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */; };
 		FADAFB341B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */; };
 		FADBE7771BE9F3FF00E5C89A /* Vimeo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADBE7761BE9F3FF00E5C89A /* Vimeo.swift */; };
@@ -137,6 +143,11 @@
 		FA60A73D1BF7D0940093EA0B /* WebRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebRequest.swift; sourceTree = "<group>"; tabWidth = 5; };
 		FA60A73F1BF7DFD00093EA0B /* FileInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileInformation.swift; path = "Inline Media Handlers/FileInformation.swift"; sourceTree = "<group>"; };
 		FA60A7411BF7E78D0093EA0B /* InlineImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineImage.swift; path = "Inline Media Handlers/InlineImage.swift"; sourceTree = "<group>"; };
+		FA69B82D1CAD147F003A3AA3 /* CustomElements.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = CustomElements.min.js; path = Resources/lib/CustomElements.min.js; sourceTree = "<group>"; };
+		FA69B82E1CAD147F003A3AA3 /* HTMLImports.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = HTMLImports.min.js; path = Resources/lib/HTMLImports.min.js; sourceTree = "<group>"; };
+		FA69B82F1CAD147F003A3AA3 /* MutationObserver.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = MutationObserver.min.js; path = Resources/lib/MutationObserver.min.js; sourceTree = "<group>"; };
+		FA69B8301CAD147F003A3AA3 /* ShadowDOM.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = ShadowDOM.min.js; path = Resources/lib/ShadowDOM.min.js; sourceTree = "<group>"; };
+		FA69B8311CAD147F003A3AA3 /* webcomponents.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = webcomponents.min.js; path = Resources/lib/webcomponents.min.js; sourceTree = "<group>"; };
 		FA6E76841BA1071500948E03 /* Wikipedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Wikipedia.swift; path = "Inline Media Handlers/Wikipedia.swift"; sourceTree = "<group>"; };
 		FA6F487D1B95CAA4000280E0 /* InlineMediaHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineMediaHandler.swift; path = "Inline Media Handlers/InlineMediaHandler.swift"; sourceTree = "<group>"; };
 		FA6F488D1B963E56000280E0 /* Webpage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Webpage.swift; path = "Inline Media Handlers/Webpage.swift"; sourceTree = "<group>"; };
@@ -155,6 +166,7 @@
 		FAD24D6F1C016952004DE4A8 /* Streamable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Streamable.xib; path = "User Interface/Media Handler Preferences/Streamable.xib"; sourceTree = "<group>"; };
 		FAD24D771C0182C1004DE4A8 /* InlineMediaPreferenceHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineMediaPreferenceHandler.swift; path = "Inline Media Handlers/InlineMediaPreferenceHandler.swift"; sourceTree = "<group>"; };
 		FAD24D7B1C0230A7004DE4A8 /* YouTube.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YouTube.xib; sourceTree = "<group>"; };
+		FAD2EF481CAB411500B7AB2E /* InlineMedia.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = InlineMedia.js; path = Resources/InlineMedia.js; sourceTree = "<group>"; };
 		FADAFB2F1B9BABB200273C13 /* IRCAddressBookEntry+Overrides.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "IRCAddressBookEntry+Overrides.h"; path = "Overrides/IRCAddressBookEntry+Overrides.h"; sourceTree = "<group>"; };
 		FADAFB301B9BABB200273C13 /* IRCAddressBookEntry+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "IRCAddressBookEntry+Overrides.m"; path = "Overrides/IRCAddressBookEntry+Overrides.m"; sourceTree = "<group>"; };
 		FADAFB331B9BB07800273C13 /* TDCAddressBookSheet+Overrides.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TDCAddressBookSheet+Overrides.m"; path = "Overrides/TDCAddressBookSheet+Overrides.m"; sourceTree = "<group>"; };
@@ -192,6 +204,8 @@
 		FA02C4541B98E36200144323 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FAD2EF481CAB411500B7AB2E /* InlineMedia.js */,
+				FAD2EF3D1CAB23E300B7AB2E /* lib */,
 				FAC93D9C1BA4D8DF00B9896C /* dsa_pub.pem */,
 				FA02C4551B98E3BD00144323 /* style.css */,
 				FA13CED51B9E02CD00FA1475 /* media.js */,
@@ -348,6 +362,18 @@
 			name = "Media Handler Preferences";
 			sourceTree = "<group>";
 		};
+		FAD2EF3D1CAB23E300B7AB2E /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				FA69B82D1CAD147F003A3AA3 /* CustomElements.min.js */,
+				FA69B82E1CAD147F003A3AA3 /* HTMLImports.min.js */,
+				FA69B82F1CAD147F003A3AA3 /* MutationObserver.min.js */,
+				FA69B8301CAD147F003A3AA3 /* ShadowDOM.min.js */,
+				FA69B8311CAD147F003A3AA3 /* webcomponents.min.js */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -380,11 +406,13 @@
 					Resources,
 				);
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Alex S. Glomsaas";
 				TargetAttributes = {
 					FAC040311B544536002480BB = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 9X89US848J;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -413,11 +441,17 @@
 				FA1ABCD41C063B3A0024374A /* .swiftlint.yml in Resources */,
 				FAC93D9F1BA4FD2200B9896C /* Assets.xcassets in Resources */,
 				FAD24D7C1C0230A7004DE4A8 /* YouTube.xib in Resources */,
+				FA69B8341CAD147F003A3AA3 /* MutationObserver.min.js in Resources */,
+				FAD2EF491CAB411500B7AB2E /* InlineMedia.js in Resources */,
 				FA39B2531B9717CC0034B0C7 /* LICENSE in Resources */,
 				FAC93D9D1BA4D8DF00B9896C /* dsa_pub.pem in Resources */,
+				FA69B8331CAD147F003A3AA3 /* HTMLImports.min.js in Resources */,
 				FA13CED61B9E02CD00FA1475 /* media.js in Resources */,
 				FAD24D701C016952004DE4A8 /* Streamable.xib in Resources */,
+				FA69B8361CAD147F003A3AA3 /* webcomponents.min.js in Resources */,
 				FA37789F1BAD6C12002D4083 /* Preferences.xib in Resources */,
+				FA69B8351CAD147F003A3AA3 /* ShadowDOM.min.js in Resources */,
+				FA69B8321CAD147F003A3AA3 /* CustomElements.min.js in Resources */,
 				FA02C4561B98E3BD00144323 /* style.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -594,11 +628,12 @@
 		FAC040391B544536002480BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = /Applications/Textual.app/Contents/MacOS/Textual;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer: Alex Sorlie Glomsaas (C6R37Z9WN2)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Applications/Textual.app/Contents/Frameworks/**",
@@ -616,9 +651,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sorlie.Textual-Inline-Media";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Textual Inline Media/Textual Inline Media-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -626,11 +663,12 @@
 		FAC0403A1B544536002480BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = /Applications/Textual.app/Contents/MacOS/Textual;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer: Alex Sorlie Glomsaas (C6R37Z9WN2)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"/Applications/Textual.app/Contents/Frameworks/**",
@@ -648,8 +686,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sorlie.Textual-Inline-Media";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Textual Inline Media/Textual Inline Media-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;

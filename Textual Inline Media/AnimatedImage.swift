@@ -32,35 +32,35 @@
 import Foundation
 
 class AnimatedImage: NSObject {
-    static func create(controller: TVCLogController, url: NSURL, line: String) {
+    static func create(_ controller: TVCLogController, url: URL, line: String) {
         /* Create a request to the gfycat API to convert this gif into a video file. */
-        let requestString = url.absoluteString.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
-        let requestUrl = NSURL(string: "http://upload.gfycat.com/transcode?fetchUrl=\(requestString)")
+        let requestString = url.absoluteString?.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
+        let requestUrl = URL(string: "http://upload.gfycat.com/transcode?fetchUrl=\(requestString)")
         guard requestUrl != nil else {
             return
         }
         
-        let session = NSURLSession.sharedSession()
-        session.dataTaskWithURL(requestUrl!, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        let session = URLSession.shared()
+        session.dataTask(with: requestUrl!, completionHandler: {(data: Data?, response: URLResponse?, error: NSError?) -> Void in
             guard data != nil else {
                 return
             }
             
             do {
                 /* Attempt to serialise the JSON results into a dictionary. */
-                let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+                let root = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
                 if let videoUrl = root["mp4Url"] as? String {
-                    self.performBlockOnMainThread({
+                    self.performBlock(onMainThread: {
                         /* Create the video tag and set it to automatically play, and loop continously. */
-                        let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: true)
+                        //let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: true)
                         
                         /* Insert the element into Textual's view. */
-                        controller.insertInlineMedia(line, node: video, url: url.absoluteString)
                     })
                 } else {
                     /* The image conversation was unsuccessful, this is most likely not an animated gif, we will fall back to displaying the normal image. */
-                    self.performBlockOnMainThread({
-                        let document = controller.webView.mainFrameDocument
+                    self.performBlock(onMainThread: {
+                        let document = controller.backingView
+                        /*
                         if let line = document.getElementById("line-" + line) {
                             if let imageLink = line.querySelector(".inlineImageCell a[href='\(url.absoluteString)']") {
                                 let imageId = imageLink.parentElement.getAttribute("id")
@@ -68,7 +68,7 @@ class AnimatedImage: NSObject {
                                     eventSink.toggleInlineImage(imageId)
                                 }
                             }
-                        }
+                        }*/
                     })
                 }
             } catch {

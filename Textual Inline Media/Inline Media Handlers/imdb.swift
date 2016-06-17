@@ -40,23 +40,23 @@ class IMDB: NSObject, InlineMediaHandler {
         return NSImage.fromAssetCatalogue("imdb")
     }
     
-    required convenience init(url: NSURL, controller: TVCLogController, line: String) {
+    required convenience init(url: URL, controller: TVCLogController, line: String) {
         self.init()
         let requestString = url.pathComponents![2]
-        let requestUrl = NSURL(string: "http://www.omdbapi.com/?i=\(requestString)&plot=short&r=json")
+        let requestUrl = URL(string: "http://www.omdbapi.com/?i=\(requestString)&plot=short&r=json")
         guard requestUrl != nil else {
             return
         }
         
-        let session = NSURLSession.sharedSession()
-        session.dataTaskWithURL(requestUrl!, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        let session = URLSession.shared()
+        session.dataTask(with: requestUrl!, completionHandler: {(data: Data?, response: URLResponse?, error: NSError?) -> Void in
             guard data != nil else {
                 return
             }
             
             do {
                 /* Attempt to serialise the JSON results into a dictionary. */
-                let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+                let root = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
                 let response = root["Response"] as? String
                 guard response == "True" else {
                     return
@@ -77,8 +77,10 @@ class IMDB: NSObject, InlineMediaHandler {
                 let rating      = root["imdbRating"] as? String
                 let thumbnail   = root["Poster"]     as? String
                 
-                self.performBlockOnMainThread({
-                    let document = controller.webView.mainFrameDocument
+                self.performBlock(onMainThread: {
+                    let document = controller.backingView
+                    
+                    /*
                     
                     /* Create the container for the entire imdb card.  */
                     let imdbContainer = document.createElement("div")
@@ -263,7 +265,7 @@ class IMDB: NSObject, InlineMediaHandler {
                     }
                     
                     /* Insert the IMDB card into the chat  */
-                    controller.insertInlineMedia(line, node: imdbContainer, url: url.absoluteString)
+                    controller.insertInlineMedia(line, node: imdbContainer, url: url.absoluteString)*/
                 })
 
             } catch {
@@ -272,7 +274,7 @@ class IMDB: NSObject, InlineMediaHandler {
         }).resume()
     }
     
-    static func matchesServiceSchema(url: NSURL) -> Bool {
+    static func matchesServiceSchema(_ url: URL) -> Bool {
         return url.host?.hasSuffix("imdb.com") == true && url.path?.hasPrefix("/title/") == true
     }
 }

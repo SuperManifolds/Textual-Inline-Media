@@ -40,35 +40,37 @@ class Twitter: NSObject, InlineMediaHandler {
         return NSImage.fromAssetCatalogue("Twitter")
     }
     
-    required convenience init(url: NSURL, controller: TVCLogController, line: String) {
+    required convenience init(url: URL, controller: TVCLogController, line: String) {
         self.init()
         if url.pathComponents!.count > 3 {
             let tweetId = url.pathComponents![3]
-            let requestUrl = NSURL(string: "https://api.twitter.com/1/statuses/oembed.json?id=\(tweetId)&omit_script=true&align=left&maxwidth=550")
+            let requestUrl = URL(string: "https://api.twitter.com/1/statuses/oembed.json?id=\(tweetId)&omit_script=true&align=left&maxwidth=550")
             guard requestUrl != nil else {
                 return
             }
             
             /* Rquest information about this tweet from the Twitter API. */
-            let session = NSURLSession.sharedSession()
-            session.dataTaskWithURL(requestUrl!, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            let session = URLSession.shared()
+            session.dataTask(with: requestUrl!, completionHandler: {(data: Data?, response: URLResponse?, error: NSError?) -> Void in
                 guard data != nil else {
                     return
                 }
                 
                 do {
                    /* Attempt to serialise the JSON results into a dictionary. */
-                    let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+                    let root = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
                     if let tweetHTML = root["html"] as? String {
-                        self.performBlockOnMainThread({
-                            let document = controller.webView.mainFrameDocument
+                        self.performBlock(onMainThread: {
+                            let document = controller.backingView
+                            
+                            /*
                             
                             let tweet = document.createElement("div")
                             tweet.className = "inline_media_twitter"
                             tweet.innerHTML = tweetHTML
                             
                             controller.insertInlineMedia(line, node: tweet, url: url.absoluteString)
-                            document.evaluateWebScript("twttr.widgets.load(document.getElementById('line-\(line)'))")
+                            document.evaluateWebScript("twttr.widgets.load(document.getElementById('line-\(line)'))")*/
                         })
                     }
                 } catch {
@@ -78,7 +80,7 @@ class Twitter: NSObject, InlineMediaHandler {
         }
     }
     
-    static func matchesServiceSchema(url: NSURL) -> Bool {
-        return url.host?.hasSuffix("twitter.com") == true && url.path?.lowercaseString.containsString("/status/") == true
+    static func matchesServiceSchema(_ url: URL) -> Bool {
+        return url.host?.hasSuffix("twitter.com") == true && url.path?.lowercased().contains("/status/") == true
     }
 }

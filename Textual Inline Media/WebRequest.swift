@@ -33,13 +33,13 @@ import Foundation
 
 let maximumResponseBodySize = 4194304
 
-class WebRequest: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate {
-    private var session: NSURLSession!
-    private let url: NSURL
+class WebRequest: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionDataDelegate {
+    private var session: Foundation.URLSession!
+    private let url: URL
     private let controller: TVCLogController
     private let line: String
-    private var data: NSMutableData
-    private let originalUrl: NSURL?
+    private var data: Data
+    private let originalUrl: URL?
     
     /**
     Create a web request to get information about this URL
@@ -51,26 +51,26 @@ class WebRequest: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSUR
     
     - returns: An instance of a WebRequest
     */
-    required init(url: NSURL, controller: TVCLogController, line: String, originalUrl: NSURL? = nil) {
+    required init(url: URL, controller: TVCLogController, line: String, originalUrl: URL? = nil) {
         self.url = url
         self.controller = controller
         self.line = line
-        self.data = NSMutableData()
+        self.data = Data()
         self.originalUrl = originalUrl
         
         super.init()
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        config.HTTPAdditionalHeaders = ["User-Agent": "TextualInlineMedia/1.0 (https://github.com/xlexi/Textual-Inline-Media/; alex@sorlie.co.uk)"]
-        self.session = NSURLSession(configuration: config, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
+        let config = URLSessionConfiguration.default()
+        config.httpAdditionalHeaders = ["User-Agent": "TextualInlineMedia/1.0 (https://github.com/xlexi/Textual-Inline-Media/; alex@sorlie.co.uk)"]
+        self.session = Foundation.URLSession(configuration: config, delegate: self, delegateQueue: OperationQueue.main())
     }
     
     /**
     Start the web request
     */
     func start() {
-        let request = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 300)
-        request.HTTPMethod = "GET"
-        session.dataTaskWithRequest(request).resume()
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 300)
+        request.httpMethod = "GET"
+        session.dataTask(with: request).resume()
     }
     
     /**
@@ -82,10 +82,10 @@ class WebRequest: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSUR
     - parameter request:           A new NSURLRequest object containing the URL the server wishes us to go to
     - parameter completionHandler: A completion handler to call should we wish NSURLSession to continue through the redirect
     */
-    func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection response: NSHTTPURLResponse,
-        newRequest request: NSURLRequest, completionHandler: (NSURLRequest?) -> Void) {
+    func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse,
+        newRequest request: URLRequest, completionHandler: (URLRequest) -> Void) {
         let originalUrl = self.originalUrl != nil ? self.originalUrl : self.url
-        InlineMedia.processInlineMediaFromUrl(request.URL!, controller: self.controller, line: self.line, originalUrl: originalUrl)
+        InlineMedia.processInlineMediaFromUrl(request.url!, controller: self.controller, line: self.line, originalUrl: originalUrl)
         task.cancel()
     }
     
@@ -96,12 +96,12 @@ class WebRequest: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSUR
     - parameter task:    The NSURLSessionTask for this specific http request
     - parameter error:   The error message if the request was completed due to an error
     */
-    func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
         guard error == nil else {
             return
         }
         
-        if let response = task.response as? NSHTTPURLResponse {
+        if let response = task.response as? HTTPURLResponse {
             Webpage(data: self.data, response: response, controller: self.controller, line: self.line).start()
         }
     }
@@ -113,11 +113,11 @@ class WebRequest: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSUR
     - parameter dataTask: The NSURLSessionDataTask for this specific http response
     - parameter data:     The data returned from the server
     */
-    func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
-        self.data.appendData(data)
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        self.data.append(data)
         
         /* Disconnect if the response body is larger than the allowed request body size  */
-        if self.data.length > maximumResponseBodySize {
+        if self.data.count > maximumResponseBodySize {
             dataTask.cancel()
         }
     }
@@ -130,16 +130,16 @@ class WebRequest: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSUR
     - parameter response:          The response from the server
     - parameter completionHandler: A completion handler to call with whether the session should get the response body or disconnect
     */
-    func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveResponse response: NSURLResponse, completionHandler: (NSURLSessionResponseDisposition) -> Void) {
-        if let httpResponse = response as? NSHTTPURLResponse {
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: (URLSession.ResponseDisposition) -> Void) {
+        if let httpResponse = response as? HTTPURLResponse {
             /* If the request is HTML, continue the download. If not, just get the headers and act accordingly. */
             let contentType = httpResponse.allHeaderFields["Content-Type"]
             if contentType?.contains("text/html") == true {
-                completionHandler(.Allow)
+                completionHandler(.allow)
                 return
             } else {
                 if contentType?.hasPrefix("image/gif") == true {
-                    AnimatedImage.create(controller, url: httpResponse.URL!, line: self.line)
+                    AnimatedImage.create(controller, url: httpResponse.url!, line: self.line)
                 } else if contentType?.hasPrefix("image/") == true {
                     let originalUrl = self.originalUrl != nil ? self.originalUrl! : self.url
                     InlineImage(url: originalUrl, response: httpResponse, controller: controller, line: line).start()
@@ -149,6 +149,6 @@ class WebRequest: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate, NSUR
                 }
             } 
         }
-        completionHandler(.Cancel)
+        completionHandler(.cancel)
     }
 }

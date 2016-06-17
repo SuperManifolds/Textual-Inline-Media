@@ -40,27 +40,27 @@ class Vimeo: NSObject, InlineMediaHandler {
         return NSImage.fromAssetCatalogue("Vimeo")
     }
     
-    required convenience init(url: NSURL, controller: TVCLogController, line: String) {
+    required convenience init(url: URL, controller: TVCLogController, line: String) {
         self.init()
         
         /* Retrieve the video id of this video.  */
         if let videoID = url.pathComponents?[1] {
-            let requestUrl = NSURL(string: "https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/\(videoID)")
+            let requestUrl = URL(string: "https://vimeo.com/api/oembed.json?url=https%3A//vimeo.com/\(videoID)")
             guard requestUrl != nil else {
                 return
             }
             
             
             /* Rquest information about this video from the YouTube API. */
-            let session = NSURLSession.sharedSession()
-            session.dataTaskWithURL(requestUrl!, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            let session = URLSession.shared()
+            session.dataTask(with: requestUrl!, completionHandler: {(data: Data?, response: URLResponse?, error: NSError?) -> Void in
                 guard data != nil else {
                     return
                 }
                 
                 do {
                     /* Attempt to serialise the JSON results into a dictionary. */
-                    let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+                    let root = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
                     if let title = root["title"] as? String {
                         
                         /* Retrieve the author  */
@@ -70,7 +70,7 @@ class Vimeo: NSObject, InlineMediaHandler {
                         guard let fullDescription = root["description"] as? String else {
                             return
                         }
-                        let descriptionLines = fullDescription.componentsSeparatedByString("\n")
+                        let descriptionLines = fullDescription.components(separatedBy: "\n")
                         let description = descriptionLines[0]
                         
                         /* Retrieve the thumbnail of the video. */
@@ -80,17 +80,17 @@ class Vimeo: NSObject, InlineMediaHandler {
                         guard let durationLength = root["duration"] as? Int else {
                             return
                         }
-                        let timeInterval = NSTimeInterval(durationLength)
-                        let formatter = NSDateComponentsFormatter()
+                        let timeInterval = TimeInterval(durationLength)
+                        let formatter = DateComponentsFormatter()
                         
-                        formatter.allowedUnits = timeInterval >= 3600 ? [.Hour, .Minute, .Second] : [.Minute, .Second]
-                        formatter.zeroFormattingBehavior = .Pad
-                        let duration = formatter.stringFromTimeInterval(timeInterval)
+                        formatter.allowedUnits = timeInterval >= 3600 ? [.hour, .minute, .second] : [.minute, .second]
+                        formatter.zeroFormattingBehavior = .pad
+                        let duration = formatter.string(from: timeInterval)
                         
-                        self.performBlockOnMainThread({
-                            let document = controller.webView.mainFrameDocument
+                        self.performBlock(onMainThread: {
+                            let document = controller.backingView
                             
-                            /* Create the container for the complete inline media item. */
+                            /*/* Create the container for the complete inline media item. */
                             let ytContainer = document.createElement("a")
                             ytContainer.setAttribute("href", value: url.absoluteString)
                             ytContainer.className = "inline_media_vimeo"
@@ -133,7 +133,7 @@ class Vimeo: NSObject, InlineMediaHandler {
                             infoContainer.appendChild(videoDescription)
                             
                             /* Insert the element into Textual's view. */
-                            controller.insertInlineMedia(line, node: ytContainer, url: url.absoluteString)
+                            controller.insertInlineMedia(line, node: ytContainer, url: url.absoluteString)*/
                         })
                     }
                 } catch {
@@ -143,7 +143,7 @@ class Vimeo: NSObject, InlineMediaHandler {
         }
     }
     
-    static func matchesServiceSchema(url: NSURL) -> Bool {
+    static func matchesServiceSchema(_ url: URL) -> Bool {
         return url.host?.hasSuffix("vimeo.com") == true  && url.path?.characters.count > 5
     }
 }

@@ -32,7 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import Cocoa
 
 extension InlineMediaHandler {
-    static func downloadButton(logController: TVCLogController) {
+    static func downloadButton(_ logController: TVCLogController) {
     
     }
 }

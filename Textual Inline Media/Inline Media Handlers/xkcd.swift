@@ -40,30 +40,30 @@ class Xkcd: NSObject, InlineMediaHandler {
         return NSImage.fromAssetCatalogue("xkcd")
     }
     
-    required convenience init(url: NSURL, controller: TVCLogController, line: String) {
+    required convenience init(url: URL, controller: TVCLogController, line: String) {
         self.init()
-        let request = NSMutableURLRequest(URL: url)
+        var request = URLRequest(url: url)
         
         /* Inform the server that we only accept HTML documents, it should reject our connection otherwise. */
         request.setValue("text/html", forHTTPHeaderField: "Content-Type")
         
-        let session = NSURLSession.sharedSession()
-        session.dataTaskWithRequest(request, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-            if let httpResponse = response as? NSHTTPURLResponse {
+        let session = URLSession.shared()
+        session.dataTask(with: request, completionHandler: {(data: Data?, response: URLResponse?, error: NSError?) -> Void in
+            if let httpResponse = response as? HTTPURLResponse {
                 /* Validate that the server obeyed our request to only receive HTML, abort if otherwise. */
                 guard httpResponse.allHeaderFields["Content-Type"]?.contains("text/html") == true && data != nil else {
                     return
                 }
                 
                 /* ObjectiveGumbo has no gracefully error handling for failure to decode data, so we will validate the data beforehand. */
-                guard NSString(data: data!, encoding: NSUTF8StringEncoding) != nil else {
+                guard NSString(data: data!, encoding: String.Encoding.utf8.rawValue) != nil else {
                     return
                 }
                 
                 /* Create an HTML parser object of the website using ObjectiveGumbo. */
-                if let node = ObjectiveGumbo.parseDocumentWithData(data, encoding: NSUTF8StringEncoding) {
-                    if let comicContainer = node.elementsWithID("comic").first as? OGElement {
-                        guard let comic = comicContainer.elementsWithTag(GUMBO_TAG_IMG).first as? OGElement else {
+                if let node = ObjectiveGumbo.parseDocument(with: data, encoding: String.Encoding.utf8.rawValue) {
+                    if let comicContainer = node.elements(withID: "comic").first as? OGElement {
+                        guard let comic = comicContainer.elements(with: GUMBO_TAG_IMG).first as? OGElement else {
                             return
                         }
                         
@@ -72,28 +72,13 @@ class Xkcd: NSObject, InlineMediaHandler {
                         let comicAlt = comic.attributes["title"] as? String
                         
                         /* Retrieve the image title */
-                        let comicTitle = node.elementsWithID("ctitle").first as? OGElement
+                        let comicTitle = node.elements(withID: "ctitle").first as? OGElement
                         let comicTitleText = comicTitle!.text()
                         
                         
-                        self.performBlockOnMainThread({
-                            let document = controller.webView.mainFrameDocument
-                            
-                            let xkcdContainer = document.createElement("div")
-                            xkcdContainer.className = "inline_media_xkcd"
-                            
-                            let xkcdHeader = document.createElement("h2")
-                            xkcdHeader.className = "inline_media_xkcd_title"
-                            xkcdHeader.appendChild(document.createTextNode(comicTitleText))
-                            xkcdContainer.appendChild(xkcdHeader)
-                            
-                            let xkcdImage = document.createElement("img")
-                            xkcdImage.className = "inline_media_xkcd_image"
-                            xkcdImage.setAttribute("src", value: "https:" + comicUrl!)
-                            xkcdImage.setAttribute("title", value: comicAlt)
-                            xkcdContainer.appendChild(xkcdImage)
-                            
-                            controller.insertInlineMedia(line, node: xkcdContainer, url: url.absoluteString)
+                        self.performBlock(onMainThread: {
+                            let webView = controller.backingView
+                            webView!.evaluateFunction("InlineMedia.xkcd.insert", withArguments: [line, response!.url!.absoluteString!, comicTitleText!, comicUrl!, comicAlt!])
                         })
                     }
                     
@@ -102,7 +87,7 @@ class Xkcd: NSObject, InlineMediaHandler {
         }).resume()
     }
     
-    static func matchesServiceSchema(url: NSURL) -> Bool {
+    static func matchesServiceSchema(_ url: URL) -> Bool {
         return url.host!.hasSuffix("xkcd.com")
     }
 }

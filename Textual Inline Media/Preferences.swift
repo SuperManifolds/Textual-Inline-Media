@@ -48,8 +48,8 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
     var mediaHandlerInstances = [InlineMediaPreferenceHandler]()
     var updater: SUUpdater?
     
-    @IBAction func checkForUpdatesClicked(sender: AnyObject) {
-        updater = SUUpdater(forBundle: NSBundle(forClass: object_getClass(self)))
+    @IBAction func checkForUpdatesClicked(_ sender: AnyObject) {
+        updater = SUUpdater(for: Bundle(for: object_getClass(self)))
         updater!.delegate = self
         updater!.resetUpdateCycle()
         updater!.checkForUpdates(sender)
@@ -57,19 +57,19 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
     
     override func viewDidAppear() {
         self.tabView.delegate = self
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard()
         
-        self.displayInformationForDuplicates.state = defaults.integerForKey("displayInformationForDuplicates")
-        self.maximumPreviewsPerMessage.stringValue = String(defaults.integerForKey("maximumPreviewsPerMessage"))
-        self.displayAnimatedImages.state           = defaults.integerForKey("displayAnimatedImages")
+        self.displayInformationForDuplicates.state = defaults.integer(forKey: "displayInformationForDuplicates")
+        self.maximumPreviewsPerMessage.stringValue = String(defaults.integer(forKey: "maximumPreviewsPerMessage"))
+        self.displayAnimatedImages.state           = defaults.integer(forKey: "displayAnimatedImages")
         self.tableViewSelectionChanged(self.servicesTableView.tableView!)
     }
     
-    func pathToRelaunchForUpdater(updater: SUUpdater!) -> String! {
-        return NSBundle.mainBundle().bundlePath
+    func pathToRelaunch(for updater: SUUpdater!) -> String! {
+        return Bundle.main().bundlePath
     }
     
-    required override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    required override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -77,28 +77,28 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
         super.init(coder: coder)
     }
     
-    @IBAction func displayInformationForDuplicatesChange(sender: NSButton) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(sender.state, forKey: "displayInformationForDuplicates")
+    @IBAction func displayInformationForDuplicatesChange(_ sender: NSButton) {
+        let defaults = UserDefaults.standard()
+        defaults.set(sender.state, forKey: "displayInformationForDuplicates")
         defaults.synchronize()
     }
     
-    @IBAction func maximumPreviewsPerMessageChange(sender: NSTextField) {
+    @IBAction func maximumPreviewsPerMessageChange(_ sender: NSTextField) {
         if let maxMessagePreviews = Int(sender.stringValue) {
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setInteger(maxMessagePreviews, forKey: "maximumPreviewsPerMessage")
+            let defaults = UserDefaults.standard()
+            defaults.set(maxMessagePreviews, forKey: "maximumPreviewsPerMessage")
             defaults.synchronize()
         }
     }
     
-    @IBAction func displayAnimatedImagesChange(sender: NSButton) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(sender.state, forKey: "displayAnimatedImages")
+    @IBAction func displayAnimatedImagesChange(_ sender: NSButton) {
+        let defaults = UserDefaults.standard()
+        defaults.set(sender.state, forKey: "displayAnimatedImages")
         defaults.synchronize()
     }
     
     
-    @IBAction func tableViewSelectionChanged(sender: NSTableView) {
+    @IBAction func tableViewSelectionChanged(_ sender: NSTableView) {
         if let preferenceMediaHandler = InlineMedia.mediaHandlers[sender.selectedRow] as? InlineMediaPreferenceHandler.Type {
             let handlerInstance = preferenceMediaHandler.init()
             self.mediaHandlerInstances.append(handlerInstance)
@@ -117,18 +117,18 @@ class Preferences: NSViewController, SUUpdaterDelegate, NSTabViewDelegate {
     }
     
     
-    @IBAction func serviceIsEnabledChange(sender: NSButton) {
+    @IBAction func serviceIsEnabledChange(_ sender: NSButton) {
         if let mediaHandler = InlineMedia.mediaHandlers[self.servicesTableView.tableView!.selectedRow] as? InlineMediaHandler.Type {
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setInteger(sender.state, forKey: "\(mediaHandler.name()) enabled")
+            let defaults = UserDefaults.standard()
+            defaults.set(sender.state, forKey: "\(mediaHandler.name()) enabled")
             defaults.synchronize()
         }
     }
     
-    static func serviceIsEnabled(service: InlineMediaHandler.Type) -> Bool {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if defaults.objectForKey("\(service.name()) enabled") != nil {
-            return defaults.integerForKey("\(service.name()) enabled") == 1
+    static func serviceIsEnabled(_ service: InlineMediaHandler.Type) -> Bool {
+        let defaults = UserDefaults.standard()
+        if defaults.object(forKey: "\(service.name()) enabled") != nil {
+            return defaults.integer(forKey: "\(service.name()) enabled") == 1
         }
         return true
     }

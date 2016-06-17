@@ -32,129 +32,14 @@
 import Foundation
 
 extension TVCLogController {
-    /**
-    Inserts any HTML DOM Node as an inline media item in a message.
-    
-    - parameter line:       The unique ID for the line we wish to modify.
-    - parameter node:       The HTML DOM Node to insert.
-    - parameter url:        The original URL of the media source.
-    */
-    func insertInlineMedia(line: String, node: DOMNode, url: String) {
-        let document = self.webView.mainFrameDocument
-        if let line = document.getElementById("line-" + line) {
-            let message = line.querySelector(".innerMessage")
-            
-            let mediaContainer = document.createElement("span")
-            mediaContainer.className = "inlineMediaCell"
-            mediaContainer.setAttribute("href", value: url)
-            
-            let hideListener = HideElementEventListener()
-            mediaContainer.addEventListener("click", listener: hideListener, useCapture: false)
-            
-            let showListener = ShowElementEventListener()
-            let messageLinks = message.querySelectorAll("a")
-            for index in 0...messageLinks.length {
-                let node = messageLinks.item(index)
-                if let element = node as? DOMElement {
-                    if element.getAttribute("href") == url {
-                        element.removeAttribute("onclick")
-                        element.addEventListener("click", listener: showListener, useCapture: false)
-                    }
-                }
-            }
-            
-            mediaContainer.appendChild(node)
-            message.appendChild(mediaContainer)
-        }
-    }
-    
-    /**
-    Create an inline image from a link.
-    
-    - parameter source:     The source link for the image to display.
-    - returns: An HTML DOM Node containing the inline image element.
-    */
-    func createInlineImage(source: String, uuid: String) -> DOMNode {
-        return self.createInlineImage(source, link: source, uuid: uuid)
-    }
-    
-    
-    /**
-    Creates an inline image from a link.
-    
-    - parameter source:     The source link for the image to display.
-    - parameter link:       The link to open when the user interacts with the image.
-    
-    - returns: An HTML DOM Node containing the inline image element.
-    */
-    func createInlineImage(source: String, link: String, uuid: String) -> DOMNode {
-        let document = self.webView.mainFrameDocument
-        
-        let inlineImageCell = document.createElement("span")
-        inlineImageCell.classList += ["inlineImageCell"]
-        inlineImageCell.setAttribute("id", value: "inlineImage-\(uuid)")
-        inlineImageCell.setAttribute("style", value: "display: none;")
-        
-        let closeButton = document.createElement("span")
-        closeButton.classList += ["closeButton"]
-        closeButton.setAttribute("href", value: "#")
-        closeButton.setAttribute("onclick", value: "Textual.toggleInlineImage('\(uuid)', false);")
-        closeButton.textContent = "x"
-        inlineImageCell.appendChild(closeButton)
-        
-        let imageLink = document.createElement("a")
-        imageLink.setAttribute("href", value: link)
-        imageLink.setAttribute("onclick", value: "return InlineImageLiveResize.negateAnchorOpen()")
-        inlineImageCell.appendChild(imageLink)
-        
-        let image = document.createElement("img")
-        image.setAttribute("src", value: source)
-        image.classList += ["image"]
-        image.setAttribute("style", value: "max-width: \(TPCPreferences.inlineImagesMaxWidth())px;")
-        imageLink.appendChild(image)
-        
-        return inlineImageCell
-    }
-    
-    /**
-    Creates an inline video from a link
-    
-    - parameter source:     The source link for the video to display.
-    - parameter loop:       Whether this video should be continously looped.
-    - parameter autoPlay:   Whether this video should start playing automatically.
-    - parameter muteAudio:  Whether the audio should be muted when the video begins. (True by default)
-    
-    - returns: An HTML DOM Node containing the video element.
-    */
-    func createInlineVideo(source: String, loop: Bool, autoPlay: Bool, muteAudio: Bool = true) -> DOMNode {
-        let document = self.webView.mainFrameDocument
-        
-        /* Create the video tag  */
-        let video = document.createElement("video")
-        video.setAttribute("loop", value: loop.description)
-        video.setAttribute("autoplay", value: autoPlay.description)
-        video.setAttribute("muted", value: muteAudio.description)
-        
-        /* Set the event listener to start/pause it when the user clicks it. */
-        let listener = VideoEventListener()
-        video.addEventListener("click", listener: listener, useCapture: false)
-        
-        /* Set the source of the video */
-        let videoSource = document.createElement("source")
-        videoSource.setAttribute("type", value: "video/mp4")
-        videoSource.setAttribute("src", value: source)
-        video.appendChild(videoSource)
-        return video
-    }
     
     /**
     Truncates all the URLs in a message
     
     - parameter line: The unique ID for the line we wish to modify.
     */
-    func truncateLinksInUrl(line: String) {
-        let document = self.webView.mainFrameDocument
-        if let line = document.getElementById("line-" + line) {
+    func truncateLinksInUrl(_ line: String) {
+        /*if let line = document.getElementById("line-" + line) {
             guard let message = line.querySelector(".innerMessage") else {
                 return
             }
@@ -187,7 +72,7 @@ extension TVCLogController {
                     }
                 }
             }
-        }
+        }*/
 
     }
 }

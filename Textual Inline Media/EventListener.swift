@@ -37,9 +37,9 @@ class VideoEventListener: NSObject, DOMEventListener {
 
     - parameter event: The event object for this click event.
     */
-    func handleEvent(event: DOMEvent!) {
+    func handle(_ event: DOMEvent!) {
         if let video = event.target as? DOMElement {
-            let paused = video.valueForKey("paused") as? Bool
+            let paused = video.value(forKey: "paused") as? Bool
             video.callWebScriptMethod(paused == true ? "play" : "pause", withArguments: nil)
         }
     }
@@ -53,7 +53,7 @@ class HideElementEventListener: NSObject, DOMEventListener {
 
     - parameter event: The event object for this click event.
     */
-    func handleEvent(event: DOMEvent!) {
+    func handle(_ event: DOMEvent!) {
         if let mouseEvent = event as? DOMMouseEvent {
             if mouseEvent.shiftKey == true {
                 let mediaElement = event.currentTarget as? DOMElement
@@ -70,7 +70,7 @@ class ShowElementEventListener: NSObject, DOMEventListener {
     
     - parameter event: The event object for this click event.
     */
-    func handleEvent(event: DOMEvent!) {
+    func handle(_ event: DOMEvent!) {
         if let mouseEvent = event as? DOMMouseEvent {
             if mouseEvent.shiftKey == true {
                 guard let linkElement = event.target as? DOMElement else {
@@ -78,10 +78,10 @@ class ShowElementEventListener: NSObject, DOMEventListener {
                 }
                 let url = linkElement.getAttribute("href")
                 let mediaElement = linkElement.parentElement.querySelector(".inlineMediaCell[href='\(url)']")
-                if let index = mediaElement.classList.indexOf("hidden") {
-                    mediaElement.classList.removeAtIndex(index)
+                if let index = mediaElement?.classList.index(of: "hidden") {
+                    mediaElement?.classList.remove(at: index)
                 } else {
-                    mediaElement.classList += ["hidden"]
+                    mediaElement?.classList += ["hidden"]
                 }
                 event.preventDefault()
             }
@@ -90,12 +90,12 @@ class ShowElementEventListener: NSObject, DOMEventListener {
 }
 
 class TextualToggleInlineImageEventListener: NSObject, DOMEventListener {
-    func handleEvent(event: DOMEvent!) {
+    func handle(_ event: DOMEvent!) {
         if let mouseEvent = event as? DOMMouseEvent {
             if mouseEvent.shiftKey == true {
                 if let image = event.target as? DOMElement {
                     let imageCell = image.parentElement.parentElement
-                    imageCell.setAttribute("style", value: "display: none;")
+                    imageCell?.setAttribute("style", value: "display: none;")
                     event.preventDefault()
                 }
             }

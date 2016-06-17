@@ -35,7 +35,7 @@
 
 @implementation TVCLogController (Overrides)
 
-+ (void)load {
+/*+ (void)load {
     XRExchangeImplementation(@"TVCLogController", @"isSafeToPresentImageWithID:", @"__tpi_isSafeToPresentImageWithID:");
 }
 
@@ -63,7 +63,7 @@
             [self __tpi_isSafeToPresentImageWithID:uniqueID];
         }
     }
-}
+}*/
 
 
 @end

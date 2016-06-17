@@ -32,8 +32,8 @@
 import Foundation
 
 class InlineImage: NSObject {
-    private let url: NSURL
-    private let response: NSHTTPURLResponse
+    private let url: URL
+    private let response: HTTPURLResponse
     private let controller: TVCLogController
     private let line: String
     
@@ -47,7 +47,7 @@ class InlineImage: NSObject {
     
     - returns: An instance of an InlineImage object
     */
-    init(url: NSURL, response: NSHTTPURLResponse, controller: TVCLogController, line: String) {
+    init(url: URL, response: HTTPURLResponse, controller: TVCLogController, line: String) {
         self.url = url
         self.response = response
         self.controller = controller
@@ -59,8 +59,9 @@ class InlineImage: NSObject {
     Show the image within Textual
     */
     func start() {
-        let redirectUrl = response.URL!.absoluteString
-        self.performBlockOnMainThread({
+        let redirectUrl = response.url!.absoluteString
+        let document = self.controller.backingView
+        /*self.performBlockOnMainThread({
             let document = self.controller.webView.mainFrameDocument
             if let line = document.getElementById("line-" + self.line) {
                 let message = line.querySelector(".innerMessage")
@@ -85,6 +86,6 @@ class InlineImage: NSObject {
                 }
                 
             }
-        })
+        })*/
     }
 }

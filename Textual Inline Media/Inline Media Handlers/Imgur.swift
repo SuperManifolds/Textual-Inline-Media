@@ -42,25 +42,24 @@ class Imgur: NSObject, InlineMediaHandler {
         return NSImage.fromAssetCatalogue("Imgur")
     }
     
-    required convenience init(url: NSURL, controller: TVCLogController, line: String) {
+    required convenience init(url: URL, controller: TVCLogController, line: String) {
         self.init()
         /* Get the mp4 version of this link  */
-        if let imageId = url.URLByDeletingPathExtension?.pathComponents?[1] {
+        if let imageId = try! url.deletingPathExtension().pathComponents?[1] {
             let videoUrl = "http://i.imgur.com/\(imageId).mp4"
             
-            self.performBlockOnMainThread({
+            self.performBlock(onMainThread: {
                 /* Create the video tag and set it to automatically play, and loop continously. */
-                let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: true)
+                //let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: true)
                 
                 /* Insert the element into Textual's view. */
-                controller.insertInlineMedia(line, node: video, url: url.absoluteString)
             })
         }
     }
     
-    static func matchesServiceSchema(url: NSURL) -> Bool {
+    static func matchesServiceSchema(_ url: URL) -> Bool {
         if let pathExtension = url.pathExtension {
-            return url.host?.hasSuffix("i.imgur.com") == true && Imgur.supportedExtensions.contains(pathExtension.lowercaseString)
+            return url.host?.hasSuffix("i.imgur.com") == true && Imgur.supportedExtensions.contains(pathExtension.lowercased())
         }
         return false
     }

@@ -33,35 +33,35 @@ import Foundation
 
 extension String {
     subscript(index: Int) -> Character {
-        return self[startIndex.advancedBy(index)]
+        return self[characters.index(startIndex, offsetBy: index)]
     }
 
     subscript(range: Range<Int>) -> String {
-        return self[startIndex.advancedBy(range.startIndex)..<startIndex.advancedBy(range.endIndex)]
+        return self[characters.index(startIndex, offsetBy: range.lowerBound)..<characters.index(startIndex, offsetBy: range.upperBound)]
     }
     
     func trim() -> String {
-        return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        return self.trimmingCharacters(in: CharacterSet.whitespaces)
     }
 }
 
 extension DOMElement {
     var classList: [String] {
         get {
-            return self.className.componentsSeparatedByString(" ")
+            return self.className.components(separatedBy: " ")
         } set(classes) {
-            self.className = classes.joinWithSeparator(" ")
+            self.className = classes.joined(separator: " ")
         }
     }
 }
 
-extension NSFileManager {
-    func getTemporaryDirectory(name: String) -> NSURL? {
-        let tempDirURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(name)
+extension FileManager {
+    func getTemporaryDirectory(_ name: String) -> URL? {
+        let tempDirURL = try! URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(name)
 
-        if NSFileManager.defaultManager().fileExistsAtPath(tempDirURL.absoluteString) == false {
+        if FileManager.default().fileExists(atPath: tempDirURL.absoluteString!) == false {
             do {
-                try NSFileManager.defaultManager().createDirectoryAtURL(tempDirURL, withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default().createDirectory(at: tempDirURL, withIntermediateDirectories: true, attributes: nil)
             } catch {
                 return nil
             }
@@ -71,33 +71,33 @@ extension NSFileManager {
 }
 
 extension NSImage {
-    static func fromAssetCatalogue(name: String) -> NSImage? {
-        let mainBundle = NSBundle(forClass: InlineMedia.self)
-        return mainBundle.imageForResource(name)
+    static func fromAssetCatalogue(_ name: String) -> NSImage? {
+        let mainBundle = Bundle(for: InlineMedia.self)
+        return mainBundle.image(forResource: name)
     }
 }
 
-extension NSTimeInterval {
+extension TimeInterval {
     init?(iso8601String: String) {
-        if iso8601String.hasPrefix("P") && iso8601String.containsString("T") {
+        if iso8601String.hasPrefix("P") && iso8601String.contains("T") {
 
-            var seconds: NSTimeInterval = 0
+            var seconds: TimeInterval = 0
             var isTimeSegment = false
 
-            let iso8601duration = NSScanner(string: iso8601String)
+            let iso8601duration = Scanner(string: iso8601String)
             if iso8601String.hasPrefix("PT") {
-                iso8601duration.charactersToBeSkipped = NSCharacterSet(charactersInString: "PT")
+                iso8601duration.charactersToBeSkipped = CharacterSet(charactersIn: "PT")
                 isTimeSegment = true
             } else {
-                iso8601duration.charactersToBeSkipped = NSCharacterSet(charactersInString: "P")
+                iso8601duration.charactersToBeSkipped = CharacterSet(charactersIn: "P")
             }
 
-            while iso8601duration.atEnd == false {
+            while iso8601duration.isAtEnd == false {
                 var value = 0.0
                 var units: NSString?
 
                 if iso8601duration.scanDouble(&value) {
-                    if iso8601duration.scanCharactersFromSet(NSCharacterSet.uppercaseLetterCharacterSet(), intoString: &units) {
+                    if iso8601duration.scanCharacters(from: CharacterSet.uppercaseLetters, into: &units) {
                         if let unitString = units as? String {
                             for unit in unitString.characters {
                                 switch unit {

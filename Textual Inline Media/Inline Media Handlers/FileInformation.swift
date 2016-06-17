@@ -32,7 +32,7 @@
 import Foundation
 
 class FileInformation: NSObject {
-    private let response: NSHTTPURLResponse
+    private let response: HTTPURLResponse
     private let controller: TVCLogController
     private let line: String
     
@@ -45,7 +45,7 @@ class FileInformation: NSObject {
     
     - returns: An instance of a FileInformation object
     */
-    init(response: NSHTTPURLResponse, controller: TVCLogController, line: String) {
+    init(response: HTTPURLResponse, controller: TVCLogController, line: String) {
         self.response = response
         self.controller = controller
         self.line = line
@@ -60,53 +60,53 @@ class FileInformation: NSObject {
             return
         }
         
-        let workspace = NSWorkspace.sharedWorkspace()
-        let fileManager = NSFileManager.defaultManager()
+        let workspace = NSWorkspace.shared()
+        let fileManager = FileManager.default()
         /* Request the 'human readable' localised file type for this file and the finder image for this filetype. */
         if let fileTypeSystemIdentifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, fileType, nil)?.takeRetainedValue() {
-            var localisedFileType = workspace.localizedDescriptionForType(fileTypeSystemIdentifier as String)
-            var icon = workspace.iconForFileType(fileTypeSystemIdentifier as String)
-            if (localisedFileType == nil || localisedFileType == "data") && response.URL!.pathExtension != nil {
-                if let fileExtensionSystemIdentifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, response.URL!.pathExtension!, nil)?.takeRetainedValue() {
-                    localisedFileType = workspace.localizedDescriptionForType(fileExtensionSystemIdentifier as String)
-                    icon = workspace.iconForFileType(fileExtensionSystemIdentifier as String)
+            var localisedFileType = workspace.localizedDescription(forType: fileTypeSystemIdentifier as String)
+            var icon = workspace.icon(forFileType: fileTypeSystemIdentifier as String)
+            if (localisedFileType == nil || localisedFileType == "data") && response.url!.pathExtension != nil {
+                if let fileExtensionSystemIdentifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, response.url!.pathExtension!, nil)?.takeRetainedValue() {
+                    localisedFileType = workspace.localizedDescription(forType: fileExtensionSystemIdentifier as String)
+                    icon = workspace.icon(forFileType: fileExtensionSystemIdentifier as String)
                 }
             }
             
             /* OSX returns an NSImage for the file icon, which is not useable in Webkit. We will therefor create a temporary file on disk to refer to in the image tag. */
-            let iconData = icon.TIFFRepresentation
+            let iconData = icon.tiffRepresentation
             let tempDir = fileManager.getTemporaryDirectory("textual_inline_media")
             if tempDir != nil && iconData != nil {
                 /* Create a checsum of the icon and use it for the filename, so we can reuse it if we already have a temp file for this file type. */
-                let iconFileLocation = tempDir!.URLByAppendingPathComponent("\(iconData!.sha1).tif")
-                if fileManager.fileExistsAtPath(iconFileLocation.absoluteString) == false {
-                    iconData!.writeToURL(iconFileLocation, atomically: true)
+                let iconFileLocation = try! tempDir!.appendingPathComponent("\((iconData! as NSData).sha1).tif")
+                if fileManager.fileExists(atPath: iconFileLocation.absoluteString!) == false {
+                    try? iconData!.write(to: iconFileLocation, options: [.dataWritingAtomic])
                 }
                 
-                let fileName = response.URL!.lastPathComponent
+                let fileName = response.url!.lastPathComponent
                 
                 var size = "Unknown Size"
                 if let contentLength = response.allHeaderFields["Content-Length"] {
-                    size = NSByteCountFormatter.stringFromByteCountWithPaddedDigits(contentLength.longLongValue)
+                    size = ByteCountFormatter.stringFromByteCount(withPaddedDigits: contentLength.int64Value)
                 }
                 
                 var modified: String? = nil
                 if let dateModified = response.allHeaderFields["Last-Modified"] as? String {
-                    let dateFormatter = NSDateFormatter()
+                    let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "EEE, dd MMM y HH:mm:ss zzz"
-                    if let date = dateFormatter.dateFromString(dateModified) {
-                        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
-                        dateFormatter.timeStyle = NSDateFormatterStyle.LongStyle
-                        modified = dateFormatter.stringFromDate(date)
+                    if let date = dateFormatter.date(from: dateModified) {
+                        dateFormatter.dateStyle = DateFormatter.Style.longStyle
+                        dateFormatter.timeStyle = DateFormatter.Style.longStyle
+                        modified = dateFormatter.string(from: date)
                     } else {
                         modified = dateModified
                     }
                 }
                 
-                self.performBlockOnMainThread({
-                    let document = self.controller.webView.mainFrameDocument
+                self.performBlock(onMainThread: {
+                    let document = self.controller.backingView
                     
-                    let fileContainer = document.createElement("div")
+                    /*let fileContainer = document.createElement("div")
                     fileContainer.className = "inline_media_file"
                     
                     let fileIcon = document.createElement("img")
@@ -163,7 +163,7 @@ class FileInformation: NSObject {
                         fileModifiedContainer.appendChild(fileModified)
                     }
                     
-                    self.controller.insertInlineMedia(self.line, node: fileContainer, url: self.response.URL!.absoluteString)
+                    self.controller.insertInlineMedia(self.line, node: fileContainer, url: self.response.URL!.absoluteString)*/
                 })
             }
         }

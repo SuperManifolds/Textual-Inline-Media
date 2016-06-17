@@ -40,32 +40,31 @@ class Gfycat: NSObject, InlineMediaHandler {
         return NSImage.fromAssetCatalogue("gfycat")
     }
     
-    required convenience init(url: NSURL, controller: TVCLogController, line: String) {
+    required convenience init(url: URL, controller: TVCLogController, line: String) {
         self.init()
         /* Create a request to the gfycat API to find the mp4 version of this link.  */
-        if let requestString = url.URLByDeletingPathExtension?.pathComponents?[1] {
-            let requestUrl = NSURL(string: "http://gfycat.com/cajax/get/\(requestString)")
+        if let requestString = try! url.deletingPathExtension().pathComponents?[1] {
+            let requestUrl = URL(string: "http://gfycat.com/cajax/get/\(requestString)")
             guard requestUrl != nil else {
                 return
             }
             
-            let session = NSURLSession.sharedSession()
-            session.dataTaskWithURL(requestUrl!, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            let session = URLSession.shared()
+            session.dataTask(with: requestUrl!, completionHandler: {(data: Data?, response: URLResponse?, error: NSError?) -> Void in
                 guard data != nil else {
                     return
                 }
                 
                 do {
                     /* Attempt to serialise the JSON results into a dictionary. */
-                    let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+                    let root = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
                     if let gfyItem = root["gfyItem"] as? Dictionary<String, AnyObject> {
                         if let videoUrl = gfyItem["mp4Url"] as? String {
-                            self.performBlockOnMainThread({
+                            self.performBlock(onMainThread: {
                                 /* Create the video tag and set it to automatically play, and loop continously. */
-                                let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: true)
+                                //let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: true)
                                 
                                 /* Insert the element into Textual's view. */
-                                controller.insertInlineMedia(line, node: video, url: url.absoluteString)
                             })
                         }
                     }
@@ -76,7 +75,7 @@ class Gfycat: NSObject, InlineMediaHandler {
         }
     }
     
-    static func matchesServiceSchema(url: NSURL) -> Bool {
+    static func matchesServiceSchema(_ url: URL) -> Bool {
         return url.host?.hasSuffix("gfycat.com") == true
     }
 }

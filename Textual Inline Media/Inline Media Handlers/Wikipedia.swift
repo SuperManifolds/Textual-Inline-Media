@@ -40,36 +40,36 @@ class Wikipedia: NSObject, InlineMediaHandler {
         return NSImage.fromAssetCatalogue("Wikipedia")
     }
     
-    required convenience init(url: NSURL, controller: TVCLogController, line: String) {
+    required convenience init(url: URL, controller: TVCLogController, line: String) {
         self.init()
         if let query = url.pathComponents?[2] {
             let requestString = "format=json&action=query&exsentences=4&prop=extracts|pageimages&titles=\(query)&pithumbsize=200"
-                .stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
+                .addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
             
-            let subdomain = url.host?.componentsSeparatedByString(".")[0]
+            let subdomain = url.host?.components(separatedBy: ".")[0]
             guard subdomain != nil else {
                 return
             }
             
-            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-            config.HTTPAdditionalHeaders = ["User-Agent": "TextualInlineMedia/1.0 (https://github.com/xlexi/Textual-Inline-Media/; alex@sorlie.co.uk)"]
+            let config = URLSessionConfiguration.default()
+            config.httpAdditionalHeaders = ["User-Agent": "TextualInlineMedia/1.0 (https://github.com/xlexi/Textual-Inline-Media/; alex@sorlie.co.uk)"]
             
-            let session = NSURLSession(configuration: config)
-            if let requestUrl = NSURL(string: "https://\(subdomain!).wikipedia.org/w/api.php?\(requestString)") {
-                session.dataTaskWithURL(requestUrl, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            let session = URLSession(configuration: config)
+            if let requestUrl = URL(string: "https://\(subdomain!).wikipedia.org/w/api.php?\(requestString)") {
+                session.dataTask(with: requestUrl, completionHandler: {(data: Data?, response: URLResponse?, error: NSError?) -> Void in
                     guard data != nil else {
                         return
                     }
                     
                     do {
                         /* Attempt to serialise the JSON results into a dictionary. */
-                        let root = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+                        let root = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
                         guard let query = root["query"] as? Dictionary<String, AnyObject> else {
                             return
                         }
                         
                         guard let pages = query["pages"] as? Dictionary<String, AnyObject> else {
-                            WebRequest(url: response!.URL!, controller: controller, line: line).start()
+                            WebRequest(url: response!.url!, controller: controller, line: line).start()
                             return
                         }
                         
@@ -89,10 +89,8 @@ class Wikipedia: NSObject, InlineMediaHandler {
                                 thumbnailUrl = source
                             }
                             
-                            self.performBlockOnMainThread({
-                                let document = controller.webView.mainFrameDocument
-                                
-                                /* Create the container for the entire inline media element. */
+                            self.performBlock(onMainThread: {
+                                /*/* Create the container for the entire inline media element. */
                                 let wikiContainer = document.createElement("a")
                                 wikiContainer.setAttribute("href", value: url.absoluteString)
                                 wikiContainer.className = "inline_media_wiki"
@@ -123,7 +121,7 @@ class Wikipedia: NSObject, InlineMediaHandler {
                                     descriptionElement.innerHTML = description
                                     infoContainer.appendChild(descriptionElement)
                                 }
-                                controller.insertInlineMedia(line, node: wikiContainer, url: url.absoluteString)
+                                controller.insertInlineMedia(line, node: wikiContainer, url: url.absoluteString)*/
                             })
                         }
                     } catch {
@@ -134,7 +132,7 @@ class Wikipedia: NSObject, InlineMediaHandler {
         }
     }
     
-    static func matchesServiceSchema(url: NSURL) -> Bool {
+    static func matchesServiceSchema(_ url: URL) -> Bool {
         if url.host?.hasSuffix(".wikipedia.org") == true && url.pathComponents?.count === 3 {
             return url.pathComponents![1] == "wiki"
         }

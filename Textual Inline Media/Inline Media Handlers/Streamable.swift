@@ -49,10 +49,10 @@ class Streamable: NSObject, InlineMediaHandler, InlineMediaPreferenceHandler {
     }
     
     override func awakeFromNib() {
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard()
         
-        self.automaticallyPlayAudioCheckbox.state = defaults.integerForKey("streamableAutomaticallyPlayAudio")
-        self.displayVideoAsPausedCheckbox.state = defaults.integerForKey("streamableDisplayVideoAsPaused")
+        self.automaticallyPlayAudioCheckbox.state = defaults.integer(forKey: "streamableAutomaticallyPlayAudio")
+        self.displayVideoAsPausedCheckbox.state = defaults.integer(forKey: "streamableDisplayVideoAsPaused")
     }
     
     required override init() {
@@ -61,44 +61,43 @@ class Streamable: NSObject, InlineMediaHandler, InlineMediaPreferenceHandler {
             "streamableAutomaticallyPlayAudio": 0,
             "streamableDisplayVideoAsPaused": 0
         ]
-        NSUserDefaults.standardUserDefaults().registerDefaults(defaultConfiguration)
+        UserDefaults.standard().register(defaultConfiguration)
         
-        NSBundle(forClass: object_getClass(self)).loadNibNamed("Streamable", owner: self, topLevelObjects: nil)
+        Bundle(for: object_getClass(self)).loadNibNamed("Streamable", owner: self, topLevelObjects: nil)
     }
     
-    required convenience init(url: NSURL, controller: TVCLogController, line: String) {
+    required convenience init(url: URL, controller: TVCLogController, line: String) {
         self.init()
         /* Get the mp4 version of this link  */
-        if let requestString = url.URLByDeletingPathExtension?.pathComponents?[1] {
+        if let requestString = try! url.deletingPathExtension().pathComponents?[1] {
             let videoUrl = "https://cdn.streamable.com/video/mp4/\(requestString).mp4"
             
-            self.performBlockOnMainThread({
-                let defaults = NSUserDefaults.standardUserDefaults()
+            self.performBlock(onMainThread: {
+                let defaults = UserDefaults.standard()
                 
                 /* Create the video tag and set it to automatically play, and loop continously. */
-                let automaticallyPlay = Bool(defaults.integerForKey("streamableAutomaticallyPlayAudio"))
-                let playAudio = Bool(defaults.integerForKey("streamableDisplayVideoAsPaused"))
-                let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: automaticallyPlay, muteAudio: !playAudio)
+                let automaticallyPlay = Bool(defaults.integer(forKey: "streamableAutomaticallyPlayAudio"))
+                let playAudio = Bool(defaults.integer(forKey: "streamableDisplayVideoAsPaused"))
+                //let video = controller.createInlineVideo(videoUrl, loop: true, autoPlay: automaticallyPlay, muteAudio: !playAudio)
                 
                 /* Insert the element into Textual's view. */
-                controller.insertInlineMedia(line, node: video, url: url.absoluteString)
             })
         }
     }
     
-    @IBAction func automaticallyPlayAudioChange(sender: AnyObject) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(sender.state, forKey: "streamableAutomaticallyPlayAudio")
+    @IBAction func automaticallyPlayAudioChange(_ sender: AnyObject) {
+        let defaults = UserDefaults.standard()
+        defaults.set(sender.state, forKey: "streamableAutomaticallyPlayAudio")
         defaults.synchronize()
     }
     
-    @IBAction func displayVideoAsPausedChange(sender: NSButton) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(sender.state, forKey: "streamableDisplayVideoAsPaused")
+    @IBAction func displayVideoAsPausedChange(_ sender: NSButton) {
+        let defaults = UserDefaults.standard()
+        defaults.set(sender.state, forKey: "streamableDisplayVideoAsPaused")
         defaults.synchronize()
     }
     
-    static func matchesServiceSchema(url: NSURL) -> Bool {
+    static func matchesServiceSchema(_ url: URL) -> Bool {
         return url.host?.hasSuffix("streamable.com") == true && url.path?.characters.count > 3
     }
 }
