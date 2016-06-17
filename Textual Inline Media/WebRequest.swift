@@ -82,8 +82,7 @@ class WebRequest: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessi
     - parameter request:           A new NSURLRequest object containing the URL the server wishes us to go to
     - parameter completionHandler: A completion handler to call should we wish NSURLSession to continue through the redirect
     */
-    func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse,
-        newRequest request: URLRequest, completionHandler: (URLRequest) -> Void) {
+    func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: (URLRequest?) -> Void) {
         let originalUrl = self.originalUrl != nil ? self.originalUrl : self.url
         InlineMedia.processInlineMediaFromUrl(request.url!, controller: self.controller, line: self.line, originalUrl: originalUrl)
         task.cancel()
