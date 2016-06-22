@@ -51,7 +51,8 @@ class Xkcd: NSObject, InlineMediaHandler {
         session.dataTask(with: request, completionHandler: {(data: Data?, response: URLResponse?, error: NSError?) -> Void in
             if let httpResponse = response as? HTTPURLResponse {
                 /* Validate that the server obeyed our request to only receive HTML, abort if otherwise. */
-                guard httpResponse.allHeaderFields["Content-Type"]?.contains("text/html") == true && data != nil else {
+                let contentType = httpResponse.allHeaderFields["Content-Type"] as? String
+                guard contentType?.contains("text/html") == true && data != nil else {
                     return
                 }
                 

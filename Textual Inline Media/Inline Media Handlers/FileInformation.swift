@@ -87,7 +87,7 @@ class FileInformation: NSObject {
                 
                 var size = "Unknown Size"
                 if let contentLength = response.allHeaderFields["Content-Length"] {
-                    size = ByteCountFormatter.stringFromByteCount(withPaddedDigits: contentLength.int64Value)
+                    size = ByteCountFormatter.stringFromByteCount(withPaddedDigits: contentLength.int64Value)!
                 }
                 
                 var modified: String? = nil

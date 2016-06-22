@@ -45,7 +45,7 @@ public class InlineMedia: NSObject, THOPluginProtocol, SUUpdaterDelegate {
         return "Inline Media"
     }
     
-    public var pluginPreferencesPaneView: NSView? {
+    public var pluginPreferencesPaneView: NSView {
         return preferencesView
     }
     

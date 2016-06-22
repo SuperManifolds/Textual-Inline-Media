@@ -132,7 +132,7 @@ class WebRequest: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessi
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: (URLSession.ResponseDisposition) -> Void) {
         if let httpResponse = response as? HTTPURLResponse {
             /* If the request is HTML, continue the download. If not, just get the headers and act accordingly. */
-            let contentType = httpResponse.allHeaderFields["Content-Type"]
+            let contentType = httpResponse.allHeaderFields["Content-Type"] as? String
             if contentType?.contains("text/html") == true {
                 completionHandler(.allow)
                 return
